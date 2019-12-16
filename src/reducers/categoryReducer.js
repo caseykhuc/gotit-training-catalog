@@ -1,4 +1,5 @@
 import { categoryTypes } from '../constants/actionTypes';
+import { arrayToObject } from '../utils/utils';
 
 /* const initialState = {
   byId: {
@@ -33,7 +34,11 @@ const categoryReducer = (state = initialState, action) => {
       return { ...state, isLoading: true };
 
     case categoryTypes.FETCH_CATEGORY_SUCCESS:
-      return { ...state, isLoading: false, byId: action.payload };
+      return {
+        ...state,
+        isLoading: false,
+        byId: arrayToObject(action.payload),
+      };
 
     case categoryTypes.FETCH_CATEGORY_FAILURE:
       return { ...state, isLoading: false, error: action.payload };
@@ -44,3 +49,7 @@ const categoryReducer = (state = initialState, action) => {
 };
 
 export default categoryReducer;
+
+export const getCategories = (state) => {
+  return Object.keys(state.byId).map((id) => state.byId[id]);
+};

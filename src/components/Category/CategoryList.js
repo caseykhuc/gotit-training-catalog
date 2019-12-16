@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchCategory } from '../../actions';
 import { Container, Row, Col } from 'react-bootstrap';
+import { getCategories } from '../../reducers';
 
 class CategoryList extends React.Component {
   componentDidMount() {
@@ -31,7 +32,7 @@ class CategoryList extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  categories: Array.from(state.category.byId),
+  categories: getCategories(state),
 });
 
 export default connect(mapStateToProps, { fetchCategory })(CategoryList);
