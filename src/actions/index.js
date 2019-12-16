@@ -12,7 +12,7 @@ import { request } from '../api';
   'name': 'name',
   'password': 'password'
 }; */
-export const signupUser = (body) => ({
+export const registerUser = (body) => ({
   type: actionTypes.SIGNUP_USER,
   promise: request('/user', {
     method: 'POST',
@@ -38,7 +38,7 @@ export const loginUser = (body) => ({
 
 export const logoutUser = () => ({
   //sync
-})
+});
 
 export const fetchCategory = (offset = 0, limit = 10) => ({
   type: actionTypes.FETCH_CATEGORY,
@@ -47,4 +47,13 @@ export const fetchCategory = (offset = 0, limit = 10) => ({
   }),
 });
 
-export const 
+export const fetchItems = (categoryId, offset = 0, limit = 10) => ({
+  //
+});
+
+export const addItem = () => {};
+export const editItem = () => {};
+
+export const deleteItemAndRefetch = () => (dispatch) => {};
+
+

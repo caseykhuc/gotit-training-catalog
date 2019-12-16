@@ -1,18 +1,28 @@
-import actionTypes from '../actions/types';
+import { userTypes, itemTypes, categoryTypes } from '../actions/types';
 
 const initialState = {
   current: {
-    username: '',
     userId: '',
     token: '',
   },
+  isLoading: false,
+  error: '',
 };
 
-const userReducer = (state, action) => {
+const current = (state = {}, action) => {
   switch (action.type) {
+    case userTypes.LOGIN_USER_SUCCESS:
+      return action.payload;
     default:
       return state;
-    /* case actionTypes. */
+  }
+};
+
+const userReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case userTypes.LOGIN_USER_REQUEST:
+    default:
+      return state;
   }
 };
 

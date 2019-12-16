@@ -1,4 +1,4 @@
-import actionTypes from '../actions/types';
+import { userTypes, itemTypes, categoryTypes } from '../actions/types';
 
 const initialState = {
   byId: {
@@ -17,15 +17,23 @@ const initialState = {
       updated: '2018-04-03T08:40:51.620Z',
     },
   },
-  allIds: [21, 22],
-  totalCategories: 100
+  isLoading: false,
+  error: '',
 };
 
-const categoryReducer = (state, action) => {
+const categoryReducer = (state = initialState, action) => {
   switch (action.type) {
+    case categoryTypes.FETCH_CATEGORY_REQUEST:
+      return { ...state, isLoading: true };
+
+    case categoryTypes.FETCH_CATEGORY_SUCCESS:
+      return { ...state, isLoading: false, byId: action.payload };
+
+    case categoryTypes.FETCH_CATEGORY_FAILURE:
+      return { ...state, isLoading: false, error: action.payload };
+
     default:
       return state;
-    /* case actionTypes. */
   }
 };
 

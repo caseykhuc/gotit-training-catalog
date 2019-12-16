@@ -28,6 +28,7 @@ const thunk = (store) => (next) => async (action) => {
       } else throw new Error(result.statusText);
     } catch (e) {
       store.dispatch({ type: `${action.type}_FAILURE`, payload: e.message });
+      // if e is array => only take the first element
       // return middleware result
       return {
         success: false,
