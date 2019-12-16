@@ -34,7 +34,7 @@ const initialState = {
 const byId = (state = {}, action) => {
   switch (action.type) {
     case itemTypes.FETCH_ITEMS_SUCCESS:
-      return { ...state, byId: arrayToObject(action.payload) };
+      return arrayToObject(action.payload);
     case itemTypes.ADD_ITEM_SUCCESS:
     case itemTypes.EDIT_ITEM_SUCCESS:
       return { ...state, [action.payload.id]: action.payload };
@@ -103,3 +103,6 @@ const totalItems = (state = 0, action) => {
 };
 
 export default combineReducers({ byId, totalItems, isLoading, error });
+
+export const getItems = (state) =>
+  Object.keys(state.byId).map((id) => state.byId[id]);
