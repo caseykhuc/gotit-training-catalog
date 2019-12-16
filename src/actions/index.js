@@ -1,4 +1,4 @@
-import actionTypes from './types';
+import actionTypes from '../const/types';
 import { request } from '../api';
 
 /* export const fetchItem = () => ({

@@ -43,3 +43,8 @@ export const categoryTypes = {
   FETCH_CATEGORY_SUCCESS: 'FETCH_CATEGORY_SUCCESS',
   FETCH_CATEGORY_FAILURE: 'FETCH_CATEGORY_FAILURE',
 };
+
+export const modalTypes = {
+  SHOW_MODAL: 'SHOW_MODAL',
+  HIDE_MODAL: 'HIDE_MODAL',
+};
