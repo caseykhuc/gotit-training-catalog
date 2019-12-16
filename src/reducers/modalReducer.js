@@ -8,8 +8,8 @@ const initialState = {
 const modalReducer = (state = initialState, action) => {
   switch (action.type) {
     case modalTypes.SHOW_MODAL:
-      const { key, props } = action.payload;
-      return { current: key, props };
+      const { modalKey, props } = action.payload;
+      return { current: modalKey, props };
 
     case modalTypes.HIDE_MODAL:
       return { ...initialState };

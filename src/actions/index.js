@@ -1,4 +1,9 @@
-import actionTypes from '../const/types';
+import {
+  userTypes,
+  categoryTypes,
+  itemTypes,
+  modalTypes,
+} from '../constants/actionTypes';
 import { request } from '../api';
 
 /* export const fetchItem = () => ({
@@ -13,7 +18,7 @@ import { request } from '../api';
   'password': 'password'
 }; */
 export const registerUser = (body) => ({
-  type: actionTypes.SIGNUP_USER,
+  type: userTypes.SIGNUP_USER,
   promise: request('/user', {
     method: 'POST',
     body: JSON.stringify(body),
@@ -28,7 +33,7 @@ export const registerUser = (body) => ({
   'password': 'password'
 }; */
 export const loginUser = (body) => ({
-  type: actionTypes.LOGIN_USER,
+  type: userTypes.LOGIN_USER,
   promise: request('/user', {
     method: 'POST',
     body: JSON.stringify(body),
@@ -41,10 +46,13 @@ export const logoutUser = () => ({
 });
 
 export const fetchCategory = (offset = 0, limit = 10) => ({
-  type: actionTypes.FETCH_CATEGORY,
-  promise: request(`/categories/?offset=${offset}&limit=${limit}`, {
+  type: categoryTypes.FETCH_CATEGORY,
+  promise: request(`/categories/`, {
     method: 'GET',
   }),
+  /* promise: request(`/categories/?offset=${offset}&limit=${limit}`, {
+    method: 'GET',
+  }), */
 });
 
 export const fetchItems = (categoryId, offset = 0, limit = 10) => ({
@@ -56,4 +64,10 @@ export const editItem = () => {};
 
 export const deleteItemAndRefetch = () => (dispatch) => {};
 
-
+export const showModal = (modalKey, props = {}) => ({
+  type: modalTypes.SHOW_MODAL,
+  payload: {
+    modalKey,
+    props,
+  },
+});

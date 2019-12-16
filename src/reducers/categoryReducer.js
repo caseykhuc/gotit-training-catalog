@@ -1,6 +1,6 @@
-import { userTypes, itemTypes, categoryTypes } from '../actions/types';
+import { categoryTypes } from '../constants/actionTypes';
 
-const initialState = {
+/* const initialState = {
   byId: {
     21: {
       id: 21,
@@ -17,6 +17,12 @@ const initialState = {
       updated: '2018-04-03T08:40:51.620Z',
     },
   },
+  isLoading: false,
+  error: '',
+}; */
+
+const initialState = {
+  byId: [],
   isLoading: false,
   error: '',
 };

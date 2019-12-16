@@ -1,4 +1,4 @@
-import { userTypes, itemTypes, categoryTypes } from '../actions/types';
+import { userTypes, itemTypes, categoryTypes } from '../constants/actionTypes';
 import { combineReducers } from 'redux';
 
 const initialState = {
