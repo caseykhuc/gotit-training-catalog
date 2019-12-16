@@ -1,35 +1,21 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { fetchCategory } from '../../actions';
 import { Container, Row, Col } from 'react-bootstrap';
-import { getCategories } from '../../reducers';
+import { Link } from 'react-router-dom';
 
-class CategoryList extends React.Component {
-  componentDidMount() {
-    if (!this.props.categories.length) {
-      //console.log('hmm k on');
-      this.props.fetchCategory();
-    }
-  }
-
-  renderCategoryList = () => {
-    return this.props.categories.map((category) => (
-      <Col key={category.id}>{category.name}</Col>
+const CategoryList = ({ categories }) => {
+  const renderCategoryList = () => {
+    return categories.map((category) => (
+      <Col key={category.id}>
+        <Link to={`/categories/${category.id}`}>{category.name}</Link>
+      </Col>
     ));
   };
 
-  render() {
-    console.log(this.props);
-    return (
-      <Container style={{ textAlign: 'center' }}>
-        <Row>{this.renderCategoryList()}</Row>
-      </Container>
-    );
-  }
-}
+  return (
+    <Container style={{ textAlign: 'center', margin: '30px 0' }}>
+      <Row>{renderCategoryList()}</Row>
+    </Container>
+  );
+};
 
-const mapStateToProps = (state) => ({
-  categories: getCategories(state),
-});
-
-export default connect(mapStateToProps, { fetchCategory })(CategoryList);
+export default CategoryList;

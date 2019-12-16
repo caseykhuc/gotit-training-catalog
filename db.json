@@ -41,12 +41,12 @@
       "updated": "2018-04-03T08:40:51.620Z"
     },
     {
-      "id": 422,
+      "id": 4224,
       "name": "item name 1",
       "description": "item description 1",
       "price": 30.5,
       "user_id": 4,
-      "category_id": 2,
+      "category_id": 4,
       "created": "2015-08-05T08:40:51.620Z",
       "updated": "2018-04-03T08:40:51.620Z"
     },
@@ -56,7 +56,7 @@
       "description": "item description 2",
       "price": 32.7,
       "user_id": 18,
-      "category_id": 2,
+      "category_id": 4,
       "created": "2015-08-05T08:40:51.620Z",
       "updated": "2018-04-03T08:40:51.620Z"
     }
@@ -65,14 +65,14 @@
     {
       "id": 4,
       "name": "Technology",
-      "description": "category description",
+      "description": "What's up boi JavaScript is so weird",
       "created": "2015-08-05T08:40:51.620Z",
       "updated": "2018-04-03T08:40:51.620Z"
     },
     {
       "id": 2,
       "name": "Travelling",
-      "description": "category description",
+      "description": "A cool description for the travelling category hmm",
       "created": "2015-08-05T08:40:51.620Z",
       "updated": "2018-04-03T08:40:51.620Z"
     }

@@ -11,3 +11,6 @@ export default reducer;
 
 export const getCategories = (state) =>
   fromCategory.getCategories(state.category);
+
+export const getCategoryIds = (state) =>
+  fromCategory.getCategoryIds(state.category);

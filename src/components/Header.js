@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { showModal } from '../actions';
+import { showModal } from '../actions/modal';
 import modalKeys from '../constants/modelKeys';
 
 class Header extends React.Component {

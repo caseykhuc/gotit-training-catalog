@@ -51,5 +51,7 @@ const categoryReducer = (state = initialState, action) => {
 export default categoryReducer;
 
 export const getCategories = (state) => {
-  return Object.keys(state.byId).map((id) => state.byId[id]);
+  return getCategoryIds(state).map((id) => state.byId[id]);
 };
+
+export const getCategoryIds = (state) => Object.keys(state.byId);

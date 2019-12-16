@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import { hideModal } from '../../actions';
+import { hideModal } from '../../actions/modal';
 import { connect } from 'react-redux';
 
 class BaseModal extends React.Component {
