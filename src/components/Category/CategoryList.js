@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchCategory } from '../../actions';
+import { Container, Row, Col } from 'react-bootstrap';
 
 class CategoryList extends React.Component {
   componentDidMount() {
@@ -11,7 +12,9 @@ class CategoryList extends React.Component {
   }
 
   renderCategoryList = () => {
-    return this.props.categories.map((category) => <div key={category.id}>{category.name}</div>);
+    return this.props.categories.map((category) => (
+      <Col key={category.id}>{category.name}</Col>
+    ));
   };
 
   render() {
@@ -19,12 +22,16 @@ class CategoryList extends React.Component {
     return (
       <div>
         CategoryList
-        {this.renderCategoryList()}
+        <Container>
+          <Row>{this.renderCategoryList()}</Row>
+        </Container>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => ({ categories: state.category.byId });
+const mapStateToProps = (state) => ({
+  categories: Array.from(state.category.byId),
+});
 
 export default connect(mapStateToProps, { fetchCategory })(CategoryList);

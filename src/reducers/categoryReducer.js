@@ -22,7 +22,7 @@ import { categoryTypes } from '../constants/actionTypes';
 }; */
 
 const initialState = {
-  byId: [],
+  byId: {},
   isLoading: false,
   error: '',
 };

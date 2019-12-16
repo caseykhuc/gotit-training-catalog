@@ -1,7 +1,16 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-const CategoryDetails = (props) => {
-  return <div>CategoryDetails</div>;
+const CategoryDetails = ({ category }) => {
+  return <div>CategoryDetails {category ? category.name : ''}</div>;
 };
 
-export default CategoryDetails;
+const mapStateToProps = (state, { match }) => {
+  console.log(match);
+  return {
+    category: Object.assign(state.category)[match.params.categoryId],
+  };
+};
+
+export default withRouter(connect(mapStateToProps)(CategoryDetails));
