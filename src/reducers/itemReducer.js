@@ -1,5 +1,6 @@
-import { userTypes, itemTypes, categoryTypes } from '../constants/actionTypes';
+import { itemTypes } from '../constants/actionTypes';
 import { combineReducers } from 'redux';
+import { arrayToObject } from '../utils/utils';
 
 const initialState = {
   byId: {
@@ -33,7 +34,7 @@ const initialState = {
 const byId = (state = {}, action) => {
   switch (action.type) {
     case itemTypes.FETCH_ITEMS_SUCCESS:
-      return { ...state, ...action.payload };
+      return { ...state, byId: arrayToObject(action.payload) };
     case itemTypes.ADD_ITEM_SUCCESS:
     case itemTypes.EDIT_ITEM_SUCCESS:
       return { ...state, [action.payload.id]: action.payload };
