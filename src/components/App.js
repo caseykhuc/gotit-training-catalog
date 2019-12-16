@@ -10,6 +10,7 @@ import ModalContainer from './ModalContainer';
 import Category from './Category/Category';
 import ItemNew from './Item/ItemNew';
 import CategoryList from './Category/CategoryList';
+import CategoryListOne from './Category/CategoryListOne';
 
 class App extends React.Component {
   componentDidMount() {
@@ -18,12 +19,13 @@ class App extends React.Component {
 
   render() {
     const { categories } = this.props;
-    //console.log(categories);
+    /* console.log(categories); */
 
     return (
       <div className='App'>
         <Header />
-        <CategoryList categories={categories} />
+        {/* <CategoryList categories={categories} /> */}
+        <CategoryListOne categories={categories} />
         <Switch>
           <Route path='/new-item' component={ItemNew} />
           <Route path='/categories/:categoryId' component={Category} />
