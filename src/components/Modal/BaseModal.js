@@ -1,11 +1,13 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
+import { hideModal } from '../../actions';
+import { connect } from 'react-redux';
 
 class BaseModal extends React.Component {
   render() {
     return (
       <Modal.Dialog>
-        <Modal.Header closeButton>
+        <Modal.Header closeButton onClick={this.props.hideModal}>
           <Modal.Title>Modal title</Modal.Title>
         </Modal.Header>
 
@@ -22,4 +24,4 @@ class BaseModal extends React.Component {
   }
 }
 
-export default BaseModal;
+export default connect(null, { hideModal })(BaseModal);

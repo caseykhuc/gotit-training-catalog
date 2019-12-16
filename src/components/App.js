@@ -14,7 +14,7 @@ function App() {
       <Switch>
         <Route path='/new-item' component={ItemNew} />
         <Route path='/categories/:categoryId' component={Category} />
-        <Redirect path='/' to='/categories/1' />
+        <Redirect to='/categories/1' />
       </Switch>
       <ModalContainer />
     </div>

@@ -7,7 +7,7 @@ import { getCategories } from '../../reducers';
 class CategoryList extends React.Component {
   componentDidMount() {
     if (!this.props.categories.length) {
-      console.log('hmm k on');
+      //console.log('hmm k on');
       this.props.fetchCategory();
     }
   }
@@ -21,12 +21,9 @@ class CategoryList extends React.Component {
   render() {
     console.log(this.props);
     return (
-      <div>
-        CategoryList
-        <Container>
-          <Row>{this.renderCategoryList()}</Row>
-        </Container>
-      </div>
+      <Container style={{ textAlign: 'center' }}>
+        <Row>{this.renderCategoryList()}</Row>
+      </Container>
     );
   }
 }
