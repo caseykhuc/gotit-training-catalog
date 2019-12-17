@@ -1,4 +1,4 @@
-import { userTypes, itemTypes, categoryTypes } from '../constants/actionTypes';
+import { userTypes } from '../constants/actionTypes';
 
 const initialState = {
   current: {

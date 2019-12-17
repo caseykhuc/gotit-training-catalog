@@ -2,7 +2,7 @@ import { itemTypes } from '../constants/actionTypes';
 import { combineReducers } from 'redux';
 import { arrayToObject } from '../utils/utils';
 
-const initialState = {
+/* const initialState = {
   byId: {
     4: {
       id: 4,
@@ -25,11 +25,11 @@ const initialState = {
       updated: '2018-04-03T08:40:51.620Z',
     },
   },
-  /* allIds: [4, 8], */
+  /* allIds: [4, 8], 
   isLoading: false,
   totalItems: 100,
   error: '',
-};
+}; */
 
 const byId = (state = {}, action) => {
   switch (action.type) {
