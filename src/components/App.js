@@ -6,11 +6,10 @@ import { fetchCategory } from '../actions/category';
 import { connect } from 'react-redux';
 import { getCategories } from '../reducers';
 
-import ModalContainer from './ModalContainer';
 import Category from './Category/Category';
-import ItemNew from './Item/ItemNew';
 import CategoryList from './Category/CategoryList';
-import CategoryListOne from './Category/CategoryListOne';
+import ItemNew from './Item/ItemNew';
+import ModalContainer from './ModalContainer';
 
 class App extends React.Component {
   componentDidMount() {
@@ -24,8 +23,7 @@ class App extends React.Component {
     return (
       <div className='App'>
         <Header />
-        {/* <CategoryList categories={categories} /> */}
-        <CategoryListOne categories={categories} />
+        <CategoryList categories={categories} />
         <Switch>
           <Route path='/new-item' component={ItemNew} />
           <Route path='/categories/:categoryId' component={Category} />

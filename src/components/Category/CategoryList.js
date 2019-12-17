@@ -1,21 +1,40 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import ScrollMenu from 'react-horizontal-scrolling-menu';
 
-const CategoryList = ({ categories }) => {
-  const renderCategoryList = () => {
-    return categories.map((category) => (
-      <Col key={category.id}>
-        <Link to={`/categories/${category.id}`}>{category.name}</Link>
-      </Col>
-    ));
-  };
+// All items component
+// Important! add unique key
+export const Menu = (list, selected) =>
+  list.map((el) => {
+    const { name, id } = el;
+    return (
+      <Link style={{ padding: '10px' }} to={`/categories/${id}`} key={id}>
+        {name}
+      </Link>
+    );
+  });
 
-  return (
-    <Container style={{ textAlign: 'center', margin: '30px 0' }}>
-      <Row>{renderCategoryList()}</Row>
-    </Container>
-  );
-};
+const ArrowLeft = <div style={{ padding: '10px' }}>{'<'}</div>;
+const ArrowRight = <div style={{ padding: '10px' }}>{'>'}</div>;
+
+/***
+ *
+ * */
+
+class CategoryList extends React.Component {
+  render() {
+    const menu = Menu(this.props.categories);
+    return (
+      <ScrollMenu
+        className='ahihi'
+        data={menu}
+        arrowLeft={ArrowLeft}
+        arrowRight={ArrowRight}
+        selected={this.props.categories[0]}
+        onSelect={this.onSelect}
+      />
+    );
+  }
+}
 
 export default CategoryList;
