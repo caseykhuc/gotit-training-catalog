@@ -5,17 +5,20 @@ import { request } from '../api';
   type: actionTypes.FETCH_ITEM,
   promise: request('/item', { method: 'GET' }),
 }); */
-export const fetchItems = (categoryId, offset = 0, limit = 10) => ({
+export const fetchItems = (categoryId, offset = 0, limit = 10) => {
   //
-  type: itemTypes.FETCH_ITEMS,
-  /* promise: request(
-    `.categories/${categoryId}/items/?offset=${offset}&limit=${limit}`,
-    { method: 'GET' },
-  ), */
-  promise: request(`/items/?category_id=${categoryId}`, { method: 'GET' }),
-});
+  console.log(`/items/?category_id=${categoryId}`);
+  return ({
+    type: itemTypes.FETCH_ITEMS,
+    /* promise: request(
+      `.categories/${categoryId}/items/?offset=${offset}&limit=${limit}`,
+      { method: 'GET' },
+    ), */
+    promise: request(`/items/?category_id=${categoryId}`, { method: 'GET' }),
+  });
+};
 
-export const addItem = () => {};
-export const editItem = () => {};
+export const addItem = () => { };
+export const editItem = () => { };
 
-export const deleteItemAndRefetch = () => (dispatch) => {};
+export const deleteItemAndRefetch = () => (dispatch) => { };

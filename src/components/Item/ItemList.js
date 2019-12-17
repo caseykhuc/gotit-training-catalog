@@ -1,11 +1,17 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { ListGroup } from 'react-bootstrap'
 
-const ItemList = (props) => {
-  //console.log(props);
-  const renderItems = () => {};
+const ItemList = ({ items }) => {
+  // console.log(props);
+  const renderItems = () => items.map((item) => <ListGroup.Item key={item.id}>{item.name}</ListGroup.Item>);
 
-  return <div>ItemList{renderItems()}</div>;
+  console.log(items);
+
+  return (
+    <ListGroup>
+      {renderItems()}
+    </ListGroup>
+  );
 };
 
-export default withRouter(ItemList);
+export default ItemList;

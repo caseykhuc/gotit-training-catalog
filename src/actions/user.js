@@ -32,5 +32,5 @@ export const loginUser = (body) => ({
 });
 
 export const logoutUser = () => ({
-  //sync
+  // sync
 });

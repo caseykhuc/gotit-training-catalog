@@ -1,27 +1,23 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import { hideModal } from '../../actions/modal';
 import { connect } from 'react-redux';
+import { hideModal } from '../../actions/modal';
 
-class BaseModal extends React.Component {
-  render() {
-    return (
-      <Modal.Dialog>
-        <Modal.Header closeButton onClick={this.props.hideModal}>
-          <Modal.Title>Modal title</Modal.Title>
-        </Modal.Header>
-
-        <Modal.Body>
-          <p>Modal body text goes here.</p>
-        </Modal.Body>
-
-        <Modal.Footer>
-          <Button variant='secondary'>Close</Button>
-          <Button variant='primary'>Save changes</Button>
-        </Modal.Footer>
-      </Modal.Dialog>
-    );
-  }
-}
+const BaseModal = ({ title, hideModal, children }) => (
+  <Modal show onHide={hideModal} centered>
+    <Modal.Header closeButton>
+      <Modal.Title>{title}</Modal.Title>
+    </Modal.Header>
+    <Modal.Body>{children}</Modal.Body>
+    <Modal.Footer>
+      <Button variant="secondary" onClick={hideModal}>
+        Close
+      </Button>
+      <Button variant="primary" onClick={hideModal}>
+        Save Changes
+      </Button>
+    </Modal.Footer>
+  </Modal>
+)
 
 export default connect(null, { hideModal })(BaseModal);

@@ -1,5 +1,5 @@
-import { itemTypes } from '../constants/actionTypes';
 import { combineReducers } from 'redux';
+import { itemTypes } from '../constants/actionTypes';
 import { arrayToObject } from '../utils/utils';
 
 /* const initialState = {
@@ -25,7 +25,7 @@ import { arrayToObject } from '../utils/utils';
       updated: '2018-04-03T08:40:51.620Z',
     },
   },
-  /* allIds: [4, 8], 
+  /* allIds: [4, 8],
   isLoading: false,
   totalItems: 100,
   error: '',
@@ -102,7 +102,8 @@ const totalItems = (state = 0, action) => {
   }
 };
 
-export default combineReducers({ byId, totalItems, isLoading, error });
+export default combineReducers({
+  byId, totalItems, isLoading, error,
+});
 
-export const getItems = (state) =>
-  Object.keys(state.byId).map((id) => state.byId[id]);
+export const getItems = (state) => Object.keys(state.byId).map((id) => state.byId[id]);

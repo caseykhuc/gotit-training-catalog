@@ -11,13 +11,13 @@ const thunk = (store) => (next) => async (action) => {
 
   if (typeof action === 'function') {
     return action(store.dispatch, store.getState);
-  } else if (action.hasOwnProperty('promise')) {
-    //console.log('REQUEST//SUCCESS//FAILURE PATTERN');
+  } if (action.hasOwnProperty('promise')) {
+    // console.log('REQUEST//SUCCESS//FAILURE PATTERN');
     store.dispatch({ type: `${action.type}_REQUEST` });
     try {
       const result = await action.promise;
       // return middleware result
-      //console.log(result);
+      // console.log(result);
       if (result.status >= 200 && result.status < 300) {
         const data = await result.json();
         store.dispatch({ type: `${action.type}_SUCCESS`, payload: data });
@@ -25,7 +25,7 @@ const thunk = (store) => (next) => async (action) => {
           success: true,
           data,
         };
-      } else throw new Error(result.statusText);
+      } throw new Error(result.statusText);
     } catch (e) {
       store.dispatch({ type: `${action.type}_FAILURE`, payload: e.message });
       // if e is array => only take the first element

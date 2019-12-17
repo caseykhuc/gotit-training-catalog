@@ -16,14 +16,23 @@ const ModalContainer = ({ modal }) => {
     }
   };
 
-  //return <div>ModalContainer {modal.current}</div>;
-  return <div>{renderModal()}</div>;
+  // return <div>ModalContainer {modal.current}</div>;
+  return (
+    <div style={{
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+    }}
+    >
+      {renderModal()}
+
+    </div>
+  );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    modal: state.modal,
-  };
-};
+const mapStateToProps = (state) => ({
+  modal: state.modal,
+});
 
 export default connect(mapStateToProps)(ModalContainer);
