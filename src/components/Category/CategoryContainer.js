@@ -56,7 +56,7 @@ const mapStateToProps = (state, { match, location }) => {
 
 CategoryContainer.propTypes = {
   categoryId: PropTypes.number.isRequired,
-  category: PropTypes.oneOfType(PropTypes.object),
+  category: PropTypes.object,
   fetchItems: PropTypes.func.isRequired,
   itemList: PropTypes.arrayOf(PropTypes.object).isRequired,
   page: PropTypes.number.isRequired,

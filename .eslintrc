@@ -1,8 +1,23 @@
 {
-  "extends": ["react-app", "airbnb", "plugin:jsx-a11y/recommended"],
-  "plugins": ["jsx-a11y"],
+  "extends": [
+    "react-app",
+    "airbnb",
+    "plugin:jsx-a11y/recommended"
+  ],
+  "plugins": [
+    "jsx-a11y"
+  ],
   "rules": {
     "semi": 0,
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
+      }
+    ],
+    "react/forbid-prop-types": 0
   }
 }
