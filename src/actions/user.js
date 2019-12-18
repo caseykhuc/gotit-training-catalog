@@ -24,7 +24,7 @@ export const registerUser = (username, password) => ({
   'password': 'password'
 }; */
 export const signinUser = (body) => ({
-  type: userTypes.LOGIN_USER,
+  type: userTypes.SIGNIN_USER,
   promise: request('/user', {
     method: 'POST',
     body: JSON.stringify(body),

@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { SignInModal } from '../SignInModal';
+import { RegisterModal } from '../RegisterModal';
 import BaseModal from '../BaseModal';
 
-describe('components/SignInModal', () => {
+describe('components/RegisterModal', () => {
   let props;
   let wrapper;
   let container;
@@ -17,27 +17,27 @@ describe('components/SignInModal', () => {
     baseModal = wrapper.find(BaseModal);
   };
   const setup = () => {
-    wrapper = shallow(<SignInModal {...props} />);
+    wrapper = shallow(<RegisterModal {...props} />);
     update();
   };
   beforeEach(() => {
     props = {
-      signinUser: jest.fn(),
+      registerUser: jest.fn(),
     }
   });
   it('should render correctly', () => {
     setup();
     expect(wrapper).toMatchSnapshot();
   });
-  it('should invoke SIGNIN_USER when user press Enter', () => {
+  it('should invoke register when user press Enter', () => {
     setup();
     container.props().onKeyDown({ key: 'Enter' });
-    expect(props.signinUser).toHaveBeenCalled();
+    expect(props.registerUser).toHaveBeenCalled();
   });
-  it('should invoke SIGNIN_USER when user press other key', () => {
+  it('should not invoke register when user press other key', () => {
     setup();
-    container.props().onKeyDown({ key: 'b' });
-    expect(props.signinUser).not.toHaveBeenCalled();
+    container.props().onKeyDown({ key: 'a' });
+    expect(props.registerUser).not.toHaveBeenCalled();
   });
   it('should call setState on input change', () => {
     setup();
@@ -47,6 +47,6 @@ describe('components/SignInModal', () => {
   it('should invoke register when baseModal invoked onAccept ', () => {
     setup();
     baseModal.props().onAccept();
-    expect(props.signinUser).toHaveBeenCalled();
+    expect(props.registerUser).toHaveBeenCalled();
   })
 })

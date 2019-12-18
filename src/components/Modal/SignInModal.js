@@ -3,7 +3,7 @@ import { Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import BaseModal from './BaseModal';
-import { registerUser } from '../../actions/user';
+import { signinUser } from '../../actions/user';
 
 export class SignInModal extends React.Component {
   state = {
@@ -17,15 +17,13 @@ export class SignInModal extends React.Component {
   }
 
   onFormSubmit = () => {
-    const { registerUser } = this.props;
+    const { signinUser } = this.props;
     const { username, password } = this.state;
-    registerUser(username, password);
+    signinUser(username, password);
   }
 
-  onKeyPress = (e) => {
-    console.log(e.key);
+  onKeyDown = (e) => {
     if (e.key === 'Enter') {
-      console.log('???')
       this.onFormSubmit();
     }
   }
@@ -34,7 +32,7 @@ export class SignInModal extends React.Component {
     const { username, password } = this.state;
 
     return (
-      <div onKeyDown={(e) => this.onKeyPress(e)}>
+      <div onKeyDown={(e) => this.onKeyDown(e)}>
         <BaseModal title="SIGN IN" onAccept={() => this.onFormSubmit()}>
           <Form.Group controlId="username">
             <Form.Label>Username</Form.Label>
@@ -52,7 +50,7 @@ export class SignInModal extends React.Component {
 }
 
 SignInModal.propTypes = {
-  registerUser: PropTypes.func.isRequired,
+  signinUser: PropTypes.func.isRequired,
 }
 
-export default connect(null, { registerUser })(SignInModal);
+export default connect(null, { signinUser })(SignInModal);
