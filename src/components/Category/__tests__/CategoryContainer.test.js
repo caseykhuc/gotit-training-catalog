@@ -1,12 +1,10 @@
 
 import React from 'react';
-import { shallow, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { shallow } from 'enzyme';
 import { CategoryContainer } from '../CategoryContainer';
 import CategoryDetails from '../CategoryDetails';
 import ItemList from '../../Item/ItemList';
 
-configure({ adapter: new Adapter() })
 
 describe('component/Category/CategoryContainer', () => {
   let props;
