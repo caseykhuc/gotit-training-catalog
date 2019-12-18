@@ -40,12 +40,13 @@ describe('component/Category/CategoryContainer', () => {
     expect(wrapper.find(CategoryDetails).length).toBe(1);
     expect(props.fetchItems).toHaveBeenCalledWith(props.categoryId);
   });
-  it('should render danger Alert and not fetchItems when category props is undefined', () => {
+  it('should render danger Alert / not fetchItems / navigate when category props is undefined', () => {
     props.category = undefined;
     setup();
     expect(wrapper.find(CategoryDetails).length).toBe(0);
     expect(wrapper.find('[variant="danger"]').length).toBe(1);
     expect(props.fetchItems).not.toHaveBeenCalled();
+    expect(props.history.push).toHaveBeenCalledWith('/');
   });
   it('should render ItemList when itemList.length > 0', () => {
     props.itemList = [{ name: 'item 1', description: 'desc' }];
