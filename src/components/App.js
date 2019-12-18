@@ -14,7 +14,7 @@ import ItemNew from './Item/ItemNew';
 import ModalContainer from './ModalContainer';
 
 
-class App extends React.Component {
+export class App extends React.Component {
   componentDidMount() {
     const { fetchCategory } = this.props;
     fetchCategory();
@@ -46,7 +46,9 @@ const mapStateToProps = (state) => ({
 
 
 App.propTypes = {
-  categories: PropTypes.arrayOf(Object).isRequired,
+  categories: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+  })).isRequired,
   fetchCategory: PropTypes.func,
 }
 
