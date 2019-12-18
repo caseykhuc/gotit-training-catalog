@@ -7,13 +7,14 @@ import { request } from '../api';
   'name': 'name',
   'password': 'password'
 }; */
-export const registerUser = (body) => ({
-  type: userTypes.SIGNUP_USER,
-  promise: request('/user', {
+export const registerUser = (username, password) => ({
+  type: userTypes.REGISTER_USER,
+  payload: { username, password },
+  /* promise: request('/user', {
     method: 'POST',
     body: JSON.stringify(body),
     headers: { 'Content-Type': 'application/json' },
-  }),
+  }), */
 });
 
 /* body = {
@@ -22,7 +23,7 @@ export const registerUser = (body) => ({
   'name': 'name',
   'password': 'password'
 }; */
-export const loginUser = (body) => ({
+export const signinUser = (body) => ({
   type: userTypes.LOGIN_USER,
   promise: request('/user', {
     method: 'POST',
@@ -31,6 +32,6 @@ export const loginUser = (body) => ({
   }),
 });
 
-export const logoutUser = () => ({
+export const signoutUser = () => ({
   // sync
 });
