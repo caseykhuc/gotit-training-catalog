@@ -6,37 +6,33 @@
 // thunk
 
 const thunk = (store) => (next) => async (action) => {
-  // console.log(action);
-  // console.log(action.hasOwnProperty('promise'));
-
   if (typeof action === 'function') {
     return action(store.dispatch, store.getState);
-  } if (action.hasOwnProperty('promise')) {
-    // console.log('REQUEST//SUCCESS//FAILURE PATTERN');
-    store.dispatch({ type: `${action.type}_REQUEST` });
-    try {
-      const result = await action.promise;
-      // return middleware result
-      // console.log(result);
-      if (result.status >= 200 && result.status < 300) {
-        const data = await result.json();
-        store.dispatch({ type: `${action.type}_SUCCESS`, payload: data });
-        return {
-          success: true,
-          data,
-        };
-      } throw new Error(result.statusText);
-    } catch (e) {
-      store.dispatch({ type: `${action.type}_FAILURE`, payload: e.message });
-      // if e is array => only take the first element
-      // return middleware result
-      return {
-        success: false,
-        error: e,
-      };
-    }
-  } else {
-    return next(action);
+  }
+  if (!Object.prototype.hasOwnProperty.call(action, 'promise')) return next(action);
+
+  // console.log('REQUEST//SUCCESS//FAILURE PATTERN');
+  store.dispatch({ type: `${action.type}_REQUEST` });
+  try {
+    const result = await action.promise;
+    /* console.log(action);
+    console.log(result); */
+    // return middleware result
+    store.dispatch({ type: `${action.type}_SUCCESS`, payload: result });
+    return {
+      success: true,
+      result,
+    };
+  } catch (e) {
+    const { message } = await e;
+
+    store.dispatch({ type: `${action.type}_FAILURE`, payload: message });
+    // if e is array => only take the first element
+    // return middleware result
+    return {
+      success: false,
+      message,
+    };
   }
 };
 

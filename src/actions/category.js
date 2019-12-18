@@ -1,12 +1,8 @@
 import { categoryTypes } from '../constants/actionTypes';
-import { request } from '../api';
+import * as api from '../api';
 
-export const fetchCategory = (offset = 0, limit = 10) => ({
+// eslint-disable-next-line import/prefer-default-export
+export const fetchCategory = () => ({
   type: categoryTypes.FETCH_CATEGORY,
-  promise: request('/categories?offset=0&limit=100', {
-    method: 'GET',
-  }),
-  /* promise: request(`/categories/?offset=${offset}&limit=${limit}`, {
-    method: 'GET',
-  }), */
-});
+  promise: api.fetchCategories(),
+})

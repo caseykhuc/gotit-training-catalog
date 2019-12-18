@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -12,10 +13,12 @@ import { fetchItems } from '../../actions/item';
 import { getItems } from '../../reducers';
 
 
-class CategoryContainer extends React.Component {
+export class CategoryContainer extends React.Component {
   componentDidMount() {
-    const { categoryId, fetchItems } = this.props;
-    fetchItems(categoryId);
+    const {
+      categoryId, category, fetchItems, history,
+    } = this.props;
+    if (category) { fetchItems(categoryId); } else history.push('/');
   }
 
   componentDidUpdate(prevState) {
@@ -25,20 +28,20 @@ class CategoryContainer extends React.Component {
 
   render() {
     const { category, itemList } = this.props;
-    return category && itemList ? (
+    return category ? (
       <div>
         <CategoryDetails category={category} />
         {itemList.length ? (
           <ItemList items={itemList} />
         ) : (
-          <Alert variant="info">
+            <Alert variant="info">
               Category currently has no items. Add one now!
             </Alert>
-        )}
+          )}
       </div>
     ) : (
-      <Alert variant="danger">Can't find category</Alert>
-    );
+        <Alert variant="danger">Can't find category</Alert>
+      );
   }
 }
 
@@ -56,14 +59,14 @@ const mapStateToProps = (state, { match, location }) => {
 
 CategoryContainer.propTypes = {
   categoryId: PropTypes.number.isRequired,
-  category: PropTypes.object,
+  category: PropTypes.shape({
+    name: PropTypes.string,
+    description: PropTypes.string,
+  }),
   fetchItems: PropTypes.func.isRequired,
   itemList: PropTypes.arrayOf(PropTypes.object).isRequired,
   page: PropTypes.number.isRequired,
-}
-
-CategoryContainer.defaultProps = {
-  category: {},
+  history: PropTypes.object.isRequired,
 }
 
 export default withRouter(connect(mapStateToProps, { fetchItems })(CategoryContainer));
