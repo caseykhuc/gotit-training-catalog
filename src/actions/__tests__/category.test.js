@@ -38,8 +38,6 @@ describe('actions/category', () => {
     creator = categoryActions.fetchCategory();
     await setup();
 
-    console.log(actions);
-
     expect(actions[1]).toEqual({ type: categoryTypes.FETCH_CATEGORY_FAILURE });
   })
 });
