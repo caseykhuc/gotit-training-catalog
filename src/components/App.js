@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Container } from 'react-bootstrap'
+import PropTypes from 'prop-types';
 import Header from './Header';
 
 import { fetchCategory } from '../actions/category';
@@ -42,5 +43,11 @@ class App extends React.Component {
 const mapStateToProps = (state) => ({
   categories: getCategories(state),
 });
+
+
+App.propTypes = {
+  categories: PropTypes.arrayOf(Object).isRequired,
+  fetchCategory: PropTypes.func,
+}
 
 export default connect(mapStateToProps, { fetchCategory })(App);
