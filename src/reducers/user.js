@@ -18,12 +18,10 @@ const current = (state = {}, action) => {
   }
 };
 
-const userReducer = (state = initialState, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case userTypes.LOGIN_USER_REQUEST:
     default:
       return state;
   }
 };
-
-export default userReducer;

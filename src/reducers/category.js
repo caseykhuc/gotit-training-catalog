@@ -28,7 +28,7 @@ const initialState = {
   error: '',
 };
 
-const categoryReducer = (state = initialState, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case categoryTypes.FETCH_CATEGORY_REQUEST:
       return { ...state, isLoading: true };
@@ -48,10 +48,6 @@ const categoryReducer = (state = initialState, action) => {
   }
 };
 
-export default categoryReducer;
-
-export const getCategories = (state) => {
-  return getCategoryIds(state).map((id) => state.byId[id]);
-};
-
 export const getCategoryIds = (state) => Object.keys(state.byId);
+
+export const getCategories = (state) => getCategoryIds(state).map((id) => state.byId[id]);
