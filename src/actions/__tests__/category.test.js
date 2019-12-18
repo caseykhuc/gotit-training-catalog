@@ -3,7 +3,6 @@ import handleFetch from '../../middlewares/handleFetch';
 import * as categoryActions from '../category';
 import { categoryTypes } from '../../constants/actionTypes';
 
-
 const middlewares = [handleFetch];
 const mockStore = configureStore(middlewares);
 
