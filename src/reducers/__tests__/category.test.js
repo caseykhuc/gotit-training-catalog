@@ -1,4 +1,4 @@
-import reducer from '../category';
+import reducer, * as selector from '../category';
 import { categoryTypes } from '../../constants/actionTypes';
 
 describe('reducers/category', () => {
@@ -41,5 +41,28 @@ describe('reducers/category', () => {
       isLoading: false,
       error: 'Not found',
     })
+  });
+});
+
+describe('reducers/category (selectors)', () => {
+  let state;
+  beforeEach(() => {
+    state = {
+      byId: {
+        1: { id: '1' }, 2: { id: '2' },
+      },
+      isLoading: false,
+      error: '',
+    };
+  });
+  // getCategoryIds
+  it('should return arrays of ids', () => {
+    expect(selector.getCategoryIds(state)).toEqual(['1', '2']);
+  });
+  // getCategories
+  it('should return arrays of category', () => {
+    expect(selector.getCategories(state)).toEqual(
+      [{ id: '1' }, { id: '2' }],
+    );
   });
 });
