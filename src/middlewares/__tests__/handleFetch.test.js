@@ -15,28 +15,28 @@ describe('middlewares/handleFetch', () => {
   const { store, next, invoke } = create();
 
   it('should pass dispatch and getState when get function action', () => {
-    const action = (dispatch, getState) => { dispatch({ type: 'COOL_ACTION' }); getState(); }
+    const action = (dispatch, getState) => { dispatch({ type: 'SAMPLE_ACTION' }); getState(); }
     invoke(action);
 
-    expect(store.dispatch).toHaveBeenLastCalledWith({ type: 'COOL_ACTION' });
+    expect(store.dispatch).toHaveBeenLastCalledWith({ type: 'SAMPLE_ACTION' });
     expect(store.getState).toHaveBeenCalled();
   });
   it('should pass through action with no promise', () => {
-    const action = { type: 'COOL_ACTION', payload: 'data' };
+    const action = { type: 'SAMPLE_ACTION', payload: 'data' };
     invoke(action);
 
     expect(next).toHaveBeenCalledWith(action);
   });
   it('should dispatch success action when done await', async () => {
-    const action = { type: 'COOL_ACTION', promise: Promise.resolve('meow') };
+    const action = { type: 'SAMPLE_ACTION', promise: Promise.resolve('test') };
     await invoke(action);
 
-    expect(store.dispatch).toHaveBeenCalledWith({ type: 'COOL_ACTION_SUCCESS', payload: 'meow' })
+    expect(store.dispatch).toHaveBeenCalledWith({ type: 'SAMPLE_ACTION_SUCCESS', payload: 'test' })
   });
   it('should dispatch failure action when caught error', async () => {
-    const action = { type: 'COOL_ACTION', promise: Promise.reject(new Error('meow')) };
+    const action = { type: 'SAMPLE_ACTION', promise: Promise.reject(new Error('test')) };
     await invoke(action);
 
-    expect(store.dispatch).toHaveBeenCalledWith({ type: 'COOL_ACTION_FAILURE', payload: 'meow' })
+    expect(store.dispatch).toHaveBeenCalledWith({ type: 'SAMPLE_ACTION_FAILURE', payload: 'test' })
   })
 })

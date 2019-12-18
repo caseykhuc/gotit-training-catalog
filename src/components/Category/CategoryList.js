@@ -3,17 +3,6 @@ import { Link } from 'react-router-dom';
 import ScrollMenu from 'react-horizontal-scrolling-menu';
 import PropTypes from 'prop-types';
 
-// All items component
-// Important! add unique key
-export const Menu = (list) => list.map((el) => {
-  const { name, id } = el;
-  return (
-    <Link style={{ padding: '10px' }} to={`/categories/${id}`} key={id}>
-      {name}
-    </Link>
-  );
-});
-
 const ArrowLeft = <div style={{ padding: '10px' }}>{'<'}</div>;
 const ArrowRight = <div style={{ padding: '10px' }}>{'>'}</div>;
 
@@ -24,7 +13,11 @@ const ArrowRight = <div style={{ padding: '10px' }}>{'>'}</div>;
 class CategoryList extends React.Component {
   render() {
     const { categories } = this.props;
-    const menu = Menu(categories);
+    const menu = categories.map((cat) => (
+      <Link style={{ padding: '10px' }} to={`/categories/${cat.id}`} key={cat.id}>
+        {cat.name}
+      </Link>
+    ));
     return (
       <ScrollMenu
         className="ahihi"
@@ -39,7 +32,10 @@ class CategoryList extends React.Component {
 }
 
 CategoryList.propTypes = {
-  categories: PropTypes.arrayOf(PropTypes.object).isRequired,
+  categories: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string,
+    id: PropTypes.number,
+  })).isRequired,
 }
 
 export default CategoryList;

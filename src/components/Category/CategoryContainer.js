@@ -34,20 +34,20 @@ export class CategoryContainer extends React.Component {
         {itemList.length ? (
           <ItemList items={itemList} />
         ) : (
-            <Alert variant="info">
+          <Alert variant="info">
               Category currently has no items. Add one now!
             </Alert>
-          )}
+        )}
       </div>
     ) : (
-        <Alert variant="danger">Can't find category</Alert>
-      );
+      <Alert variant="danger">Can't find category</Alert>
+    );
   }
 }
 
-const mapStateToProps = (state, { match, location }) => {
+export const mapStateToProps = (state, { match, location }) => {
   const categoryId = Number(match.params.categoryId);
-  const page = queryString.parse(location.search).page || 0;
+  const page = Number(queryString.parse(location.search).page || 0);
 
   return {
     category: state.category.byId[categoryId],

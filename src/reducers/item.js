@@ -106,4 +106,4 @@ export default combineReducers({
   byId, totalItems, isLoading, error,
 });
 
-export const getItems = (state) => Object.keys(state.byId).map((id) => state.byId[id]);
+export const getItems = (state) => (state.byId ? Object.keys(state.byId).map((id) => state.byId[id]) : {});
