@@ -25,6 +25,9 @@ describe('component/Category/CategoryContainer', () => {
   it('should render correctly', () => {
     setup();
     expect(wrapper).toMatchSnapshot();
+    props.categories = [];
+    setup();
+    expect(wrapper).toMatchSnapshot();
   });
   it('should fetch categories when mounted', () => {
     setup();
