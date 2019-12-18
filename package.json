@@ -96,7 +96,9 @@
   },
   "devDependencies": {
     "enzyme": "^3.10.0",
-    "enzyme-adapter-react-16": "^1.15.1"
+    "enzyme-adapter-react-16": "^1.15.1",
+    "jest-fetch-mock": "^3.0.0",
+    "redux-mock-store": "^1.5.4"
   },
   "jest": {
     "roots": [
