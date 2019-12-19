@@ -1,13 +1,8 @@
-import configureStore from 'redux-mock-store';
-import handleFetch from '../../middlewares/handleFetch';
 import * as categoryActions from '../category';
 import { categoryTypes } from '../../constants/actionTypes';
 
-const middlewares = [handleFetch];
-const mockStore = configureStore(middlewares);
-
 describe('actions/category', () => {
-  const store = mockStore({});
+  const store = global.mockStore;
   let response;
   let creator;
   let actions;
