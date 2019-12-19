@@ -1,5 +1,5 @@
 import { userTypes } from '../constants/actionTypes';
-import { request } from '../api';
+import * as api from '../api';
 
 /* body = {
   'username': 'username',
@@ -7,9 +7,9 @@ import { request } from '../api';
   'name': 'name',
   'password': 'password'
 }; */
-export const registerUser = (username, password) => ({
+export const registerUser = (body) => ({
   type: userTypes.REGISTER_USER,
-  payload: { username, password },
+  promise: api.registerUser(body),
   /* promise: request('/user', {
     method: 'POST',
     body: JSON.stringify(body),
@@ -25,11 +25,7 @@ export const registerUser = (username, password) => ({
 }; */
 export const signinUser = (body) => ({
   type: userTypes.SIGNIN_USER,
-  promise: request('/user', {
-    method: 'POST',
-    body: JSON.stringify(body),
-    headers: { 'Content-Type': 'application/json' },
-  }),
+  promise: api.signinUser(body),
 });
 
 export const signoutUser = () => ({

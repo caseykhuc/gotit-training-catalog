@@ -1,16 +1,26 @@
 import { BASE_URL, ITEM_PER_PAGE } from '../config';
 
-export const request = (path, options = {}) => fetch(`${BASE_URL}${path}`, { ...options });
-export const fetchCategories = () => fetch(`${BASE_URL}/categories?offset=0&limit=100`)
-  .then((res) => {
-    if (res.ok) { return res.json(); }
-    throw res.json();
-  })
+const handleJson = (res) => {
+  if (res.ok) { return res.json(); }
+  throw res.json();
+}
+
+const request = (url = '', method = 'GET', body) => {
+  const req = ((method !== 'GET' && body) ? fetch(`${BASE_URL}/${url}`, {
+    method,
+    body: JSON.stringify(body),
+  }) : fetch(`${BASE_URL}/${url}`))
+  return req.then(handleJson);
+}
+
+export const fetchCategories = () => request('categories?offset=0&limit=100')
   .then((res) => res.categories);
 
-export const fetchItems = (categoryId, page) => fetch(`${BASE_URL}/categories/${categoryId}/items?offset=${page * ITEM_PER_PAGE}&limit=${ITEM_PER_PAGE}`)
-  .then((res) => {
-    if (res.ok) { return res.json(); }
-    throw res.json();
-  })
-  .then((res) => res.items);
+export const fetchItems = (categoryId, page) => request(`categories/${categoryId}/items?offset=${page * ITEM_PER_PAGE}&limit=${ITEM_PER_PAGE}`)
+  .then((res) => res.items)
+
+export const registerUser = (body) => request('registrations', 'POST', body)
+  .then((res) => res.access_token);
+
+export const signinUser = (body) => request('login', 'POST', body)
+  .then((res) => res.access_token);
