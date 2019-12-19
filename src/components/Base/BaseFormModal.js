@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
 import BaseModal from './BaseModal';
 import BaseForm from './BaseForm';
 
@@ -9,12 +10,22 @@ class BaseFormModal extends React.Component {
   onInputChange = (e) => {
     const { name, value } = e.target;
     const { inputValue } = this.state;
-    this.setState({ inputValue: { ...inputValue, [name]: value } })
+
+    this.setState({
+      inputValue: { ...inputValue, [name]: value },
+    });
   }
 
   onFormSubmit = async () => {
-    const { onAction, initialState } = this.props;
+    const { onAction, initialState, validate } = this.props;
     const { inputValue } = this.state;
+
+    // prevent submission with invalid entries
+    if (validate && !_.isEmpty(validate(inputValue))) {
+      this.setState({ inputError: validate(inputValue) });
+      return;
+    }
+
     const res = await onAction(inputValue);
     if (!res.success) {
       this.setState((typeof res.message === 'object')
@@ -61,6 +72,7 @@ BaseFormModal.propTypes = {
   }),
   onAction: PropTypes.func.isRequired,
   title: PropTypes.string,
+  validate: PropTypes.func,
 }
 
 export default BaseFormModal;

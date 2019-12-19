@@ -7,9 +7,13 @@ import * as api from '../api';
   'name': 'name',
   'password': 'password'
 }; */
-export const registerUser = (body) => ({
+export const registerUser = ({
+  username, email, name, password,
+}) => ({
   type: userTypes.REGISTER_USER,
-  promise: api.registerUser(body),
+  promise: api.registerUser({
+    username, email, name, password,
+  }),
   /* promise: request('/user', {
     method: 'POST',
     body: JSON.stringify(body),

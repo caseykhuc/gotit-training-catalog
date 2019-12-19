@@ -6,6 +6,7 @@ describe('actions/user', () => {
   let response;
   let creator;
   let actions;
+  let body;
 
   const setup = async () => {
     store.clearActions();
@@ -17,12 +18,18 @@ describe('actions/user', () => {
     response = {
       access_token: 'test',
     };
+    body = {
+      username: 'username',
+      email: 'email',
+      name: 'name',
+      password: 'password',
+    }
   });
 
   // register user
   it('should create success action', async () => {
     fetch.mockResponse(JSON.stringify(response));
-    creator = userActions.registerUser();
+    creator = userActions.registerUser(body);
     await setup();
 
     expect(actions[1]).toEqual({ type: userTypes.REGISTER_USER_SUCCESS, payload: 'test' });
@@ -30,7 +37,7 @@ describe('actions/user', () => {
 
   it('should create failure action when caught error', async () => {
     fetch.mockReject(JSON.stringify(response));
-    creator = userActions.registerUser();
+    creator = userActions.registerUser(body);
     await setup();
 
     expect(actions[1]).toEqual({ type: userTypes.REGISTER_USER_FAILURE });
