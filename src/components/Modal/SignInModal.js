@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { signinUser } from '../../actions/user';
-import BaseFormModal from './BaseFormModal';
+import BaseFormModal from '../Base/BaseFormModal';
 
 export class RegisterModal extends React.Component {
   initialState = {
