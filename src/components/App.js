@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import Header from './Header';
 
 import { fetchCategory } from '../actions/category';
+import { fetchUser } from '../actions/user';
 import { getCategories } from '../reducers';
 
 import CategoryContainer from './Category/CategoryContainer';
@@ -17,8 +18,9 @@ import ModalContainer from './ModalContainer';
 
 export class App extends React.Component {
   componentDidMount() {
-    const { fetchCategory } = this.props;
+    const { fetchCategory, fetchUser } = this.props;
     fetchCategory();
+    /* fetchUser(); */
   }
 
   render() {
@@ -53,4 +55,4 @@ App.propTypes = {
   fetchCategory: PropTypes.func,
 }
 
-export default connect(mapStateToProps, { fetchCategory })(App);
+export default connect(mapStateToProps, { fetchCategory, fetchUser })(App);

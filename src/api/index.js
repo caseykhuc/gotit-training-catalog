@@ -22,6 +22,15 @@ export const fetchCategories = () => request('categories?offset=0&limit=100')
 export const fetchItems = (categoryId, page) => request(`categories/${categoryId}/items?offset=${page * ITEM_PER_PAGE}&limit=${ITEM_PER_PAGE}`)
   .then((res) => res.items)
 
+// authorized
+export const fetchUser = () => fetch(`${BASE_URL}/me`, {
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+    'Content-Type': 'application/json',
+  },
+}).then(handleJson)
+  .then((res) => res.id);
+
 export const registerUser = (body) => request('registrations', 'POST', body)
   .then((res) => res.access_token);
 

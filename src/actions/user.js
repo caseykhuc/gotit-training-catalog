@@ -1,36 +1,38 @@
 import { userTypes } from '../constants/actionTypes';
 import * as api from '../api';
 
-/* body = {
-  'username': 'username',
-  'email': 'email',
-  'name': 'name',
-  'password': 'password'
-}; */
-export const registerUser = ({
-  username, email, name, password,
-}) => ({
-  type: userTypes.REGISTER_USER,
-  promise: api.registerUser({
-    username, email, name, password,
-  }),
-  /* promise: request('/user', {
-    method: 'POST',
-    body: JSON.stringify(body),
-    headers: { 'Content-Type': 'application/json' },
-  }), */
+export const fetchUser = () => ({
+  type: 'FETCH_USER',
+  promise: api.fetchUser(),
 });
 
-/* body = {
-  'username': 'username',
-  'email': 'email',
-  'name': 'name',
-  'password': 'password'
-}; */
-export const signinUser = (body) => ({
-  type: userTypes.SIGNIN_USER,
-  promise: api.signinUser(body),
-});
+export const registerUser = ({
+  username, email, name, password,
+}) => async (dispatch) => {
+  const res = await dispatch({
+    type: userTypes.REGISTER_USER,
+    promise: api.registerUser({
+      username, email, name, password,
+    }),
+  })
+  if (res.success) {
+    dispatch(fetchUser());
+  }
+  return res;
+};
+
+
+export const signinUser = (body) => async (dispatch) => {
+  const res = await dispatch({
+    type: userTypes.SIGNIN_USER,
+    promise: api.signinUser(body),
+  });
+  if (res.success) {
+    dispatch(fetchUser());
+  }
+  return res;
+};
+
 
 export const signoutUser = () => ({
   // sync
