@@ -1,19 +1,20 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { RegisterModal } from '../RegisterModal';
-import BaseModal from '../BaseModal';
+import BaseModal from '../../Base/BaseModal';
+import BaseForm from '../../Base/BaseForm';
 
 describe('components/RegisterModal', () => {
   let props;
   let wrapper;
   let container;
-  let usernameField;
+  let baseForm;
   let baseModal;
 
   const update = () => {
     wrapper.update();
     container = wrapper.find('div');
-    usernameField = wrapper.find('[name="username"]');
+    baseForm = wrapper.find(BaseForm);
     baseModal = wrapper.find(BaseModal);
   };
   const setup = () => {
@@ -41,8 +42,8 @@ describe('components/RegisterModal', () => {
   });
   it('should call setState on input change', () => {
     setup();
-    usernameField.simulate('change', { target: { name: 'username', value: 'test' } });
-    expect(wrapper.state().username).toEqual('test')
+    baseForm.props().onInputChange({ target: { name: 'username', value: 'test' } });
+    expect(wrapper.state().inputValue.username).toEqual('test')
   });
   it('should invoke register when baseModal invoked onAccept ', () => {
     setup();

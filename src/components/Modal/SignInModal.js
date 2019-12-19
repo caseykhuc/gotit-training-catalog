@@ -2,7 +2,7 @@ import React from 'react';
 import { Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import BaseModal from './BaseModal';
+import BaseModal from '../Base/BaseModal';
 import { signinUser } from '../../actions/user';
 
 export class SignInModal extends React.Component {
