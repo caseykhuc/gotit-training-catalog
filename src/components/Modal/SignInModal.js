@@ -19,7 +19,7 @@ export class SignInModal extends React.Component {
   onFormSubmit = () => {
     const { signinUser } = this.props;
     const { username, password } = this.state;
-    signinUser(username, password);
+    signinUser({ username, password });
   }
 
   onKeyDown = (e) => {

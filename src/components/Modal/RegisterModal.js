@@ -6,24 +6,32 @@ import BaseModal from './BaseModal';
 import { registerUser } from '../../actions/user';
 
 export class RegisterModal extends React.Component {
-  state = {
-    username: '',
-    email: '',
-    name: '',
-    password: '',
+  initialState = {
+    inputValue: {
+      username: '',
+      email: '',
+      name: '',
+      password: '',
+    },
+    inputError: {
+    },
   }
+
+  state = this.initialState
 
   onInputChange = (e) => {
     const { name, value } = e.target;
-    this.setState({ [name]: value })
+    const { inputValue } = this.state;
+    this.setState({ inputValue: { ...inputValue, [name]: value } })
   }
 
-  onFormSubmit = () => {
+  onFormSubmit = async () => {
     const { registerUser } = this.props;
-    const {
-      username, email, name, password,
-    } = this.state;
-    registerUser(username, email, name, password);
+    const { inputValue } = this.state;
+    const res = await registerUser(inputValue);
+    if (!res.success) {
+      this.setState({ inputError: res.message })
+    } else this.setState(this.initialState)
   }
 
   onKeyDown = (e) => {
@@ -32,33 +40,40 @@ export class RegisterModal extends React.Component {
     }
   }
 
-  render() {
+  renderForm = (fields) => {
     const {
-      username, email, name, password,
+      inputValue, inputError,
     } = this.state;
+    console.log(inputValue);
 
+    return fields.map(({ name, type }) => (
+      <Form.Group controlId={name} key={name}>
+        {/* <Form.Label>{name.toUpperCase()}</Form.Label> */}
+        <Form.Control
+          type={type}
+          name={name}
+          value={inputValue[name]}
+          placeholder={`Enter ${name}`}
+          onChange={this.onInputChange}
+          isInvalid={inputError[name]}
+        />
+        <Form.Control.Feedback type="invalid">{inputError[name]}</Form.Control.Feedback>
+      </Form.Group>
+    ))
+  }
+
+  render() {
     return (
       <div onKeyDown={(e) => this.onKeyDown(e)}>
         <BaseModal title="REGISTER" onAccept={() => this.onFormSubmit()}>
-          <Form.Group controlId="username">
-            <Form.Label>Username</Form.Label>
-            <Form.Control type="text" name="username" value={username} placeholder="Enter username" onChange={this.onInputChange} />
-          </Form.Group>
-
-          <Form.Group controlId="email">
-            <Form.Label>Email</Form.Label>
-            <Form.Control type="email" name="email" value={email} placeholder="Enter email" onChange={this.onInputChange} />
-          </Form.Group>
-
-          <Form.Group controlId="name">
-            <Form.Label>Name</Form.Label>
-            <Form.Control type="text" name="name" value={name} placeholder="Enter name" onChange={this.onInputChange} />
-          </Form.Group>
-
-          <Form.Group controlId="password">
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password" name="password" value={password} placeholder="Password" onChange={this.onInputChange} />
-          </Form.Group>
+          {this.renderForm(
+            [{ name: 'username', type: 'text' },
+              { name: 'email', type: 'email' },
+              { name: 'name', type: 'text' },
+              {
+                name: 'password', type: 'password',
+              }],
+          )}
         </BaseModal>
       </div>
     )

@@ -9,6 +9,9 @@ const request = (url = '', method = 'GET', body) => {
   const req = ((method !== 'GET' && body) ? fetch(`${BASE_URL}/${url}`, {
     method,
     body: JSON.stringify(body),
+    headers: {
+      'Content-Type': 'application/json',
+    },
   }) : fetch(`${BASE_URL}/${url}`))
   return req.then(handleJson);
 }
