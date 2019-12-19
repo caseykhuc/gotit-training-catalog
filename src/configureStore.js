@@ -1,10 +1,11 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { createLogger } from 'redux-logger';
 import handleFetch from './middlewares/handleFetch';
+import handleJwt from './middlewares/handleJwt';
 import rootReducer from './reducers';
 
 const configureStore = () => {
-  const middlewares = [handleFetch];
+  const middlewares = [handleFetch, handleJwt];
   // console.log(thunk);
   // const middlewares = [];
   if (process.env.NODE_ENV !== 'production') {
