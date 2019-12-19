@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { signinUser } from '../../actions/user';
 import BaseFormModal from '../Base/BaseFormModal';
 
-export class RegisterModal extends React.Component {
+export class SignInModal extends Component {
   initialState = {
     inputValue: {
       username: '',
@@ -15,22 +15,21 @@ export class RegisterModal extends React.Component {
     requestError: '',
   }
 
-  fields = [{ name: 'username', type: 'text' },
-    {
-      name: 'password', type: 'password',
-    }]
+  fields = [{ name: 'username', type: 'text' }, {
+    name: 'password', type: 'password',
+  }]
 
   render() {
     const { initialState, fields } = this;
     const { signinUser } = this.props;
     return (
-      <BaseFormModal fields={fields} initialState={initialState} onAction={signinUser} />
+      <BaseFormModal title="SIGN IN" fields={fields} initialState={initialState} onAction={signinUser} />
     )
   }
 }
 
-RegisterModal.propTypes = {
+SignInModal.propTypes = {
   signinUser: PropTypes.func.isRequired,
 }
 
-export default connect(null, { signinUser })(RegisterModal);
+export default connect(null, { signinUser })(SignInModal);

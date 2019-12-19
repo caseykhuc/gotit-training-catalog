@@ -3,9 +3,14 @@ import { Form, Alert } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 const BaseForm = ({
-  onInputChange, inputError, requestError, inputValue, fields,
+  onInputChange,
+  inputError,
+  requestError,
+  inputValue,
+  fields,
+  onKeyDown,
 }) => (
-    <div>
+    <div onKeyDown={onKeyDown}>
       {fields.map(({ name, type }) => (
         <Form.Group controlId={name} key={name}>
           {/* <Form.Label>{name.toUpperCase()}</Form.Label> */}
@@ -26,6 +31,7 @@ const BaseForm = ({
 
 BaseForm.propTypes = {
   onInputChange: PropTypes.func.isRequired,
+  onKeyDown: PropTypes.func.isRequired,
   inputError: PropTypes.object.isRequired,
   inputValue: PropTypes.object.isRequired,
   fields: PropTypes.arrayOf(PropTypes.shape({

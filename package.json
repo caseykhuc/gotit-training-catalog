@@ -10,7 +10,6 @@
     "@testing-library/user-event": "^7.1.2",
     "@typescript-eslint/eslint-plugin": "^2.8.0",
     "@typescript-eslint/parser": "^2.8.0",
-    "babel-eslint": "10.0.3",
     "babel-jest": "^24.9.0",
     "babel-loader": "8.0.6",
     "babel-plugin-named-asset-import": "^0.3.5",
@@ -96,8 +95,10 @@
     ]
   },
   "devDependencies": {
+    "babel-eslint": "^10.0.3",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
+    "eslint-plugin-jest": "^23.1.1",
     "jest-fetch-mock": "^3.0.0",
     "redux-mock-store": "^1.5.4"
   },

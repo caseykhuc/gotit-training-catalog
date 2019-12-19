@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import BaseModal from './BaseModal';
 import BaseForm from './BaseForm';
 
-export default class BaseFormModal extends React.Component {
+class BaseFormModal extends React.Component {
   state = this.props.initialState
 
   onInputChange = (e) => {
@@ -33,13 +33,18 @@ export default class BaseFormModal extends React.Component {
     const {
       inputValue, inputError, requestError,
     } = this.state;
-    const { fields } = this.props;
+    const { fields, title } = this.props;
     return (
-      <div onKeyDown={(e) => this.onKeyDown(e)}>
-        <BaseModal title="SIGNIN" onAccept={() => this.onFormSubmit()}>
-          <BaseForm onInputChange={(e) => this.onInputChange(e)} inputValue={inputValue} inputError={inputError} requestError={requestError} fields={fields} />
-        </BaseModal>
-      </div>
+      <BaseModal title={title} onAccept={() => this.onFormSubmit()}>
+        <BaseForm
+          onInputChange={(e) => this.onInputChange(e)}
+          inputValue={inputValue}
+          inputError={inputError}
+          requestError={requestError}
+          fields={fields}
+          onKeyDown={(e) => this.onKeyDown(e)}
+        />
+      </BaseModal>
     )
   }
 }
@@ -55,4 +60,7 @@ BaseFormModal.propTypes = {
     requestError: PropTypes.string,
   }),
   onAction: PropTypes.func.isRequired,
+  title: PropTypes.string,
 }
+
+export default BaseFormModal;
