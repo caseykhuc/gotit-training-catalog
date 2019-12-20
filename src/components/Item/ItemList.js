@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-const ItemList = ({ items, userId, categoryId }) => {
+export const ItemList = ({ items, userId, categoryId }) => {
   // console.log(props);
   const renderItems = () => items.map(({ id, name, user_id }) => (
     <ListGroup.Item className="d-flex justify-content-between align-items-center" key={id}>
@@ -25,9 +25,6 @@ const ItemList = ({ items, userId, categoryId }) => {
 
   ));
 
-  console.log(items);
-  console.log(userId);
-
   return (
     <ListGroup>
       {renderItems()}
@@ -39,6 +36,7 @@ ItemList.propTypes = {
   items: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
+    user_id: PropTypes.number,
   })).isRequired,
   userId: PropTypes.number,
 }
