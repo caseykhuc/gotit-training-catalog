@@ -1,5 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`component/Item/ItemSingle should render correctly 1`] = `ShallowWrapper {}`;
-
-exports[`component/ItemSingle should render correctly 1`] = `ShallowWrapper {}`;

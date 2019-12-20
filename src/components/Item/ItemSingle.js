@@ -42,7 +42,7 @@ export class ItemSingle extends Component {
                 </Button>
                 <Button
                   variant="danger"
-                  onClick={() => showModal(modalKeys.DELETE_MODAL)}
+                  onClick={() => showModal(modalKeys.DELETE_ITEM_MODAL)}
                 >
                   Delete
                 </Button>

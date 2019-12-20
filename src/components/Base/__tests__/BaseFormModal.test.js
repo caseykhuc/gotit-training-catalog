@@ -25,8 +25,8 @@ describe('components/BaseFormModal', () => {
       initialState: {
         inputError: {},
         inputValue: {
-          username: '',
-          password: '',
+          username: 'test',
+          password: 'test',
         },
         requestError: 'error test',
       },
@@ -34,6 +34,7 @@ describe('components/BaseFormModal', () => {
         name: 'password', type: 'password',
       }],
       title: 'Test Title',
+      /* validate: () => { }, */
     }
   });
   it('should render correctly', () => {

@@ -29,6 +29,7 @@ describe('component/Item/ItemSingle', () => {
       categoryId: 1,
       userCurrent: 10,
       fetchItem: jest.fn(),
+      showModal: jest.fn(),
     }
   });
   it('should render correctly', () => {

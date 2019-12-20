@@ -14,6 +14,7 @@ class BaseFormModal extends React.Component {
     const newValue = { ...inputValue, [name]: value };
     const { validate } = this.props;
 
+    // set validation error along with user input
     this.setState(validate ? {
       inputValue: newValue,
       inputError: validate(newValue),
@@ -24,26 +25,25 @@ class BaseFormModal extends React.Component {
 
   onFormSubmit = async () => {
     const { onAction, initialState, validate } = this.props;
-    const { inputValue, inputError } = this.state;
+    const { inputValue } = this.state;
 
-    console.log(inputValue);
+    // prevent empty submission
     if (!_.values(inputValue).some((x) => !_.isEmpty(x))) {
       this.setState({ requestError: 'Empty input' });
       return;
     }
 
+    // prevent invalid request body
     if (validate && !_.isEmpty(validate(inputValue))) {
       return;
     }
 
-    if (inputError) {
-      const res = await onAction(inputValue);
-      if (!res.success) {
-        this.setState((typeof res.message === 'object')
-          ? { inputError: res.message }
-          : { inputError: {}, requestError: res.message })
-      } else this.setState(initialState)
-    }
+    const res = await onAction(inputValue);
+    if (!res.success) {
+      this.setState((typeof res.message === 'object')
+        ? { inputError: res.message }
+        : { inputError: {}, requestError: res.message })
+    } else this.setState(initialState)
   }
 
   onKeyDown = (e) => {
@@ -56,6 +56,8 @@ class BaseFormModal extends React.Component {
     const {
       inputValue, inputError, requestError,
     } = this.state;
+
+    /* console.log(this.state); */
 
     const { fields, title } = this.props;
     return (
