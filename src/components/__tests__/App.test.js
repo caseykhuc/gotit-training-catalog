@@ -3,7 +3,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { App } from '../App';
 
-describe('component/Category/CategoryContainer', () => {
+describe('component/Category/App', () => {
   let props;
   let wrapper;
   const update = () => {
@@ -20,6 +20,7 @@ describe('component/Category/CategoryContainer', () => {
         name: 'Cat',
       }],
       fetchCategory: jest.fn(),
+      fetchUser: jest.fn(),
     }
   });
   it('should render correctly', () => {
@@ -29,9 +30,10 @@ describe('component/Category/CategoryContainer', () => {
     setup();
     expect(wrapper).toMatchSnapshot();
   });
-  it('should fetch categories when mounted', () => {
+  it('should fetch categories & user when mounted', () => {
     setup();
     expect(props.fetchCategory).toHaveBeenCalled();
+    expect(props.fetchUser).toHaveBeenCalled();
   })
   /* it('should render CategoryDetails and fetchItems when category props is defined', () => {
     setup();

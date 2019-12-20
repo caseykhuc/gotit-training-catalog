@@ -2,7 +2,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Alert, Container } from 'react-bootstrap';
+import { Alert } from 'react-bootstrap';
 import queryString from 'query-string';
 
 import PropTypes from 'prop-types';

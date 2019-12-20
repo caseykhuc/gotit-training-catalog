@@ -1,5 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`component/Category/App should render correctly 1`] = `ShallowWrapper {}`;
+
+exports[`component/Category/App should render correctly 2`] = `ShallowWrapper {}`;
+
 exports[`component/Category/CategoryContainer should render correctly 1`] = `ShallowWrapper {}`;
 
 exports[`component/Category/CategoryContainer should render correctly 2`] = `ShallowWrapper {}`;

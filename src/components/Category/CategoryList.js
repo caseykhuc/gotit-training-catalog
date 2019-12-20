@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ScrollMenu from 'react-horizontal-scrolling-menu';
 import PropTypes from 'prop-types';
-import { Navbar } from 'react-bootstrap';
 
 const ArrowLeft = <div style={{ padding: '10px' }}>{'<'}</div>;
 const ArrowRight = <div style={{ padding: '10px' }}>{'>'}</div>;
