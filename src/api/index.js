@@ -16,6 +16,23 @@ const request = (url = '', method = 'GET', body) => {
   return req.then(handleJson);
 }
 
+const authorizedRequest = (url = '', method = 'GET', body) => {
+  const req = ((method !== 'GET' && body) ? fetch(`${BASE_URL}/${url}`, {
+    method,
+    body: JSON.stringify(body),
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+      'Content-Type': 'application/json',
+    },
+  }) : fetch(`${BASE_URL}/${url}`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+      'Content-Type': 'application/json',
+    },
+  }))
+  return req.then(handleJson);
+}
+
 export const fetchCategories = () => request('categories?offset=0&limit=100')
   .then((res) => res.categories);
 
@@ -39,3 +56,6 @@ export const registerUser = (body) => request('registrations', 'POST', body)
 
 export const signinUser = (body) => request('login', 'POST', body)
   .then((res) => res.access_token);
+
+export const addItem = (categoryId, body) => authorizedRequest(`categories/${categoryId}/items`, 'POST', body)
+  .then((res) => res);

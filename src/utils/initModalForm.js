@@ -57,3 +57,24 @@ export const signinModal = {
     name: 'password', type: 'password',
   }],
 }
+
+export const addItemModal = () => ({
+  initialState: {
+    inputValue: {
+      name: '',
+      description: '',
+      price: '',
+      category_id: '',
+    },
+    inputError: {
+    },
+    requestError: '',
+  },
+
+  fields: [
+    { name: 'name', type: 'text' },
+    { name: 'description', type: 'text' },
+    { name: 'price', type: 'text' },
+    { name: 'category_id', type: 'select' },
+  ],
+})

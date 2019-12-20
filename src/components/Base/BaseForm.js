@@ -11,17 +11,29 @@ const BaseForm = ({
   onKeyDown,
 }) => (
     <div onKeyDown={onKeyDown}>
-      {fields.map(({ name, type }) => (
+      {fields.map(({ name, type, options }) => (
         <Form.Group controlId={name} key={name}>
-          {/* <Form.Label>{name.toUpperCase()}</Form.Label> */}
-          <Form.Control
-            type={type}
-            name={name}
-            value={inputValue[name]}
-            placeholder={`Enter ${name}`}
-            onChange={onInputChange}
-            isInvalid={inputError[name]}
-          />
+          {type !== 'select'
+            ? (
+              <Form.Control
+                type={type}
+                name={name}
+                value={inputValue[name]}
+                placeholder={`Enter ${name}`}
+                onChange={onInputChange}
+                isInvalid={inputError[name]}
+              />
+            )
+            : (
+              <Form.Control
+                as="select"
+                name={name}
+                onChange={onInputChange}
+                isInvalid={inputError[name]}
+              >
+                {options.map(({ name, id }) => <option value={id} key={id}>{`Category ${name}`}</option>)}
+              </Form.Control>
+            )}
           <Form.Control.Feedback type="invalid">{inputError[name]}</Form.Control.Feedback>
         </Form.Group>
       ))}
