@@ -16,4 +16,6 @@ export const getCategories = (state) => fromCategory.getCategories(state.categor
 
 export const getCategoryIds = (state) => fromCategory.getCategoryIds(state.category);
 
+export const getItem = (state, itemId) => fromItem.getItem(state.item, itemId)
+
 export const getItems = (state) => fromItem.getItems(state.item);

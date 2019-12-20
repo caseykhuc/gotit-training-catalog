@@ -40,24 +40,24 @@ describe('component/Category/CategoryContainer', () => {
   });
   it('should render CategoryDetails and fetchItems when category props is defined', () => {
     setup();
-    expect(categoryDetails.length).toEqual(1);
+    expect(categoryDetails).toHaveLength(1);
     expect(props.fetchItems).toHaveBeenCalledWith(props.categoryId);
   });
   it('should render danger Alert / not fetchItems / navigate when category props is undefined', () => {
     props.category = undefined;
     setup();
-    expect(categoryDetails.length).toBe(0);
-    expect(alertDanger.length).toBe(1);
+    expect(categoryDetails).toHaveLength(0);
+    expect(alertDanger).toHaveLength(1);
     expect(props.fetchItems).not.toHaveBeenCalled();
     expect(props.history.push).toHaveBeenCalledWith('/');
   });
   it('should render ItemList when itemList.length > 0', () => {
     props.itemList = [{ name: 'item 1', description: 'desc' }];
     setup();
-    expect(itemList.length).toBe(1);
+    expect(itemList).toHaveLength(1);
   }); it('should render Alert when itemList is empty', () => {
     setup();
-    expect(alertInfo.length).toBe(1);
+    expect(alertInfo).toHaveLength(1);
   });
   it('should not fetch items when updating without categoryId || page change', () => {
     setup();

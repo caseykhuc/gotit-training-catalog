@@ -35,6 +35,8 @@ const byId = (state = {}, action) => {
   switch (action.type) {
     case itemTypes.FETCH_ITEMS_SUCCESS:
       return arrayToObject(action.payload);
+    case itemTypes.FETCH_ITEM_SUCCESS:
+      return { ...state, [action.payload.id]: action.payload };
     case itemTypes.ADD_ITEM_SUCCESS:
     case itemTypes.EDIT_ITEM_SUCCESS:
       return { ...state, [action.payload.id]: action.payload };
@@ -106,4 +108,8 @@ export default combineReducers({
   byId, totalItems, isLoading, error,
 });
 
-export const getItems = (state) => (state.byId ? Object.keys(state.byId).map((id) => state.byId[id]) : {});
+export const getItem = (state, id) => state.byId[id];
+
+export const getItems = (state) => (state.byId
+  ? Object.keys(state.byId).map((id) => state.byId[id])
+  : {});

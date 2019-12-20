@@ -2,7 +2,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Alert } from 'react-bootstrap';
+import { Alert, Container } from 'react-bootstrap';
 import queryString from 'query-string';
 
 import PropTypes from 'prop-types';
@@ -27,21 +27,21 @@ export class CategoryContainer extends React.Component {
   }
 
   render() {
-    const { category, itemList } = this.props;
+    const { category, itemList, categoryId } = this.props;
     return category ? (
-      <div>
+      <div className="w-75 mx-auto">
         <CategoryDetails category={category} />
         {itemList.length ? (
-          <ItemList items={itemList} />
+          <ItemList items={itemList} categoryId={categoryId} />
         ) : (
-          <Alert variant="info">
+            <Alert variant="info">
               Category currently has no items. Add one now!
-            </Alert>
-        )}
+          </Alert>
+          )}
       </div>
     ) : (
-      <Alert variant="danger">Can't find category</Alert>
-    );
+        <Alert variant="danger">Can't find category</Alert>
+      );
   }
 }
 
