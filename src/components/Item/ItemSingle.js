@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Card, ButtonGroup, Button } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { getItem } from '../../reducers';
 import { fetchItem } from '../../actions/item';
 
-class ItemSingle extends Component {
+export class ItemSingle extends Component {
   componentDidMount() {
     const {
       item, fetchItem, categoryId, itemId,
     } = this.props;
-    console.log(this.props);
     if (!item) {
       fetchItem(categoryId, itemId);
     }
@@ -51,7 +51,7 @@ class ItemSingle extends Component {
   }
 }
 
-const mapStateToProps = (state, { match }) => {
+export const mapStateToProps = (state, { match }) => {
   const { itemId, categoryId } = match.params;
   const { user } = state;
   return {
@@ -60,6 +60,19 @@ const mapStateToProps = (state, { match }) => {
     item: getItem(state, itemId),
     userCurrent: user.userId,
   }
+}
+
+ItemSingle.propTypes = {
+  itemId: PropTypes.number.isRequired,
+  categoryId: PropTypes.number.isRequired,
+  item: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    user_id: PropTypes.number.isRequired,
+  }),
+  userCurrent: PropTypes.number,
+  fetchItem: PropTypes.func.isRequired,
 }
 
 export default withRouter(connect(mapStateToProps, { fetchItem })(ItemSingle));
