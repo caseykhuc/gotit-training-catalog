@@ -5,6 +5,8 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getItem } from '../../reducers';
 import { fetchItem } from '../../actions/item';
+import { showModal } from '../../actions/modal';
+import modalKeys from '../../constants/modelKeys';
 
 export class ItemSingle extends Component {
   componentDidMount() {
@@ -17,7 +19,7 @@ export class ItemSingle extends Component {
   }
 
   render() {
-    const { item, userCurrent } = this.props;
+    const { item, userCurrent, showModal } = this.props;
     if (item) {
       const {
         id, name, description, user_id,
@@ -38,7 +40,10 @@ export class ItemSingle extends Component {
                 <Button className="mr-1">
                   Edit
                 </Button>
-                <Button variant="secondary">
+                <Button
+                  variant="danger"
+                  onClick={() => showModal(modalKeys.DELETE_MODAL)}
+                >
                   Delete
                 </Button>
               </ButtonGroup>
@@ -55,8 +60,8 @@ export const mapStateToProps = (state, { match }) => {
   const { itemId, categoryId } = match.params;
   const { user } = state;
   return {
-    itemId,
-    categoryId,
+    itemId: Number(itemId),
+    categoryId: Number(categoryId),
     item: getItem(state, itemId),
     userCurrent: user.userId,
   }
@@ -73,6 +78,7 @@ ItemSingle.propTypes = {
   }),
   userCurrent: PropTypes.number,
   fetchItem: PropTypes.func.isRequired,
+  showModal: PropTypes.func.isRequired,
 }
 
-export default withRouter(connect(mapStateToProps, { fetchItem })(ItemSingle));
+export default withRouter(connect(mapStateToProps, { fetchItem, showModal })(ItemSingle));

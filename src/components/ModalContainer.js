@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import modalKeys from '../constants/modelKeys';
 import RegisterModal from './Modal/RegisterModal';
 import SignInModal from './Modal/SignInModal';
+import DeleteModal from './Modal/DeleteModal';
 
 export const ModalContainer = ({ modal }) => {
   const renderModal = () => {
@@ -12,6 +13,8 @@ export const ModalContainer = ({ modal }) => {
         return <RegisterModal />;
       case modalKeys.SIGNIN_MODAL:
         return <SignInModal />;
+      case modalKeys.DELETE_MODAL:
+        return <DeleteModal />;
       default:
         return '';
     }

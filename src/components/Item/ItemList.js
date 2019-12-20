@@ -16,7 +16,7 @@ export const ItemList = ({ items, userId, categoryId }) => {
           <Button className="mr-1">
             Edit
           </Button>
-          <Button variant="secondary">
+          <Button variant="danger">
             Delete
           </Button>
         </ButtonGroup>
