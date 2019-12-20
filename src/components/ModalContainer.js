@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import modalKeys from '../constants/modelKeys';
 import RegisterModal from './Modal/RegisterModal';
 import SignInModal from './Modal/SignInModal';
 
-const ModalContainer = ({ modal }) => {
+export const ModalContainer = ({ modal }) => {
   const renderModal = () => {
     switch (modal.current) {
       case modalKeys.REGISTER_MODAL:
@@ -26,10 +27,15 @@ const ModalContainer = ({ modal }) => {
     }}
     >
       {renderModal()}
-
     </div>
   );
 };
+
+ModalContainer.propTypes = {
+  modal: PropTypes.shape({
+    current: PropTypes.string,
+  }).isRequired,
+}
 
 const mapStateToProps = (state) => ({
   modal: state.modal,
