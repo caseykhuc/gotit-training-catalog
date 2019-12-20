@@ -11,27 +11,39 @@ class BaseFormModal extends React.Component {
     const { name, value } = e.target;
     const { inputValue } = this.state;
 
-    this.setState({
-      inputValue: { ...inputValue, [name]: value },
-    });
+    const newValue = { ...inputValue, [name]: value };
+    const { validate } = this.props;
+
+    this.setState(validate ? {
+      inputValue: newValue,
+      inputError: validate(newValue),
+    } : {
+        inputValue: newValue,
+      });
   }
 
   onFormSubmit = async () => {
     const { onAction, initialState, validate } = this.props;
-    const { inputValue } = this.state;
+    const { inputValue, inputError } = this.state;
 
-    // prevent submission with invalid entries
-    if (validate && !_.isEmpty(validate(inputValue))) {
-      this.setState({ inputError: validate(inputValue) });
+    console.log(inputValue);
+    if (!_.values(inputValue).some((x) => !_.isEmpty(x))) {
+      this.setState({ requestError: 'Empty input' });
       return;
     }
 
-    const res = await onAction(inputValue);
-    if (!res.success) {
-      this.setState((typeof res.message === 'object')
-        ? { inputError: res.message }
-        : { inputError: {}, requestError: res.message })
-    } else this.setState(initialState)
+    if (validate && !_.isEmpty(validate(inputValue))) {
+      return;
+    }
+
+    if (inputError) {
+      const res = await onAction(inputValue);
+      if (!res.success) {
+        this.setState((typeof res.message === 'object')
+          ? { inputError: res.message }
+          : { inputError: {}, requestError: res.message })
+      } else this.setState(initialState)
+    }
   }
 
   onKeyDown = (e) => {
