@@ -1,26 +1,37 @@
 import { userTypes } from '../constants/actionTypes';
 
-const initialState = {
+/* const initialState = {
   current: {
     userId: '',
     token: '',
   },
   isLoading: false,
   error: '',
-};
+}; */
 
-const current = (state = {}, action) => {
-  switch (action.type) {
-    case userTypes.LOGIN_USER_SUCCESS:
-      return action.payload;
-    default:
-      return state;
-  }
-};
+const initialState = {
+  userId: null,
+  isLoading: false,
+  error: '',
+}
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case userTypes.LOGIN_USER_REQUEST:
+    case userTypes.FETCH_USER_SUCCESS:
+      return { ...state, userId: action.payload };
+
+    case userTypes.REGISTER_USER_REQUEST:
+    case userTypes.SIGNIN_USER_REQUEST:
+      return { ...state, isLoading: true }
+
+    case userTypes.FETCH_USER_FAILURE:
+    case userTypes.REGISTER_USER_FAILURE:
+    case userTypes.SIGNIN_USER_FAILURE:
+      return { ...state, error: action.payload }
+
+    case userTypes.SIGNOUT_USER:
+      return { ...initialState };
+
     default:
       return state;
   }

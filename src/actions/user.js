@@ -36,4 +36,5 @@ export const signinUser = (body) => async (dispatch) => {
 
 export const signoutUser = () => ({
   // sync
+  type: userTypes.SIGNOUT_USER,
 });

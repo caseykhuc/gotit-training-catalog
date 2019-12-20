@@ -10,6 +10,11 @@ export const fetchItems = (categoryId, page = 0) => ({
   promise: api.fetchItems(categoryId, page),
 })
 
+export const fetchItem = (categoryId, itemId) => ({
+  type: 'FETCH_ITEM',
+  promise: api.fetchItem(categoryId, itemId),
+})
+
 export const addItem = () => { };
 export const editItem = () => { };
 

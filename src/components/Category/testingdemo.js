@@ -1,4 +1,4 @@
-import React, * as fromReact from 'react';
+/* import React, * as fromReact from 'react';
 import { shallow } from 'enzyme';
 import { Form } from '@gotitinc/design-system';
 import { EditArchivedQuestion } from '../EditArchivedQuestion';
@@ -121,3 +121,4 @@ describe('components/Modals/EditArchivedQuestion', () => {
     expect(props.onModalClose).toHaveBeenCalled();
   });
 });
+ */
