@@ -18,7 +18,10 @@ export const Header = ({ isSignedIn, showModal, signoutUser }) => (
     {isSignedIn
       ? (
         <ButtonGroup>
-          <Button onClick={() => showModal(modalKeys.ADD_ITEM_MODAL)}>
+          <Button
+            onClick={() => showModal(modalKeys.ADD_ITEM_MODAL)}
+            className="add-btn"
+          >
             Add Item
           </Button>
           <Button
@@ -34,6 +37,7 @@ export const Header = ({ isSignedIn, showModal, signoutUser }) => (
         <ButtonGroup>
           <Button
             onClick={() => showModal(modalKeys.REGISTER_MODAL)}
+            className="register-btn"
           >
             Register
           </Button>

@@ -12,7 +12,6 @@ import { getCategories } from '../reducers';
 
 import CategoryContainer from './Category/CategoryContainer';
 import CategoryList from './Category/CategoryList';
-import ItemNew from './Item/ItemNew';
 import ModalContainer from './ModalContainer';
 import ItemSingle from './Item/ItemSingle';
 
@@ -32,7 +31,6 @@ export class App extends React.Component {
         <Header isSignedIn={Boolean(userId)} />
         <CategoryList categories={categories} />
         <Switch>
-          <Route path="/new-item" component={ItemNew} />
           <Route path="/categories/items/:categoryId/:itemId" component={ItemSingle} />
           <Route path="/categories/:categoryId" component={CategoryContainer} />
           {categories.length && (

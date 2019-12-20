@@ -26,16 +26,10 @@ describe('component/ModalContainer', () => {
     setup();
     expect(wrapper).toMatchSnapshot();
 
-    props.modal.current = modalKeys.DELETE_MODAL;
-    setup();
-    expect(wrapper).toMatchSnapshot();
-
-    props.modal.current = modalKeys.REGISTER_MODAL;
-    setup();
-    expect(wrapper).toMatchSnapshot();
-
-    props.modal.current = modalKeys.SIGNIN_MODAL;
-    setup();
-    expect(wrapper).toMatchSnapshot();
+    Object.keys(modalKeys).map((key) => {
+      props.modal.current = modalKeys[key];
+      setup();
+      expect(wrapper).toMatchSnapshot();
+    });
   });
 })
