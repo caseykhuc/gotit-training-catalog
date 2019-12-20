@@ -44,7 +44,7 @@ class BaseFormModal extends React.Component {
     const {
       inputValue, inputError, requestError,
     } = this.state;
-    console.log(inputValue);
+
     const { fields, title } = this.props;
     return (
       <BaseModal title={title} onAccept={() => this.onFormSubmit()}>

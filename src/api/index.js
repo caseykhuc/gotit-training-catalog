@@ -58,4 +58,4 @@ export const signinUser = (body) => request('login', 'POST', body)
   .then((res) => res.access_token);
 
 export const addItem = (categoryId, body) => authorizedRequest(`categories/${categoryId}/items`, 'POST', body)
-  .then((res) => res);
+  .then((res) => { console.log(res); return res });

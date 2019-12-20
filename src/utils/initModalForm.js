@@ -77,4 +77,18 @@ export const addItemModal = () => ({
     { name: 'price', type: 'text' },
     { name: 'category_id', type: 'select' },
   ],
+
+  validate: ({
+    name, price, category_id,
+  }) => {
+    const inputError = {};
+    if (name && name.length < 5) inputError.name = errorMessage.name.tooShort;
+    if (price && !validator.isNumeric(price)) {
+      inputError.price = errorMessage.price.tooSimple;
+    }
+    if (!category_id) {
+      inputError.category_id = errorMessage.category.isNotDefined;
+    }
+    return inputError;
+  },
 })
