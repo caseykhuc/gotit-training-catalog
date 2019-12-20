@@ -10,7 +10,7 @@ const persistJwt = () => (next) => (action) => {
       break
 
     case userTypes.SIGNOUT_USER:
-      localStorage.setItem('access_token', undefined);
+      localStorage.removeItem('access_token');
       break
 
     default:

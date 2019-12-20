@@ -1,42 +1,45 @@
-import handleFetch from '../handleFetch';
+import handleJwt from '../handleJwt';
+import { userTypes } from '../../constants/actionTypes';
 
-describe('middlewares/handleFetch', () => {
+describe('middlewares/handleJwt', () => {
   const create = () => {
     const store = {
       getState: jest.fn(() => { }),
       dispatch: jest.fn(),
     }
     const next = jest.fn();
-    const invoke = async (action) => handleFetch(store)(next)(action);
+    const invoke = async (action) => handleJwt(store)(next)(action);
 
     return { store, next, invoke }
   }
 
   const { store, next, invoke } = create();
 
-  it('should pass dispatch and getState when get function action', () => {
-    const action = (dispatch, getState) => { dispatch({ type: 'SAMPLE_ACTION' }); getState(); }
+  beforeEach(() => {
+    localStorage.clear();
+  })
+
+  it('should store token on localStorage in signin/register success', () => {
+    let action = { type: userTypes.SIGNIN_USER_SUCCESS, payload: 'sample access_token' };
     invoke(action);
 
-    expect(store.dispatch).toHaveBeenLastCalledWith({ type: 'SAMPLE_ACTION' });
-    expect(store.getState).toHaveBeenCalled();
+    expect(localStorage.getItem('access_token')).toBe('sample access_token');
+
+    action = { type: userTypes.REGISTER_USER_SUCCESS, payload: 'test access_token' };
+    invoke(action);
+
+    expect(localStorage.getItem('access_token')).toBe('test access_token');
   });
-  it('should pass through action with no promise', () => {
-    const action = { type: 'SAMPLE_ACTION', payload: 'data' };
+  it('should clear token on localStorage in signout action', () => {
+    const action = { type: userTypes.SIGNOUT_USER, payload: 'sample access_token' };
+    invoke(action);
+
+    expect(localStorage.getItem('access_token')).toBeFalsy();
+  });
+  it('should pass action when action is of other type', () => {
+    const action = { type: userTypes.FETCH_USER, payload: 'sample access_token' };
     invoke(action);
 
     expect(next).toHaveBeenCalledWith(action);
-  });
-  it('should dispatch success action when done await', async () => {
-    const action = { type: 'SAMPLE_ACTION', promise: Promise.resolve('test') };
-    await invoke(action);
-
-    expect(store.dispatch).toHaveBeenCalledWith({ type: 'SAMPLE_ACTION_SUCCESS', payload: 'test' })
-  });
-  it('should dispatch failure action when caught error', async () => {
-    const action = { type: 'SAMPLE_ACTION', promise: Promise.reject(new Error('test')) };
-    await invoke(action);
-
-    expect(store.dispatch).toHaveBeenCalledWith({ type: 'SAMPLE_ACTION_FAILURE', payload: 'test' })
   })
 })
