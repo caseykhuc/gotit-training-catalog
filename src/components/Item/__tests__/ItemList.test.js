@@ -1,17 +1,17 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import { ButtonGroup } from 'react-bootstrap';
+import ModifyButton from '../ModifyButton';
 import { ItemList } from '../ItemList';
 
 describe('component/ItemList', () => {
   let props;
   let wrapper;
-  let btnGroup;
+  let modifyButton;
 
   const update = () => {
     wrapper.update();
-    btnGroup = wrapper.find(ButtonGroup);
+    modifyButton = wrapper.find(ModifyButton);
   };
   const setup = () => {
     wrapper = shallow(<ItemList {...props} />);
@@ -30,9 +30,9 @@ describe('component/ItemList', () => {
     setup();
     expect(wrapper).toMatchSnapshot();
   });
-  it('should render btnGroup when userId match', () => {
+  it('should render modifyButton when userId match', () => {
     props.userId = 3;
     setup();
-    expect(btnGroup.length).toBeTruthy();
+    expect(modifyButton.length).toBeTruthy();
   });
 })

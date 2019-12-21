@@ -1,8 +1,9 @@
 import React from 'react';
-import { ListGroup, Button, ButtonGroup } from 'react-bootstrap'
+import { ListGroup } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import ModifyButton from './ModifyButton';
 
 export const ItemList = ({ items, userId, categoryId }) => {
   // console.log(props);
@@ -12,14 +13,7 @@ export const ItemList = ({ items, userId, categoryId }) => {
         {name}
       </Link>
       {userId === user_id && (
-        <ButtonGroup>
-          <Button className="mr-1">
-            Edit
-          </Button>
-          <Button variant="danger">
-            Delete
-          </Button>
-        </ButtonGroup>
+        <ModifyButton categoryId={categoryId} itemId={id} />
       )}
     </ListGroup.Item>
 

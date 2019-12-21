@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Card, ButtonGroup, Button } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getItem } from '../../reducers';
 import { fetchItem } from '../../actions/item';
 import { showModal } from '../../actions/modal';
-import modalKeys from '../../constants/modelKeys';
+import ModifyButton from './ModifyButton';
 
 export class ItemSingle extends Component {
   componentDidMount() {
@@ -20,7 +20,7 @@ export class ItemSingle extends Component {
 
   render() {
     const {
-      item, userCurrent, showModal, categoryId, itemId,
+      item, userCurrent, categoryId, itemId,
     } = this.props;
     if (item) {
       const {
@@ -38,17 +38,7 @@ export class ItemSingle extends Component {
               {description}
             </Card.Text>
             {userCurrent === user_id && (
-              <ButtonGroup>
-                <Button className="mr-1">
-                  Edit
-                </Button>
-                <Button
-                  variant="danger"
-                  onClick={() => showModal(modalKeys.DELETE_ITEM_MODAL, { categoryId, itemId })}
-                >
-                  Delete
-                </Button>
-              </ButtonGroup>
+              <ModifyButton categoryId={categoryId} itemId={itemId} />
             )}
           </Card.Body>
         </Card>

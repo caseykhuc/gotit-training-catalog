@@ -1,16 +1,16 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { ButtonGroup } from 'react-bootstrap';
+import ModifyButton from '../ModifyButton';
 import { ItemSingle, mapStateToProps } from '../ItemSingle';
 
 describe('component/Item/ItemSingle', () => {
   let props;
   let wrapper;
-  let btnGroup;
+  let modifyButton;
 
   const update = () => {
     wrapper.update();
-    btnGroup = wrapper.find(ButtonGroup);
+    modifyButton = wrapper.find(ModifyButton);
   };
   const setup = () => {
     wrapper = shallow(<ItemSingle {...props} />);
@@ -36,10 +36,10 @@ describe('component/Item/ItemSingle', () => {
     setup();
     expect(wrapper).toMatchSnapshot();
   });
-  it('should render btnGroup when userId match', () => {
+  it('should render modifyButton when userId match', () => {
     props.item.user_id = 10;
     setup();
-    expect(btnGroup.length).toBeTruthy();
+    expect(modifyButton.length).toBeTruthy();
   });
   it('should fetchItem when item is not defined in props', () => {
     props.item = undefined;
