@@ -17,19 +17,22 @@ const request = (url = '', method = 'GET', body) => {
 }
 
 const authorizedRequest = (url = '', method = 'GET', body) => {
-  const req = ((method !== 'GET' && body) ? fetch(`${BASE_URL}/${url}`, {
-    method,
-    body: JSON.stringify(body),
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-      'Content-Type': 'application/json',
-    },
-  }) : fetch(`${BASE_URL}/${url}`, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-      'Content-Type': 'application/json',
-    },
-  }))
+  const req = (body)
+    ? fetch(`${BASE_URL}/${url}`, {
+      method,
+      body: JSON.stringify(body),
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+        'Content-Type': 'application/json',
+      },
+    })
+    : fetch(`${BASE_URL}/${url}`, {
+      method,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+        'Content-Type': 'application/json',
+      },
+    })
   return req.then(handleJson);
 }
 
@@ -59,3 +62,6 @@ export const signinUser = (body) => request('login', 'POST', body)
 
 export const addItem = (categoryId, body) => authorizedRequest(`categories/${categoryId}/items`, 'POST', body)
   .then((res) => { console.log(res); return res });
+
+export const deleteItem = (categoryId, itemId) => authorizedRequest(`categories/${categoryId}/items/${itemId}`, 'DELETE')
+  .then((res) => res);

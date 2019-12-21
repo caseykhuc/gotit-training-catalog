@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -10,10 +10,15 @@ import { registerModal } from '../../utils/initModalForm';
 export const RegisterModal = ({ registerUser }) => {
   const { initialState, fields, validate } = registerModal;
   return (
-    <BaseFormModal title="REGISTER" fields={fields} initialState={initialState} onAction={registerUser} validate={validate} />
+    <BaseFormModal
+      title="REGISTER"
+      fields={fields}
+      initialState={initialState}
+      onAction={registerUser}
+      validate={validate}
+    />
   )
 }
-
 
 RegisterModal.propTypes = {
   registerUser: PropTypes.func.isRequired,

@@ -4,18 +4,18 @@ import PropTypes from 'prop-types';
 import modalKeys from '../constants/modelKeys';
 import RegisterModal from './Modal/RegisterModal';
 import SignInModal from './Modal/SignInModal';
-import DeleteModal from './Modal/DeleteModal';
+import DeleteItemModal from './Modal/DeleteItemModal';
 import AddItemModal from './Modal/AddItemModal';
 
 export const ModalContainer = ({ modal }) => {
-  const renderModal = () => {
-    switch (modal.current) {
+  const renderModal = ({ current, props }) => {
+    switch (current) {
       case modalKeys.REGISTER_MODAL:
         return <RegisterModal />;
       case modalKeys.SIGNIN_MODAL:
         return <SignInModal />;
       case modalKeys.DELETE_ITEM_MODAL:
-        return <DeleteModal />;
+        return <DeleteItemModal {...props} />;
       case modalKeys.ADD_ITEM_MODAL:
         return <AddItemModal />
       default:
@@ -32,7 +32,7 @@ export const ModalContainer = ({ modal }) => {
       transform: 'translate(-50%, -50%)',
     }}
     >
-      {renderModal()}
+      {renderModal(modal)}
     </div>
   );
 };

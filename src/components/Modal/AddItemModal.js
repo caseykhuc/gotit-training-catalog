@@ -23,6 +23,7 @@ export const AddItemModal = ({ addItem, categories }) => {
 
 AddItemModal.propTypes = {
   addItem: PropTypes.func.isRequired,
+  categories: PropTypes.arrayOf(PropTypes.object).isRequired,
 }
 
 const mapStateToProps = (state) => ({

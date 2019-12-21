@@ -19,7 +19,9 @@ export class ItemSingle extends Component {
   }
 
   render() {
-    const { item, userCurrent, showModal } = this.props;
+    const {
+      item, userCurrent, showModal, categoryId, itemId,
+    } = this.props;
     if (item) {
       const {
         id, name, description, user_id,
@@ -42,7 +44,7 @@ export class ItemSingle extends Component {
                 </Button>
                 <Button
                   variant="danger"
-                  onClick={() => showModal(modalKeys.DELETE_ITEM_MODAL)}
+                  onClick={() => showModal(modalKeys.DELETE_ITEM_MODAL, { categoryId, itemId })}
                 >
                   Delete
                 </Button>

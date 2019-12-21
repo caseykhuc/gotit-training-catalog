@@ -10,7 +10,13 @@ import { registerModal } from '../../utils/initModalForm';
 export const EditItemModal = ({ registerUser }) => {
   const { initialState, fields, validate } = registerModal;
   return (
-    <BaseFormModal title="ADD" fields={fields} initialState={initialState} onAction={registerUser} validate={validate} />
+    <BaseFormModal
+      title="EDIT ITEM"
+      fields={fields}
+      initialState={initialState}
+      onAction={registerUser}
+      validate={validate}
+    />
   )
 }
 
