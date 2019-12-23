@@ -12,7 +12,6 @@ const ArrowRight = <div style={{ padding: '10px' }}>{'>'}</div>;
  *
  * */
 
-// eslint-disable-next-line react/prefer-stateless-function
 class CategoryList extends React.Component {
   state = { selected: NaN }
 

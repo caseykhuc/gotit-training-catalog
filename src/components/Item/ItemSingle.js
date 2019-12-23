@@ -5,8 +5,8 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getItem } from '../../reducers';
 import { fetchItem } from '../../actions/item';
-import { showModal } from '../../actions/modal';
 import ModifyButton from './ModifyButton';
+import { formatDateString } from '../../utils/utils';
 
 export class ItemSingle extends Component {
   componentDidMount() {
@@ -24,18 +24,27 @@ export class ItemSingle extends Component {
     } = this.props;
     if (item) {
       const {
-        id, name, description, user_id,
+        id, name, description, user_id, created, updated,
       } = item;
+
       return (
         <Card style={{
           width: '50%', margin: '0 auto',
         }}
         >
-          <Card.Header>{`Card ${id}`}</Card.Header>
+          <Card.Header>
+            <h4>{`Card ${id}`}</h4>
+            <small><i>{created && formatDateString(created)}</i></small>
+          </Card.Header>
           <Card.Body className="text-center">
             <Card.Title>{name}</Card.Title>
             <Card.Text style={{ minHeight: '7rem' }}>
               {description}
+            </Card.Text>
+            <Card.Text>
+              <small className="text-muted">
+                {updated && `Last updated: ${formatDateString(updated)}`}
+              </small>
             </Card.Text>
             {userCurrent === user_id && (
               <ModifyButton categoryId={categoryId} itemId={itemId} />
@@ -67,10 +76,11 @@ ItemSingle.propTypes = {
     name: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     user_id: PropTypes.number.isRequired,
+    created: PropTypes.string,
+    updated: PropTypes.string,
   }),
   userCurrent: PropTypes.number,
   fetchItem: PropTypes.func.isRequired,
-  showModal: PropTypes.func.isRequired,
 }
 
-export default withRouter(connect(mapStateToProps, { fetchItem, showModal })(ItemSingle));
+export default withRouter(connect(mapStateToProps, { fetchItem })(ItemSingle));
