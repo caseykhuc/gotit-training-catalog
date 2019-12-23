@@ -7,21 +7,30 @@ import { getItem } from '../../reducers';
 import { fetchItem } from '../../actions/item';
 import ModifyButton from './ModifyButton';
 import { formatDateString } from '../../utils/utils';
+import LoadingPage from '../LoadingPage';
 
 export class ItemSingle extends Component {
   componentDidMount() {
     const {
-      item, fetchItem, categoryId, itemId,
+      categoryId, itemId,
     } = this.props;
-    if (!item) {
-      fetchItem(categoryId, itemId);
+    this.fetchItem(categoryId, itemId);
+  }
+
+  fetchItem = async (categoryId, itemId) => {
+    const { fetchItem } = this.props;
+    const res = await fetchItem(categoryId, itemId);
+    const { history } = this.props;
+    if (!res.success) {
+      history.push(`/categories/${categoryId}`)
     }
   }
 
   render() {
     const {
-      item, userCurrent, categoryId, itemId,
+      item, userCurrent, categoryId, itemId, isLoadingItem,
     } = this.props;
+
     if (item) {
       const {
         id, name, description, user_id, created, updated,
@@ -29,16 +38,18 @@ export class ItemSingle extends Component {
 
       return (
         <Card style={{
-          width: '50%', margin: '0 auto',
+          width: '50%',
+          margin: '0 auto',
         }}
         >
           <Card.Header>
-            <h4>{`Card ${id}`}</h4>
+            <h4>{`Item ${id}`}</h4>
             <small><i>{created && formatDateString(created)}</i></small>
           </Card.Header>
-          <Card.Body className="text-center">
+          <Card.Body className="text-center" style={{ paddingRight: '10%', paddingLeft: '10%' }}>
+
             <Card.Title>{name}</Card.Title>
-            <Card.Text style={{ minHeight: '7rem' }}>
+            <Card.Text style={{ minHeight: '7rem', textAlign: 'left' }}>
               {description}
             </Card.Text>
             <Card.Text>
@@ -53,24 +64,29 @@ export class ItemSingle extends Component {
         </Card>
       )
     }
-    return <div>Ahihi</div>;
+    if (isLoadingItem) return <LoadingPage />;
+    return '';
   }
 }
 
 export const mapStateToProps = (state, { match }) => {
   const { itemId, categoryId } = match.params;
-  const { user } = state;
+  const { user, item } = state;
   return {
     itemId: Number(itemId),
     categoryId: Number(categoryId),
     item: getItem(state, itemId),
     userCurrent: user.userId,
+    isLoadingItem: item.isLoading,
   }
 }
 
 ItemSingle.propTypes = {
   itemId: PropTypes.number.isRequired,
   categoryId: PropTypes.number.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
   item: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,

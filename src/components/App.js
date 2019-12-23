@@ -2,7 +2,7 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Container } from 'react-bootstrap'
+import { Container, Alert } from 'react-bootstrap'
 import PropTypes from 'prop-types';
 import Header from './Header';
 
@@ -14,7 +14,7 @@ import CategoryContainer from './Category/CategoryContainer';
 import CategoryList from './Category/CategoryList';
 import ModalContainer from './ModalContainer';
 import ItemSingle from './Item/ItemSingle';
-
+import LoadingPage from './LoadingPage';
 
 export class App extends React.Component {
   componentDidMount() {
@@ -23,25 +23,39 @@ export class App extends React.Component {
     fetchUser();
   }
 
+  renderLoading = () => {
+    const { isLoading, error } = this.props;
+    if (isLoading) return <LoadingPage />
+    return <Alert variant="danger">{error}</Alert>
+  }
+
   render() {
     const { categories, userId } = this.props;
 
     return (
-      <Container className="App my-4">
-        <Header isSignedIn={Boolean(userId)} />
-        <CategoryList
-          categories={categories}
-          defaultSelected={categories.length ? categories[0].id : NaN}
-        />
-        <Switch>
-          <Route path="/categories/items/:categoryId/:itemId" component={ItemSingle} />
-          <Route path="/categories/:categoryId" component={CategoryContainer} />
-          {categories.length && (
-            <Redirect to={`/categories/${categories[0].id}`} />
-          )}
-        </Switch>
-        <ModalContainer />
-      </Container>
+      (
+        <Container className="App my-4">
+          <Header isSignedIn={Boolean(userId)} />
+          {categories.length
+            ? (
+              <div>
+                <CategoryList
+                  categories={categories}
+                  defaultSelected={categories.length ? categories[0].id : NaN}
+                />
+                <Switch>
+                  <Route exact path="/categories/items/:categoryId/:itemId" component={ItemSingle} />
+                  <Route exact path="/categories/:categoryId" component={CategoryContainer} />
+                  {categories.length && (
+                    <Redirect to={`/categories/${categories[0].id}`} />
+                  )}
+                </Switch>
+              </div>
+            )
+            : this.renderLoading()}
+          <ModalContainer />
+        </Container>
+      )
     );
   }
 }
@@ -49,8 +63,9 @@ export class App extends React.Component {
 const mapStateToProps = (state) => ({
   categories: getCategories(state),
   userId: state.user.userId,
+  isLoading: state.user.isLoading && state.category.isLoading,
+  error: state.user.error || state.category.error,
 });
-
 
 App.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.shape({

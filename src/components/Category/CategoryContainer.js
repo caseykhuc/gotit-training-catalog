@@ -11,6 +11,7 @@ import ItemList from '../Item/ItemList';
 
 import { fetchItems } from '../../actions/item';
 import { getItems } from '../../reducers';
+import LoadingPage from '../LoadingPage';
 
 
 export class CategoryContainer extends React.Component {
@@ -18,6 +19,7 @@ export class CategoryContainer extends React.Component {
     const {
       categoryId, category, fetchItems, history,
     } = this.props;
+    // direct app to home page when no category is equivalent to categoryId
     if (category) { fetchItems(categoryId); } else history.push('/');
   }
 
@@ -26,18 +28,28 @@ export class CategoryContainer extends React.Component {
     if (categoryId !== prevState.categoryId || page !== prevState.page) { fetchItems(categoryId); }
   }
 
+  // conditionally render based on loading items state
+  renderList = () => {
+    const {
+      itemList, categoryId, isLoadingItem,
+    } = this.props;
+    if (itemList.length) return <ItemList items={itemList} categoryId={categoryId} />
+    if (isLoadingItem) return <LoadingPage />
+    return (
+      <Alert variant="info">
+        Category currently has no items. Add one now!
+      </Alert>
+    );
+  }
+
   render() {
-    const { category, itemList, categoryId } = this.props;
+    const {
+      category,
+    } = this.props;
     return category ? (
       <div className="w-75 mx-auto">
         <CategoryDetails category={category} />
-        {itemList.length ? (
-          <ItemList items={itemList} categoryId={categoryId} />
-        ) : (
-            <Alert variant="info">
-              Category currently has no items. Add one now!
-          </Alert>
-          )}
+        {this.renderList()}
       </div>
     ) : (
         <Alert variant="danger">Can't find category</Alert>
@@ -54,19 +66,21 @@ export const mapStateToProps = (state, { match, location }) => {
     itemList: getItems(state),
     categoryId,
     page,
+    isLoadingItem: state.item.isLoading,
   };
 };
 
 CategoryContainer.propTypes = {
   categoryId: PropTypes.number.isRequired,
+  fetchItems: PropTypes.func.isRequired,
+  page: PropTypes.number.isRequired,
+  history: PropTypes.object.isRequired,
+  isLoadingItem: PropTypes.bool.isRequired,
   category: PropTypes.shape({
     name: PropTypes.string,
     description: PropTypes.string,
   }),
-  fetchItems: PropTypes.func.isRequired,
-  itemList: PropTypes.arrayOf(PropTypes.object).isRequired,
-  page: PropTypes.number.isRequired,
-  history: PropTypes.object.isRequired,
+  itemList: PropTypes.arrayOf(PropTypes.object),
 }
 
 export default withRouter(connect(mapStateToProps, { fetchItems })(CategoryContainer));
