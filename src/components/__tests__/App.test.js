@@ -21,23 +21,23 @@ describe('component/App', () => {
       }],
       fetchCategory: jest.fn(),
       fetchUser: jest.fn(),
+      isLoading: false,
     }
   });
   it('should render correctly', () => {
     setup();
     expect(wrapper).toMatchSnapshot();
+
     props.categories = [];
     setup();
     expect(wrapper).toMatchSnapshot();
-  });
-  it('should fetch categories & user when mounted', () => {
+
+    props.isLoading = true;
     setup();
-    expect(props.fetchCategory).toHaveBeenCalled();
+    expect(wrapper).toMatchSnapshot();
+  });
+  it('should fetch  user when mounted', () => {
+    setup();
     expect(props.fetchUser).toHaveBeenCalled();
   })
-  /* it('should render CategoryDetails and fetchItems when category props is defined', () => {
-    setup();
-    expect(wrapper.find(CategoryDetails).length).toBe(1);
-    expect(props.fetchItems).toHaveBeenCalledWith(props.categoryId);
-  }); */
 })

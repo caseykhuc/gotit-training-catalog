@@ -76,10 +76,10 @@ App.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
   })).isRequired,
-  userId: PropTypes.number,
-  fetchCategory: PropTypes.func,
-  fetchUser: PropTypes.func,
+  fetchCategory: PropTypes.func.isRequired,
+  fetchUser: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
+  userId: PropTypes.number,
   error: PropTypes.string,
 }
 

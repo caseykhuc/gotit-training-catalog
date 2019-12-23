@@ -3,3 +3,5 @@
 exports[`component/App should render correctly 1`] = `ShallowWrapper {}`;
 
 exports[`component/App should render correctly 2`] = `ShallowWrapper {}`;
+
+exports[`component/App should render correctly 3`] = `ShallowWrapper {}`;
