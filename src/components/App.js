@@ -29,7 +29,10 @@ export class App extends React.Component {
     return (
       <Container className="App my-4">
         <Header isSignedIn={Boolean(userId)} />
-        <CategoryList categories={categories} />
+        <CategoryList
+          categories={categories}
+          defaultSelected={categories.length ? categories[0].id : NaN}
+        />
         <Switch>
           <Route path="/categories/items/:categoryId/:itemId" component={ItemSingle} />
           <Route path="/categories/:categoryId" component={CategoryContainer} />

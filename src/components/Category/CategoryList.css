@@ -1,0 +1,14 @@
+.menu-link {
+  text-align: center;
+  padding: 14px;
+  text-decoration: none!important;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.menu-link:hover {
+  color: black;
+}
+
+.active-link {
+  color: black;
+}
