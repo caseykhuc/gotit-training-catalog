@@ -9,7 +9,8 @@ import { addItemModal } from '../../utils/initModalForm';
 
 export const AddItemModal = ({ addItem, categories }) => {
   const { initialState, fields, validate } = addItemModal();
-  fields[3].options = categories;
+  fields[fields.findIndex((f) => f.name === 'category_id')].options = categories;
+  initialState.inputValue.category_id = categories[0];
   return (
     <BaseFormModal
       title="ADD ITEM"

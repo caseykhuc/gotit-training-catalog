@@ -28,6 +28,7 @@ const BaseForm = ({
               <Form.Control
                 as="select"
                 name={name}
+                value={inputValue[name]}
                 onChange={onInputChange}
                 isInvalid={inputError[name]}
               >
