@@ -18,11 +18,18 @@ import LoadingPage from './LoadingPage';
 
 export class App extends React.Component {
   componentDidMount() {
-    const { fetchCategory, fetchUser } = this.props;
-    fetchCategory();
-    fetchUser();
+    this.fetchInit();
   }
 
+  // prevent any actions before both user state and category are ready
+  fetchInit = async () => {
+    const { fetchCategory, fetchUser } = this.props;
+    await fetchUser();
+    fetchCategory();
+  }
+
+  // show only loading page before fetchInit finishes
+  // show Error when fetchCategory failed
   renderLoading = () => {
     const { isLoading, error } = this.props;
     if (isLoading) return <LoadingPage />
@@ -35,20 +42,18 @@ export class App extends React.Component {
     return (
       (
         <Container className="App my-4">
-          <Header isSignedIn={Boolean(userId)} />
           {categories.length
             ? (
               <div>
+                <Header isSignedIn={Boolean(userId)} />
                 <CategoryList
                   categories={categories}
-                  defaultSelected={categories.length ? categories[0].id : NaN}
+                  defaultSelected={categories[0].id}
                 />
                 <Switch>
                   <Route exact path="/categories/items/:categoryId/:itemId" component={ItemSingle} />
                   <Route exact path="/categories/:categoryId" component={CategoryContainer} />
-                  {categories.length && (
-                    <Redirect to={`/categories/${categories[0].id}`} />
-                  )}
+                  <Redirect to={`/categories/${categories[0].id}`} />
                 </Switch>
               </div>
             )
@@ -63,7 +68,7 @@ export class App extends React.Component {
 const mapStateToProps = (state) => ({
   categories: getCategories(state),
   userId: state.user.userId,
-  isLoading: state.user.isLoading && state.category.isLoading,
+  isLoading: state.user.isLoading || state.category.isLoading,
   error: state.user.error || state.category.error,
 });
 
@@ -74,6 +79,8 @@ App.propTypes = {
   userId: PropTypes.number,
   fetchCategory: PropTypes.func,
   fetchUser: PropTypes.func,
+  isLoading: PropTypes.bool.isRequired,
+  error: PropTypes.string,
 }
 
 export default connect(mapStateToProps, { fetchCategory, fetchUser })(App);
