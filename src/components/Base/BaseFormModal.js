@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import BaseModal from './BaseModal';
-import BaseForm from './BaseForm';
+import BaseModal from 'components/Base/BaseFormModal';
+import BaseForm from 'components/Base/BaseForm';
 
 class BaseFormModal extends React.Component {
   state = this.props.initialState

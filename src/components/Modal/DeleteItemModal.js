@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import BaseModal from '../Base/BaseModal';
-import confirmMessage from '../../utils/confirmMessage';
-import { deleteItemAndRefetch } from '../../actions/item';
+import BaseModal from 'components/Base/BaseModal';
+import confirmMessage from 'utils/confirmMessage';
+import { deleteItemAndRefetch } from 'actions/item';
 
 export const DeleteItemModal = ({ categoryId, itemId, deleteItemAndRefetch }) => (
   <BaseModal

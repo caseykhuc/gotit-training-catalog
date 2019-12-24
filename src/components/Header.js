@@ -2,9 +2,9 @@ import React from 'react';
 import { Button, ButtonGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { showModal } from '../actions/modal';
-import { signoutUser } from '../actions/user';
-import modalKeys from '../constants/modelKeys';
+import { showModal } from 'actions/modal';
+import { signoutUser } from 'actions/user';
+import modalKeys from 'constants/modelKeys';
 
 export const Header = ({ isSignedIn, showModal, signoutUser }) => (
   <div

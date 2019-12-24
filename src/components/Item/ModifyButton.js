@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { ButtonGroup, Button } from 'react-bootstrap';
-import modalKeys from '../../constants/modelKeys';
-import { showModal } from '../../actions/modal';
+import modalKeys from 'constants/modelKeys';
+import { showModal } from 'actions/modal';
 
 export const ModifyButton = ({ categoryId, itemId, showModal }) => (
   <ButtonGroup>

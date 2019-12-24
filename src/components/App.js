@@ -4,17 +4,17 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Container, Alert } from 'react-bootstrap'
 import PropTypes from 'prop-types';
-import Header from './Header';
+import Header from 'components/Header';
 
-import { fetchCategory } from '../actions/category';
-import { fetchUser } from '../actions/user';
-import { getCategories } from '../reducers';
+import { fetchCategory } from 'actions/category';
+import { fetchUser } from 'actions/user';
+import { getCategories } from 'reducers';
 
-import CategoryContainer from './Category/CategoryContainer';
-import CategoryList from './Category/CategoryList';
-import ModalContainer from './ModalContainer';
-import ItemSingle from './Item/ItemSingle';
-import LoadingPage from './LoadingPage';
+import CategoryContainer from 'components/Category/CategoryContainer';
+import CategoryList from 'components/Category/CategoryList';
+import ModalContainer from 'components/ModalContainer';
+import ItemSingle from 'components/Item/ItemSingle';
+import LoadingPage from 'components/LoadingPage';
 
 export class App extends React.Component {
   componentDidMount() {

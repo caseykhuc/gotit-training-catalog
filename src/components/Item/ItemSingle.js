@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { Card } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { getItem } from '../../reducers';
-import { fetchItem } from '../../actions/item';
-import ModifyButton from './ModifyButton';
-import { formatDateString } from '../../utils/utils';
-import LoadingPage from '../LoadingPage';
+import { getItem } from 'reducers';
+import { fetchItem } from 'actions/item';
+import { formatDateString } from 'utils/utils';
+import LoadingPage from 'components/LoadingPage';
+import ModifyButton from 'components/Item/ModifyButton';
 
 export class ItemSingle extends Component {
   componentDidMount() {

@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { signinUser } from '../../actions/user';
-import BaseFormModal from '../Base/BaseFormModal';
-import { signinModal } from '../../utils/initModalForm';
+import { signinUser } from 'actions/user';
+import BaseFormModal from 'components/Base/BaseFormModal';
+import { signinModal } from 'utils/initModalForm';
 
 export const SignInModal = ({ signinUser }) => {
   const { initialState, fields } = signinModal;

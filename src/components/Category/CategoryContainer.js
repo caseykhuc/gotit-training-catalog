@@ -6,14 +6,14 @@ import { Alert } from 'react-bootstrap';
 import queryString from 'query-string';
 
 import PropTypes from 'prop-types';
-import CategoryDetails from './CategoryDetails';
-import ItemList from '../Item/ItemList';
-import ItemPagination from '../Item/ItemPagination';
+import CategoryDetails from 'components/Category/CategoryDetails';
+import ItemList from 'components/Item/ItemList';
+import ItemPagination from 'components/Item/ItemPagination';
+import LoadingPage from 'components/LoadingPage';
 
-import { fetchItems } from '../../actions/item';
-import { getItems } from '../../reducers';
-import LoadingPage from '../LoadingPage';
-import config from '../../config';
+import { fetchItems } from 'actions/item';
+import { getItems } from 'reducers';
+import config from 'config';
 
 export class CategoryContainer extends React.Component {
   componentDidMount() {

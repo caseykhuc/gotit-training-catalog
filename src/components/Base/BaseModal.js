@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
-import { hideModal } from '../../actions/modal';
+import { hideModal } from 'actions/modal';
 
 export const BaseModal = ({
   title, hideModal, onAccept, children,
