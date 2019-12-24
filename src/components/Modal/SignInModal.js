@@ -15,9 +15,9 @@ export const SignInModal = ({ signinUser }) => {
     requestError: '',
   };
 
-  const fields = [{ name: 'username', type: 'text' }, {
-    name: 'password', type: 'password',
-  }];
+  const fields = [
+    { name: 'username', type: 'text' },
+    { name: 'password', type: 'password' }];
 
   return (
     <BaseFormModal title="SIGN IN" fields={fields} initialState={initialState} onAction={signinUser} />
