@@ -35,9 +35,16 @@ export class CategoryContainer extends React.Component {
   // conditionally render based on loading items state
   renderList = () => {
     const {
-      itemList, categoryId, isLoadingItem,
+      itemList, categoryId, isLoadingItem, totalPages, page,
     } = this.props;
-    if (itemList.length) return <ItemList items={itemList} categoryId={categoryId} />
+    if (itemList.length) {
+      return (
+        <div>
+          <ItemList items={itemList} categoryId={categoryId} />
+          <ItemPagination totalPages={totalPages} currentPage={page} onPageClick={this.onPageClick} />
+        </div>
+      );
+    }
     if (isLoadingItem) return <LoadingPage />
     return (
       <Alert variant="info">
@@ -54,14 +61,11 @@ export class CategoryContainer extends React.Component {
   render() {
     const {
       category,
-      totalPages,
-      page,
     } = this.props;
     return category ? (
       <div className="w-75 mx-auto">
         <CategoryDetails category={category} />
         {this.renderList()}
-        <ItemPagination totalPages={totalPages} currentPage={page} onPageClick={this.onPageClick} />
       </div>
     ) : (<Alert variant="danger">Can't find category</Alert>);
   }
@@ -85,6 +89,7 @@ CategoryContainer.propTypes = {
   categoryId: PropTypes.number.isRequired,
   fetchItems: PropTypes.func.isRequired,
   page: PropTypes.number.isRequired,
+  totalPages: PropTypes.number.isRequired,
   history: PropTypes.object.isRequired,
   isLoadingItem: PropTypes.bool.isRequired,
   category: PropTypes.shape({

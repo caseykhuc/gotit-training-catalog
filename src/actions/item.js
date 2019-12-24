@@ -24,13 +24,7 @@ export const addItem = ({
 
 export const editItem = () => { };
 
-export const deleteItemAndRefetch = (categoryId, itemId) => async (dispatch) => {
-  const res = await dispatch({
-    type: itemTypes.DELETE_ITEM,
-    promise: api.deleteItem(categoryId, itemId),
-  });
-  if (res.success) {
-    dispatch(fetchItem(categoryId));
-  }
-  return res;
-};
+export const deleteItem = (categoryId, itemId) => ({
+  type: itemTypes.DELETE_ITEM,
+  promise: api.deleteItem(categoryId, itemId),
+});

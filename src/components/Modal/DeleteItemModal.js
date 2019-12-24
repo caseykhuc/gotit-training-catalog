@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import BaseModal from 'components/Base/BaseModal';
 import confirmMessage from 'utils/confirmMessage';
-import { deleteItemAndRefetch } from 'actions/item';
+import { deleteItem } from 'actions/item';
 
-export const DeleteItemModal = ({ categoryId, itemId, deleteItemAndRefetch }) => (
+export const DeleteItemModal = ({ categoryId, itemId, deleteItem }) => (
   <BaseModal
     title="DELETE CONFIRM"
-    onAccept={() => deleteItemAndRefetch(categoryId, itemId)}
+    onAccept={() => deleteItem(categoryId, itemId)}
   >
     <p>{confirmMessage.confirmDelete}</p>
   </BaseModal>
@@ -17,7 +17,7 @@ export const DeleteItemModal = ({ categoryId, itemId, deleteItemAndRefetch }) =>
 DeleteItemModal.propTypes = {
   categoryId: PropTypes.number.isRequired,
   itemId: PropTypes.number.isRequired,
-  deleteItemAndRefetch: PropTypes.func.isRequired,
+  deleteItem: PropTypes.func.isRequired,
 }
 
-export default connect(null, { deleteItemAndRefetch })(DeleteItemModal)
+export default connect(null, { deleteItem })(DeleteItemModal)
