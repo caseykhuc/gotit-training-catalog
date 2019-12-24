@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { DeleteItemModal } from '../DeleteItemModal';
+import { AddItemModal } from '../AddItemModal';
 import BaseModal from '../../Base/BaseModal';
 
-describe('components/Modal/DeleteItemModal', () => {
+describe('components/Modal/AddItemModal', () => {
   let props;
   let wrapper;
   let baseModal;
@@ -13,23 +13,17 @@ describe('components/Modal/DeleteItemModal', () => {
     baseModal = wrapper.find(BaseModal);
   };
   const setup = () => {
-    wrapper = shallow(<DeleteItemModal {...props} />);
+    wrapper = shallow(<AddItemModal {...props} />);
     update();
   };
   beforeEach(() => {
     props = {
-      categoryId: 2,
-      itemId: 1,
-      deleteItem: jest.fn(),
+      addItem: jest.fn().mockResolvedValue(),
+      categories: [{}],
     }
   });
   it('should render correctly', () => {
     setup();
     expect(wrapper).toMatchSnapshot();
-  });
-  it('should invoke action when BaseModal invoked onAccept ', () => {
-    setup();
-    baseModal.props().onAccept();
-    expect(props.deleteItem).toHaveBeenCalledWith(props.categoryId, props.itemId);
   });
 })

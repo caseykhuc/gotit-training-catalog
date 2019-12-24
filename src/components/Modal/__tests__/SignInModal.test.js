@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import { SignInModal } from '../SignInModal';
 import BaseFormModal from '../../Base/BaseFormModal';
 
-describe('components/SignInModal', () => {
+describe('components/Modal/SignInModal', () => {
   let props;
   let wrapper;
   let baseFormModal;

@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import { RegisterModal } from '../RegisterModal';
 import BaseFormModal from '../../Base/BaseFormModal';
 
-describe('components/RegisterModal', () => {
+describe('components/Modal/RegisterModal', () => {
   let props;
   let wrapper;
   let baseFormModal;

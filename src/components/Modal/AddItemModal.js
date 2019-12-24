@@ -8,6 +8,20 @@ import BaseFormModal from 'components/Base/BaseFormModal';
 import validator from 'validator';
 import * as errorMessage from 'utils/inputError';
 
+const validate = ({
+  name, price, categoryId,
+}) => {
+  const inputError = {};
+  if (name && name.length < 5) inputError.name = errorMessage.name.tooShort;
+  if (price && !validator.isNumeric(price)) {
+    inputError.price = errorMessage.price.tooSimple;
+  }
+  if (!categoryId) {
+    inputError.categoryId = errorMessage.category.isNotDefined;
+  }
+  return inputError;
+};
+
 export const AddItemModal = ({ addItem, categories }) => {
   const initialState = {
     inputValue: {
@@ -27,20 +41,6 @@ export const AddItemModal = ({ addItem, categories }) => {
     { name: 'price', type: 'text' },
     { name: 'categoryId', type: 'select', options: categories },
   ];
-
-  const validate = ({
-    name, price, categoryId,
-  }) => {
-    const inputError = {};
-    if (name && name.length < 5) inputError.name = errorMessage.name.tooShort;
-    if (price && !validator.isNumeric(price)) {
-      inputError.price = errorMessage.price.tooSimple;
-    }
-    if (!categoryId) {
-      inputError.categoryId = errorMessage.category.isNotDefined;
-    }
-    return inputError;
-  };
 
   return (
     <BaseFormModal
