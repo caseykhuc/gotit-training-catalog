@@ -14,7 +14,7 @@ const validate = ({
   const inputError = {};
   if (name && name.length < 5) inputError.name = errorMessage.name.tooShort;
   if (price && !validator.isNumeric(price)) {
-    inputError.price = errorMessage.price.tooSimple;
+    inputError.price = errorMessage.price.isNotNumeric;
   }
   if (!categoryId) {
     inputError.categoryId = errorMessage.category.isNotDefined;
