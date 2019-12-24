@@ -33,7 +33,7 @@ export class ItemSingle extends Component {
 
     if (item) {
       const {
-        id, name, description, userId, created, updated,
+        id, name, description, price, userId, created, updated,
       } = item;
 
       return (
@@ -58,7 +58,11 @@ export class ItemSingle extends Component {
               </small>
             </Card.Text>
             {userCurrent === userId && (
-              <ModifyButton categoryId={categoryId} itemId={itemId} />
+              <ModifyButton
+                categoryId={categoryId}
+                itemId={itemId}
+                currentValue={{ name, description, price }}
+              />
             )}
           </Card.Body>
         </Card>
@@ -92,7 +96,8 @@ ItemSingle.propTypes = {
   item: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
+    description: PropTypes.string,
+    price: PropTypes.number.isRequired,
     userId: PropTypes.number.isRequired,
     created: PropTypes.string,
     updated: PropTypes.string,

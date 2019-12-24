@@ -5,6 +5,7 @@ import modalKeys from 'constants/modelKeys';
 import RegisterModal from 'components/Modal/RegisterModal';
 import SignInModal from 'components/Modal/SignInModal';
 import DeleteItemModal from 'components/Modal/DeleteItemModal';
+import EditItemModal from 'components/Modal/EditItemModal'
 import AddItemModal from 'components/Modal/AddItemModal';
 
 export const ModalContainer = ({ modal }) => {
@@ -16,6 +17,8 @@ export const ModalContainer = ({ modal }) => {
         return <SignInModal />;
       case modalKeys.DELETE_ITEM_MODAL:
         return <DeleteItemModal {...props} />;
+      case modalKeys.EDIT_ITEM_MODAL:
+        return <EditItemModal {...props} />;
       case modalKeys.ADD_ITEM_MODAL:
         return <AddItemModal />
       default:

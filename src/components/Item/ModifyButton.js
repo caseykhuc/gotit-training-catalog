@@ -5,27 +5,41 @@ import modalKeys from 'constants/modelKeys';
 import { showModal } from 'actions/modal';
 import PropTypes from 'prop-types';
 
-export const ModifyButton = ({ categoryId, itemId, showModal }) => (
-  <ButtonGroup>
-    <Button className="mr-1">
-      Edit
+export const ModifyButton = ({
+  categoryId, itemId, currentValue, showModal,
+}) => (
+    <ButtonGroup>
+      <Button
+        className="mr-1"
+        onClick={() => showModal(modalKeys.EDIT_ITEM_MODAL, {
+          categoryId,
+          itemId,
+          currentValue,
+        })}
+      >
+        Edit
     </Button>
-    <Button
-      variant="danger"
-      onClick={() => showModal(modalKeys.DELETE_ITEM_MODAL, {
-        categoryId,
-        itemId,
-      })}
-    >
-      Delete
+      <Button
+        variant="danger"
+        onClick={() => showModal(modalKeys.DELETE_ITEM_MODAL, {
+          categoryId,
+          itemId,
+        })}
+      >
+        Delete
     </Button>
-  </ButtonGroup>
-)
+    </ButtonGroup>
+  )
 
 ModifyButton.propTypes = {
   categoryId: PropTypes.number.isRequired,
   itemId: PropTypes.number.isRequired,
   showModal: PropTypes.func.isRequired,
+  currentValue: PropTypes.shape({
+    name: PropTypes.string,
+    description: PropTypes.string,
+    price: PropTypes.number,
+  }),
 }
 
 export default connect(null, { showModal })(ModifyButton);

@@ -6,17 +6,23 @@ import { connect } from 'react-redux';
 import ModifyButton from './ModifyButton';
 
 export const ItemList = ({ items, userCurrent, categoryId }) => {
-  const renderItems = () => items.map(({ id, name, userId }) => (
-    <ListGroup.Item className="d-flex justify-content-between align-items-center" key={id}>
-      <Link to={`/categories/items/${categoryId}/${id}`} key={id}>
-        {name}
-      </Link>
-      {userId === userCurrent && (
-        <ModifyButton categoryId={categoryId} itemId={id} />
-      )}
-    </ListGroup.Item>
+  const renderItems = () => items.map(({
+    id, name, description, price, userId,
+  }) => (
+      <ListGroup.Item className="d-flex justify-content-between align-items-center" key={id}>
+        <Link to={`/categories/items/${categoryId}/${id}`} key={id}>
+          {name}
+        </Link>
+        {userId === userCurrent && (
+          <ModifyButton
+            categoryId={categoryId}
+            itemId={id}
+            currentValue={{ name, description, price }}
+          />
+        )}
+      </ListGroup.Item>
 
-  ));
+    ));
 
   return (
     <ListGroup>
