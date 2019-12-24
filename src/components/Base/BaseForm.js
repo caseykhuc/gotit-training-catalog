@@ -15,7 +15,7 @@ const BaseForm = ({
       case 'select':
         return (
           <Form.Control
-            as="select"
+            as={type}
             name={name}
             value={inputValue[name]}
             onChange={onInputChange}
@@ -28,7 +28,7 @@ const BaseForm = ({
         return (
           <Form.Control
             as={type}
-            name="textarea"
+            name={name}
             value={inputValue[name]}
             placeholder={`Enter ${name}`}
             onChange={onInputChange}
