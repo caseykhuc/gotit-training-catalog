@@ -7,5 +7,3 @@ exports[`component/Item/ItemSingle should render correctly 2`] = `ShallowWrapper
 exports[`component/Item/ItemSingle should render correctly 3`] = `ShallowWrapper {}`;
 
 exports[`component/Item/ItemSingle should render correctly 4`] = `ShallowWrapper {}`;
-
-exports[`component/Item/ItemSingle should render correctly 5`] = `ShallowWrapper {}`;
