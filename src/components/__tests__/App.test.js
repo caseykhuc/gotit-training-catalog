@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { shallow } from 'enzyme';
-import { App } from '../App';
+import { App, mapStateToProps } from '../App';
 
 describe('component/App', () => {
   let props;
@@ -41,3 +40,26 @@ describe('component/App', () => {
     expect(props.fetchUser).toHaveBeenCalled();
   })
 })
+
+describe('component/App (mapStateToProps)', () => {
+  let state;
+  beforeEach(() => {
+    state = {
+      category: {
+        byId: {},
+        isLoading: false,
+        error: 'Category Error',
+      },
+      user: {
+        isLoading: true,
+        error: 'User Error',
+        userId: 1,
+      },
+    };
+  });
+
+  it('should return isLoading/error values properly', () => {
+    expect(mapStateToProps(state).isLoading).toBe(true);
+    expect(mapStateToProps(state).error).toBe('User Error');
+  })
+});

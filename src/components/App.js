@@ -65,7 +65,7 @@ export class App extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+export const mapStateToProps = (state) => ({
   categories: getCategories(state),
   userId: state.user.userId,
   isLoading: state.user.isLoading || state.category.isLoading,
