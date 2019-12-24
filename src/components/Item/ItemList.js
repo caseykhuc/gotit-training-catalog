@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ModifyButton from './ModifyButton';
 
-export const ItemList = ({ items, userId: userCurrent, categoryId }) => {
+export const ItemList = ({ items, userCurrent, categoryId }) => {
   const renderItems = () => items.map(({ id, name, userId }) => (
     <ListGroup.Item className="d-flex justify-content-between align-items-center" key={id}>
       <Link to={`/categories/items/${categoryId}/${id}`} key={id}>
@@ -27,15 +27,16 @@ export const ItemList = ({ items, userId: userCurrent, categoryId }) => {
 
 ItemList.propTypes = {
   items: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
-    name: PropTypes.string,
-    user_id: PropTypes.number,
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    userId: PropTypes.number.isRequired,
   })).isRequired,
-  userId: PropTypes.number,
+  categoryId: PropTypes.number.isRequired,
+  userCurrent: PropTypes.number,
 }
 
 const mapStateToProps = ({ user }) => ({
-  userId: user.userId,
+  userCurrent: user.userId,
 })
 
 export default connect(mapStateToProps)(ItemList);

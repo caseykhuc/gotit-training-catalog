@@ -87,6 +87,8 @@ ItemSingle.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
+  isLoadingItem: PropTypes.bool.isRequired,
+  fetchItem: PropTypes.func.isRequired,
   item: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
@@ -96,7 +98,6 @@ ItemSingle.propTypes = {
     updated: PropTypes.string,
   }),
   userCurrent: PropTypes.number,
-  fetchItem: PropTypes.func.isRequired,
 }
 
 export default withRouter(connect(mapStateToProps, { fetchItem })(ItemSingle));

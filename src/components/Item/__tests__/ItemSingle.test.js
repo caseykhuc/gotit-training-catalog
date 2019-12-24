@@ -6,11 +6,9 @@ import { ItemSingle, mapStateToProps } from '../ItemSingle';
 describe('component/Item/ItemSingle', () => {
   let props;
   let wrapper;
-  let modifyButton;
 
   const update = () => {
     wrapper.update();
-    modifyButton = wrapper.find(ModifyButton);
   };
   const setup = () => {
     wrapper = shallow(<ItemSingle {...props} />);
@@ -20,37 +18,56 @@ describe('component/Item/ItemSingle', () => {
   beforeEach(() => {
     props = {
       itemId: 0,
+      categoryId: 1,
+      history: {
+        push: jest.fn(),
+      },
+      isLoadingItem: false,
       item: {
         name: 'test',
         description: 'test',
         id: 1,
-        user_id: 0,
+        userId: 0,
       },
-      categoryId: 1,
+      fetchItem: jest.fn().mockResolvedValue({
+        success: true,
+      }),
       userCurrent: 10,
-      fetchItem: jest.fn(),
-      showModal: jest.fn(),
     }
   });
   it('should render correctly', () => {
     setup();
     expect(wrapper).toMatchSnapshot();
-  });
-  it('should render modifyButton when userId match', () => {
-    props.item.user_id = 10;
+
+    props.item.userId = 10;
     setup();
-    expect(modifyButton.length).toBeTruthy();
-  });
-  it('should fetchItem when item is not defined in props', () => {
+    expect(wrapper).toMatchSnapshot();
+
     props.item = undefined;
     setup();
+    expect(wrapper).toMatchSnapshot();
+
+    props.isLoadingItem = true;
+    setup();
+    expect(wrapper).toMatchSnapshot();
+  });
+  it('should fetchItem when item is not defined in props', () => {
+    setup();
     expect(props.fetchItem).toHaveBeenCalled();
+  });
+  it('should redirect to category page when fail fetching items', async () => {
+    props.fetchItem = () => Promise.resolve({ success: false });
+    setup();
+    await new Promise((resolve, reject) => {
+      setImmediate(resolve)
+    });
+    expect(props.history.push).toHaveBeenCalled();
   })
 })
 
 describe('component/Item/ItemSingle (mapStateToProps)', () => {
-  let state; let match; let
-    location;
+  let state;
+  let match;
   beforeEach(() => {
     state = { user: { userId: 10 }, item: { byId: [] } };
     match = { params: { categoryId: 1, itemId: 2 } };
