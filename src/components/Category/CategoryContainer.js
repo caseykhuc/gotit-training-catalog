@@ -63,9 +63,7 @@ export class CategoryContainer extends React.Component {
         {this.renderList()}
         <ItemPagination totalPages={totalPages} currentPage={page} onPageClick={this.onPageClick} />
       </div>
-    ) : (
-        <Alert variant="danger">Can't find category</Alert>
-      );
+    ) : (<Alert variant="danger">Can't find category</Alert>);
   }
 }
 

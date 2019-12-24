@@ -1,9 +1,10 @@
 {
   "env": {
-    "jest": true
+    "jest": true,
+    "browser": true
   },
   "extends": [
-    "airbnb",
+    "airbnb"
   ],
   "plugins": [
     "jsx-a11y",
