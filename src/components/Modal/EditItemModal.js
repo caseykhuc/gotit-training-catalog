@@ -20,7 +20,9 @@ const validate = ({
   return inputError;
 };
 
-export const EditItemModal = ({ editItem, currentValue = {} }) => {
+export const EditItemModal = ({
+  editItem, currentValue = {},
+}) => {
   const initialState = {
     inputValue: currentValue,
     inputError: {
@@ -58,4 +60,8 @@ const mapStateToProps = (state) => ({
   categories: selector.getCategories(state),
 })
 
-export default connect(mapStateToProps, { editItem })(EditItemModal);
+const mapDispatchToProps = (dispatch, { categoryId, itemId }) => ({
+  editItem: (body) => dispatch(editItem(categoryId, itemId)(body)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditItemModal);

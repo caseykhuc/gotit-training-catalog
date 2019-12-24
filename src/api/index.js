@@ -66,7 +66,7 @@ export const fetchUser = () => authorizedRequest('me')
 export const addItem = (categoryId, body) => authorizedRequest(`categories/${categoryId}/items`, 'POST', body)
   .then((res) => res);
 
-export const editItem = (categoryId, itemId, body) => authorizedRequest(`categories/${categoryId}/items/${itemId}`, 'POST', body)
+export const editItem = (categoryId, itemId, body) => authorizedRequest(`categories/${categoryId}/items/${itemId}`, 'PUT', body)
   .then((res) => res);
 
 export const deleteItem = (categoryId, itemId) => authorizedRequest(`categories/${categoryId}/items/${itemId}`, 'DELETE')
