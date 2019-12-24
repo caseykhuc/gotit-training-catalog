@@ -19,7 +19,7 @@ const thunk = (store) => (next) => async (action) => {
     console.log(result); */
     // return middleware result
 
-    if (result.status_code && (result.status_code > 299 || result.status_code < 200)) {
+    if (result.statusCode && (result.statusCode > 299 || result.statusCode < 200)) {
       throw Error(result.message || 'Request failed');
     }
     store.dispatch({ type: `${action.type}_SUCCESS`, payload: result });
