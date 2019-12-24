@@ -33,7 +33,7 @@ export class ItemSingle extends Component {
 
     if (item) {
       const {
-        id, name, description, user_id, created, updated,
+        id, name, description, userId, created, updated,
       } = item;
 
       return (
@@ -57,7 +57,7 @@ export class ItemSingle extends Component {
                 {updated && `Last updated: ${formatDateString(updated)}`}
               </small>
             </Card.Text>
-            {userCurrent === user_id && (
+            {userCurrent === userId && (
               <ModifyButton categoryId={categoryId} itemId={itemId} />
             )}
           </Card.Body>
@@ -91,7 +91,7 @@ ItemSingle.propTypes = {
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
-    user_id: PropTypes.number.isRequired,
+    userId: PropTypes.number.isRequired,
     created: PropTypes.string,
     updated: PropTypes.string,
   }),

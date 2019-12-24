@@ -1,10 +1,14 @@
+import camelcaseKeys from 'camelcase-keys';
 import config from 'configuration';
 
 const { BASE_URL, ITEM_PER_PAGE } = config;
 
 // helpers
 const handleJson = (res) => {
-  if (res.ok) { return res.json(); }
+  if (res.ok) {
+    return (res.json())
+      .then((res) => camelcaseKeys(res, { deep: true }));
+  }
   throw res.json();
 }
 
@@ -49,15 +53,15 @@ export const fetchItems = (categoryId, page) => request(`categories/${categoryId
 export const fetchItem = (categoryId, itemId) => request(`categories/${categoryId}/items/${itemId}`)
   .then((res) => res)
 
+export const registerUser = (body) => request('registrations', 'POST', body)
+  .then((res) => res.accessToken);
+
+export const signinUser = (body) => request('login', 'POST', body)
+  .then((res) => res.accessToken);
+
 // authorized requests
 export const fetchUser = () => authorizedRequest('me')
   .then((res) => res.id);
-
-export const registerUser = (body) => request('registrations', 'POST', body)
-  .then((res) => res.access_token);
-
-export const signinUser = (body) => request('login', 'POST', body)
-  .then((res) => res.access_token);
 
 export const addItem = (categoryId, body) => authorizedRequest(`categories/${categoryId}/items`, 'POST', body)
   .then((res) => res);

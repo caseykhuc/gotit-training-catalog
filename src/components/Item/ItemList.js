@@ -5,13 +5,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ModifyButton from './ModifyButton';
 
-export const ItemList = ({ items, userId, categoryId }) => {
-  const renderItems = () => items.map(({ id, name, user_id }) => (
+export const ItemList = ({ items, userId: userCurrent, categoryId }) => {
+  const renderItems = () => items.map(({ id, name, userId }) => (
     <ListGroup.Item className="d-flex justify-content-between align-items-center" key={id}>
       <Link to={`/categories/items/${categoryId}/${id}`} key={id}>
         {name}
       </Link>
-      {userId === user_id && (
+      {userId === userCurrent && (
         <ModifyButton categoryId={categoryId} itemId={id} />
       )}
     </ListGroup.Item>
