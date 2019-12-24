@@ -37,7 +37,7 @@ export const AddItemModal = ({ addItem, categories }) => {
 
   const fields = [
     { name: 'name', type: 'text' },
-    { name: 'description', type: 'text' },
+    { name: 'description', type: 'textarea' },
     { name: 'price', type: 'text' },
     { name: 'categoryId', type: 'select', options: categories },
   ];

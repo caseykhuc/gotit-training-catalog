@@ -11,9 +11,10 @@ import * as errorMessage from 'utils/inputError';
 const validate = ({
   name, price,
 }) => {
+  const priceString = String(price);
   const inputError = {};
   if (name && name.length < 5) inputError.name = errorMessage.name.tooShort;
-  if (price && !validator.isNumeric(price)) {
+  if (priceString && !validator.isNumeric(priceString)) {
     inputError.price = errorMessage.price.tooSimple;
   }
   return inputError;
@@ -29,7 +30,7 @@ export const EditItemModal = ({ editItem, currentValue = {} }) => {
 
   const fields = [
     { name: 'name', type: 'text' },
-    { name: 'description', type: 'text' },
+    { name: 'description', type: 'textarea' },
     { name: 'price', type: 'text' },
   ];
 

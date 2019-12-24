@@ -22,7 +22,10 @@ export const addItem = ({
   promise: api.addItem(categoryId, { name, description, price }),
 });
 
-export const editItem = () => { };
+export const editItem = (categoryId, itemId, body) => ({
+  type: itemTypes.EDIT_ITEM,
+  promise: api.editItem(categoryId, itemId, body),
+});
 
 export const deleteItem = (categoryId, itemId) => ({
   type: itemTypes.DELETE_ITEM,
