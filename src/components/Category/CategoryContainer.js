@@ -13,7 +13,7 @@ import LoadingPage from 'components/LoadingPage';
 
 import { fetchItems } from 'actions/item';
 import { getItems } from 'reducers';
-import config from 'config';
+import config from 'configuration';
 
 export class CategoryContainer extends React.Component {
   componentDidMount() {
@@ -45,7 +45,9 @@ export class CategoryContainer extends React.Component {
         </div>
       );
     }
-    if (isLoadingItem) return <LoadingPage />
+    if (isLoadingItem) {
+      return <LoadingPage />
+    }
     return (
       <Alert variant="info">
         Category currently has no items. Add one now!
@@ -73,7 +75,11 @@ export class CategoryContainer extends React.Component {
 
 export const mapStateToProps = (state, { match, location }) => {
   const categoryId = Number(match.params.categoryId);
-  const page = Number(queryString.parse(location.search).page || 0);
+  const totalPages = Math.ceil(state.item.totalItems / config.ITEM_PER_PAGE)
+
+  // in case page is queryString is empty
+  const page = Number(queryString.parse(location.search).page)
+    || 0;
 
   return {
     category: state.category.byId[categoryId],
@@ -81,7 +87,7 @@ export const mapStateToProps = (state, { match, location }) => {
     categoryId,
     page,
     isLoadingItem: state.item.isLoading,
-    totalPages: Math.ceil(state.item.totalItems / config.ITEM_PER_PAGE),
+    totalPages,
   };
 };
 

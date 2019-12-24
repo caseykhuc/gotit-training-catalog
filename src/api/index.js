@@ -1,4 +1,4 @@
-import config from '../config';
+import config from 'configuration';
 
 const { BASE_URL, ITEM_PER_PAGE } = config;
 
