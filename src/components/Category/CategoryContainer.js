@@ -18,10 +18,10 @@ import config from 'config';
 export class CategoryContainer extends React.Component {
   componentDidMount() {
     const {
-      categoryId, category, fetchItems, history,
+      categoryId, category, fetchItems, history, page,
     } = this.props;
     // direct app to home page when no category is equivalent to categoryId
-    if (category) { fetchItems(categoryId); } else history.push('/');
+    if (category) { fetchItems(categoryId, page); } else history.push('/');
   }
 
   componentDidUpdate(prevState) {
