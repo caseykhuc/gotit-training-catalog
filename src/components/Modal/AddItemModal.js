@@ -5,12 +5,43 @@ import * as selector from 'reducers';
 import { addItem } from 'actions/item';
 import BaseFormModal from 'components/Base/BaseFormModal';
 
-import { addItemModal } from 'utils/initModalForm';
+import validator from 'validator';
+import * as errorMessage from 'utils/inputError';
 
 export const AddItemModal = ({ addItem, categories }) => {
-  const { initialState, fields, validate } = addItemModal();
-  fields[fields.findIndex((f) => f.name === 'category_id')].options = categories;
-  initialState.inputValue.category_id = categories[0];
+  const initialState = {
+    inputValue: {
+      name: '',
+      description: '',
+      price: '',
+      categoryId: categories[0],
+    },
+    inputError: {
+    },
+    requestError: '',
+  };
+
+  const fields = [
+    { name: 'name', type: 'text' },
+    { name: 'description', type: 'text' },
+    { name: 'price', type: 'text' },
+    { name: 'categoryId', type: 'select', options: categories },
+  ];
+
+  const validate = ({
+    name, price, categoryId,
+  }) => {
+    const inputError = {};
+    if (name && name.length < 5) inputError.name = errorMessage.name.tooShort;
+    if (price && !validator.isNumeric(price)) {
+      inputError.price = errorMessage.price.tooSimple;
+    }
+    if (!categoryId) {
+      inputError.categoryId = errorMessage.category.isNotDefined;
+    }
+    return inputError;
+  };
+
   return (
     <BaseFormModal
       title="ADD ITEM"
