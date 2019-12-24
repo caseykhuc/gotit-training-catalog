@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import BaseModal from 'components/Base/BaseFormModal';
+import BaseModal from 'components/Base/BaseModal';
 import BaseForm from 'components/Base/BaseForm';
 
 class BaseFormModal extends React.Component {
