@@ -16,10 +16,10 @@ export const fetchItem = (categoryId, itemId) => ({
 })
 
 export const addItem = ({
-  name, description, price, category_id,
+  name, description, price, categoryId,
 }) => ({
   type: itemTypes.ADD_ITEM,
-  promise: api.addItem(category_id, { name, description, price }),
+  promise: api.addItem(categoryId, { name, description, price }),
 });
 
 export const editItem = () => { };
