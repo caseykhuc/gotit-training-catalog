@@ -50,7 +50,7 @@ export const fetchItem = (categoryId, itemId) => request(`categories/${categoryI
   .then((res) => res)
 
 // authorized requests
-export const fetchUser = () => authorizedRequest(`${BASE_URL}/me`)
+export const fetchUser = () => authorizedRequest('me')
   .then((res) => res.id);
 
 export const registerUser = (body) => request('registrations', 'POST', body)
