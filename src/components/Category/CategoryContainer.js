@@ -26,7 +26,10 @@ export class CategoryContainer extends React.Component {
 
   componentDidUpdate(prevState) {
     const { categoryId, page, fetchItems } = this.props;
-    if (categoryId !== prevState.categoryId || page !== prevState.page) { fetchItems(categoryId, page); }
+    if (categoryId !== prevState.categoryId
+      || page !== prevState.page) {
+      fetchItems(categoryId, page);
+    }
   }
 
   // conditionally render based on loading items state
