@@ -8,11 +8,12 @@ import queryString from 'query-string';
 import PropTypes from 'prop-types';
 import CategoryDetails from './CategoryDetails';
 import ItemList from '../Item/ItemList';
+import ItemPagination from '../Item/ItemPagination';
 
 import { fetchItems } from '../../actions/item';
 import { getItems } from '../../reducers';
 import LoadingPage from '../LoadingPage';
-
+import { ITEM_PER_PAGE } from '../../config';
 
 export class CategoryContainer extends React.Component {
   componentDidMount() {
@@ -25,7 +26,7 @@ export class CategoryContainer extends React.Component {
 
   componentDidUpdate(prevState) {
     const { categoryId, page, fetchItems } = this.props;
-    if (categoryId !== prevState.categoryId || page !== prevState.page) { fetchItems(categoryId); }
+    if (categoryId !== prevState.categoryId || page !== prevState.page) { fetchItems(categoryId, page); }
   }
 
   // conditionally render based on loading items state
@@ -42,14 +43,22 @@ export class CategoryContainer extends React.Component {
     );
   }
 
+  onPageClick = (e, page) => {
+    const { history, categoryId } = this.props;
+    history.push(`/categories/${categoryId}?page=${page}`);
+  }
+
   render() {
     const {
       category,
+      totalPages,
+      page,
     } = this.props;
     return category ? (
       <div className="w-75 mx-auto">
         <CategoryDetails category={category} />
         {this.renderList()}
+        <ItemPagination totalPages={totalPages} currentPage={page} onPageClick={this.onPageClick} />
       </div>
     ) : (
         <Alert variant="danger">Can't find category</Alert>
@@ -67,6 +76,7 @@ export const mapStateToProps = (state, { match, location }) => {
     categoryId,
     page,
     isLoadingItem: state.item.isLoading,
+    totalPages: Math.ceil(state.item.totalItems / ITEM_PER_PAGE),
   };
 };
 

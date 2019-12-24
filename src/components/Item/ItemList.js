@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import ModifyButton from './ModifyButton';
 
 export const ItemList = ({ items, userId, categoryId }) => {
-  // console.log(props);
   const renderItems = () => items.map(({ id, name, user_id }) => (
     <ListGroup.Item className="d-flex justify-content-between align-items-center" key={id}>
       <Link to={`/categories/items/${categoryId}/${id}`} key={id}>

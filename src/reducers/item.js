@@ -34,7 +34,7 @@ import { arrayToObject } from '../utils/utils';
 const byId = (state = {}, action) => {
   switch (action.type) {
     case itemTypes.FETCH_ITEMS_SUCCESS:
-      return arrayToObject(action.payload);
+      return arrayToObject(action.payload.items);
     case itemTypes.FETCH_ITEM_SUCCESS:
       return { ...state, [action.payload.id]: action.payload };
     case itemTypes.ADD_ITEM_SUCCESS:
@@ -94,7 +94,7 @@ const error = (state = '', action) => {
 const totalItems = (state = 0, action) => {
   switch (action.type) {
     case itemTypes.FETCH_ITEMS_SUCCESS:
-      return action.payload;
+      return action.payload.total_items;
     case itemTypes.ADD_ITEM_SUCCESS:
       return state + 1;
     case itemTypes.DELETE_ITEM_SUCCESS:

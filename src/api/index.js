@@ -1,5 +1,6 @@
 import { BASE_URL, ITEM_PER_PAGE } from '../config';
 
+// helpers
 const handleJson = (res) => {
   if (res.ok) { return res.json(); }
   throw res.json();
@@ -36,16 +37,17 @@ const authorizedRequest = (url = '', method = 'GET', body) => {
   return req.then(handleJson);
 }
 
+// regular requests
 export const fetchCategories = () => request('categories?offset=0&limit=100')
   .then((res) => res.categories);
 
 export const fetchItems = (categoryId, page) => request(`categories/${categoryId}/items?offset=${page * ITEM_PER_PAGE}&limit=${ITEM_PER_PAGE}`)
-  .then((res) => res.items)
+  .then((res) => res)
 
 export const fetchItem = (categoryId, itemId) => request(`categories/${categoryId}/items/${itemId}`)
   .then((res) => res)
 
-// authorized
+// authorized requests
 export const fetchUser = () => fetch(`${BASE_URL}/me`, {
   headers: {
     Authorization: `Bearer ${localStorage.getItem('access_token')}`,
