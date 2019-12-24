@@ -13,7 +13,7 @@ import ItemPagination from '../Item/ItemPagination';
 import { fetchItems } from '../../actions/item';
 import { getItems } from '../../reducers';
 import LoadingPage from '../LoadingPage';
-import { ITEM_PER_PAGE } from '../../config';
+import config from '../../config';
 
 export class CategoryContainer extends React.Component {
   componentDidMount() {
@@ -79,7 +79,7 @@ export const mapStateToProps = (state, { match, location }) => {
     categoryId,
     page,
     isLoadingItem: state.item.isLoading,
-    totalPages: Math.ceil(state.item.totalItems / ITEM_PER_PAGE),
+    totalPages: Math.ceil(state.item.totalItems / config.ITEM_PER_PAGE),
   };
 };
 
