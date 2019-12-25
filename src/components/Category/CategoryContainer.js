@@ -30,7 +30,7 @@ export class CategoryContainer extends React.Component {
 
     // direct app to first category page when 'page' number is invalid
     if (totalPages && page >= totalPages) {
-      history.push(`${categoryId}`);
+      history.push(`${categoryId}?page=${totalPages - 1}`);
     }
   }
 
@@ -48,7 +48,7 @@ export class CategoryContainer extends React.Component {
 
     // direct app to first category page when 'page' number is invalid
     if (totalPages && page >= totalPages) {
-      history.push(`${categoryId}`);
+      history.push(`${categoryId}?page=${totalPages - 1}`);
     }
   }
 

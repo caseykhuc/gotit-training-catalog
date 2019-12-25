@@ -1,2 +1,2 @@
 export const BASE_URL = 'http://localhost:5000';
-export const ITEM_PER_PAGE = 1;
+export const ITEM_PER_PAGE = 2;
