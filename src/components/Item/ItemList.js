@@ -5,7 +5,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ModifyButton from './ModifyButton';
 
-export const ItemList = ({ items, userCurrent, categoryId }) => {
+export const ItemList = ({
+  items, page, userCurrent, categoryId,
+}) => {
   const renderItems = () => items.map(({
     id, name, description, price, userId,
   }) => (
@@ -17,6 +19,7 @@ export const ItemList = ({ items, userCurrent, categoryId }) => {
           <ModifyButton
             categoryId={categoryId}
             itemId={id}
+            page={page}
             currentValue={{ name, description, price }}
           />
         )}
@@ -37,6 +40,7 @@ ItemList.propTypes = {
     name: PropTypes.string.isRequired,
     userId: PropTypes.number.isRequired,
   })).isRequired,
+  page: PropTypes.number.isRequired,
   categoryId: PropTypes.number.isRequired,
   userCurrent: PropTypes.number,
 }

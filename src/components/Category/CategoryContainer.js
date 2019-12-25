@@ -37,11 +37,19 @@ export class CategoryContainer extends React.Component {
     const {
       itemList, categoryId, isLoadingItem, totalPages, page,
     } = this.props;
-    if (itemList.length) {
+    if (itemList.length && !isLoadingItem) {
       return (
         <div>
-          <ItemList items={itemList} categoryId={categoryId} />
-          <ItemPagination totalPages={totalPages} currentPage={page} onPageClick={this.onPageClick} />
+          <ItemList
+            items={itemList}
+            categoryId={categoryId}
+            page={page}
+          />
+          <ItemPagination
+            totalPages={totalPages}
+            currentPage={page}
+            onPageClick={this.onPageClick}
+          />
         </div>
       );
     }
