@@ -6,7 +6,7 @@ import { showModal } from 'actions/modal';
 import PropTypes from 'prop-types';
 
 export const ModifyButton = ({
-  categoryId, itemId, currentValue, showModal, page = 0,
+  categoryId, itemId, currentValue, showModal, onDeleteSuccess,
 }) => (
     <ButtonGroup>
       <Button
@@ -24,7 +24,7 @@ export const ModifyButton = ({
         onClick={() => showModal(modalKeys.DELETE_ITEM_MODAL, {
           categoryId,
           itemId,
-          page,
+          onSuccess: onDeleteSuccess,
         })}
       >
         Delete
@@ -41,7 +41,7 @@ ModifyButton.propTypes = {
     description: PropTypes.string,
     price: PropTypes.number,
   }),
-  page: PropTypes.number,
+  onDeleteSuccess: PropTypes.func,
 }
 
 export default connect(null, { showModal })(ModifyButton);

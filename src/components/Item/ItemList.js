@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import ModifyButton from './ModifyButton';
 
 export const ItemList = ({
-  items, page, userCurrent, categoryId,
+  items, page, userCurrent, categoryId, onDeleteSuccess,
 }) => {
   const renderItems = () => items.map(({
     id, name, description, price, userId,
@@ -21,6 +21,7 @@ export const ItemList = ({
             itemId={id}
             page={page}
             currentValue={{ name, description, price }}
+            onDeleteSuccess={onDeleteSuccess}
           />
         )}
       </ListGroup.Item>
@@ -43,6 +44,7 @@ ItemList.propTypes = {
   page: PropTypes.number.isRequired,
   categoryId: PropTypes.number.isRequired,
   userCurrent: PropTypes.number,
+  onDeleteSuccess: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = ({ user }) => ({

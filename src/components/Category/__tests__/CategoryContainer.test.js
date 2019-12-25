@@ -2,20 +2,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { CategoryContainer, mapStateToProps } from '../CategoryContainer';
-import CategoryDetails from '../CategoryDetails';
-import ItemList from '../../Item/ItemList';
 
 describe('component/Category/CategoryContainer', () => {
   let props;
   let wrapper;
-  let categoryDetails; let itemList; let alertDanger; let
-    alertInfo;
+
   const update = () => {
     wrapper.update();
-    categoryDetails = wrapper.find(CategoryDetails);
-    itemList = wrapper.find(ItemList);
-    alertDanger = wrapper.find('[variant="danger"]');
-    alertInfo = wrapper.find('[variant="info"]');
   };
   const setup = () => {
     wrapper = shallow(<CategoryContainer {...props} />);
@@ -24,15 +17,16 @@ describe('component/Category/CategoryContainer', () => {
   beforeEach(() => {
     props = {
       categoryId: 1,
+      fetchItems: jest.fn(),
+      page: 0,
+      totalPages: 5,
+      history: { push: jest.fn() },
+      isLoadingItem: false,
       category: {
         name: 'name',
         description: 'description',
       },
-      isLoadingItem: false,
-      fetchItems: jest.fn(),
       itemList: [],
-      page: 0,
-      history: { push: jest.fn() },
     }
   });
   it('should render correctly', () => {

@@ -7,7 +7,7 @@ import { deleteItem, fetchItems } from 'actions/item';
 import { hideModal } from 'actions/modal';
 
 export const DeleteItemModal = ({
-  categoryId, itemId, deleteItem, fetchItems, hideModal, page,
+  categoryId, itemId, deleteItem, onSuccess, hideModal,
 }) => {
   const onAccept = async () => {
     const res = await deleteItem(categoryId, itemId);
@@ -15,7 +15,7 @@ export const DeleteItemModal = ({
     // refetch is handled elsewhere
     if (res.success) {
       hideModal();
-      fetchItems(categoryId, page);
+      onSuccess();
     }
   }
 
@@ -32,9 +32,8 @@ export const DeleteItemModal = ({
 DeleteItemModal.propTypes = {
   categoryId: PropTypes.number.isRequired,
   itemId: PropTypes.number.isRequired,
-  page: PropTypes.number.isRequired,
   deleteItem: PropTypes.func.isRequired,
-  fetchItems: PropTypes.func.isRequired,
+  onSuccess: PropTypes.func.isRequired,
   hideModal: PropTypes.func.isRequired,
 }
 

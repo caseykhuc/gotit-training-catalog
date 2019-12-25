@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import BaseForm from '../BaseForm'
 import BaseModal from '../BaseModal';
-import BaseFormModal from '../BaseFormModal';
+import { BaseFormModal } from '../BaseFormModal';
 
 describe('components/BaseFormModal', () => {
   let props;
@@ -21,7 +21,10 @@ describe('components/BaseFormModal', () => {
   };
   beforeEach(() => {
     props = {
-      onAction: jest.fn(),
+
+      fields: [{ name: 'username', type: 'text' }, {
+        name: 'password', type: 'password',
+      }],
       initialState: {
         inputError: {},
         inputValue: {
@@ -30,11 +33,9 @@ describe('components/BaseFormModal', () => {
         },
         requestError: 'error test',
       },
-      fields: [{ name: 'username', type: 'text' }, {
-        name: 'password', type: 'password',
-      }],
       title: 'Test Title',
-      /* validate: () => { }, */
+      onAction: jest.fn().mockResolvedValue({ success: true }),
+      hideModal: jest.fn(),
     }
   });
   it('should render correctly', () => {
@@ -72,10 +73,11 @@ describe('components/BaseFormModal', () => {
     await baseModal.props().onAccept();
     expect(wrapper.state().inputError).toEqual({ username: 'test changed' });
   })
-  it('should reset state value when receive a success response', async () => {
+  it('should handle success response properly', async () => {
     props.onAction = () => Promise.resolve({ success: true });
     setup();
     await baseModal.props().onAccept();
     expect(wrapper.state()).toEqual(props.initialState);
+    expect(props.hideModal).toHaveBeenCalled();
   })
 })

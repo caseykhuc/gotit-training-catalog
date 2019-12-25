@@ -21,6 +21,7 @@ describe('components/Modal/DeleteItemModal', () => {
       categoryId: 2,
       itemId: 1,
       deleteItem: jest.fn().mockResolvedValue({ success: true }),
+      onSuccess: jest.fn(),
       hideModal: jest.fn(),
     }
   });

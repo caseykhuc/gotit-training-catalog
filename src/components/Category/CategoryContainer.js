@@ -18,16 +18,45 @@ import config from 'configuration';
 export class CategoryContainer extends React.Component {
   componentDidMount() {
     const {
-      categoryId, category, fetchItems, history, page,
+      categoryId, category, fetchItems, history, page, totalPages, isLoadingItem,
     } = this.props;
+
     // direct app to home page when no category is equivalent to categoryId
-    if (category) { fetchItems(categoryId, page); } else history.push('/');
+    if (category) {
+      if (!isLoadingItem) {
+        fetchItems(categoryId, page);
+      }
+    } else history.push('/');
+
+    // direct app to first category page when 'page' number is invalid
+    if (totalPages && page >= totalPages) {
+      history.push(`${categoryId}`);
+    }
   }
 
   componentDidUpdate(prevState) {
-    const { categoryId, page, fetchItems } = this.props;
+    const {
+      categoryId, page, fetchItems, totalPages, history, isLoadingItem, itemList,
+    } = this.props;
+
     if (categoryId !== prevState.categoryId
       || page !== prevState.page) {
+      if (!isLoadingItem) {
+        fetchItems(categoryId, page);
+      }
+    }
+
+    // direct app to first category page when 'page' number is invalid
+    if (totalPages && page >= totalPages) {
+      history.push(`${categoryId}`);
+    }
+  }
+
+  onDeleteSuccess = () => {
+    const {
+      isLoadingItem, fetchItems, categoryId, page,
+    } = this.props;
+    if (!isLoadingItem) {
       fetchItems(categoryId, page);
     }
   }
@@ -44,6 +73,7 @@ export class CategoryContainer extends React.Component {
             items={itemList}
             categoryId={categoryId}
             page={page}
+            onDeleteSuccess={this.onDeleteSuccess}
           />
           <ItemPagination
             totalPages={totalPages}

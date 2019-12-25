@@ -6,7 +6,7 @@ import BaseForm from 'components/Base/BaseForm';
 import { hideModal } from 'actions/modal';
 import { connect } from 'react-redux';
 
-class BaseFormModal extends React.Component {
+export class BaseFormModal extends React.Component {
   state = this.props.initialState
 
   onInputChange = (e) => {
