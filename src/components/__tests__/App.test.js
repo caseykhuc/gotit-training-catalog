@@ -60,6 +60,9 @@ describe('component/App (mapStateToProps)', () => {
 
   it('should return isLoading/error values properly', () => {
     expect(mapStateToProps(state).isLoading).toBe(true);
-    expect(mapStateToProps(state).error).toBe('User Error');
-  })
+    expect(mapStateToProps(state).error).toBe('Category Error');
+
+    state.user.isLoading = false;
+    expect(mapStateToProps(state).isLoading).toBe(false);
+  });
 });

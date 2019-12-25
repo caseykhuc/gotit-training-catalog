@@ -28,36 +28,39 @@ export class App extends React.Component {
     fetchCategory();
   }
 
-  // show only loading page before fetchInit finishes
-  // show Error when fetchCategory failed
-  renderLoading = () => {
-    const { isLoading, error } = this.props;
-    if (isLoading) return <LoadingPage />
-    return <Alert variant="danger">{error}</Alert>
+  renderCategory = () => {
+    const {
+      categories, userId, isLoading, error,
+    } = this.props;
+    if (categories.length) {
+      return (
+        <div>
+          <Header isSignedIn={!!userId} />
+          <CategoryList
+            categories={categories}
+            defaultSelected={categories[0].id}
+          />
+          <Switch>
+            <Route exact path="/categories/items/:categoryId/:itemId" component={ItemSingle} />
+            <Route exact path="/categories/:categoryId" component={CategoryContainer} />
+            <Redirect to={`/categories/${categories[0].id}`} />
+          </Switch>
+        </div>
+      )
+    }
+    // show only loading page before fetchInit finishes
+    if (isLoading) {
+      return <LoadingPage />
+    }
+    // show Error if fetchCategory failed
+    return <Alert variant="danger">{error || 'No record found'}</Alert>
   }
 
   render() {
-    const { categories, userId } = this.props;
-
     return (
       (
         <Container className="App my-4">
-          {categories.length
-            ? (
-              <div>
-                <Header isSignedIn={Boolean(userId)} />
-                <CategoryList
-                  categories={categories}
-                  defaultSelected={categories[0].id}
-                />
-                <Switch>
-                  <Route exact path="/categories/items/:categoryId/:itemId" component={ItemSingle} />
-                  <Route exact path="/categories/:categoryId" component={CategoryContainer} />
-                  <Redirect to={`/categories/${categories[0].id}`} />
-                </Switch>
-              </div>
-            )
-            : this.renderLoading()}
+          {this.renderCategory()}
           <ModalContainer />
         </Container>
       )
@@ -69,7 +72,7 @@ export const mapStateToProps = (state) => ({
   categories: getCategories(state),
   userId: state.user.userId,
   isLoading: state.user.isLoading || state.category.isLoading,
-  error: state.user.error || state.category.error,
+  error: state.category.error,
 });
 
 App.propTypes = {

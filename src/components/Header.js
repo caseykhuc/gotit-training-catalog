@@ -69,7 +69,7 @@ export const Header = ({
 }
 
 Header.propTypes = {
-  isSignedIn: PropTypes.bool.isRequired,
+  isSignedIn: PropTypes.bool,
   showModal: PropTypes.func.isRequired,
   signoutUser: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
