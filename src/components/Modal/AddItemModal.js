@@ -7,9 +7,8 @@ import BaseFormModal from 'components/Base/BaseFormModal';
 
 import validator from 'validator';
 import * as errorMessage from 'utils/inputError';
-import { withRouter } from 'react-router-dom';
 
-const validate = ({
+export const validate = ({
   name, price, categoryId,
 }) => {
   const inputError = {};
@@ -24,7 +23,7 @@ const validate = ({
 };
 
 export const AddItemModal = ({
-  addItem, categories, history,
+  addItem, categories, onSuccess,
 }) => {
   const initialState = {
     inputValue: {
@@ -45,11 +44,6 @@ export const AddItemModal = ({
     { name: 'categoryId', type: 'select', options: categories },
   ];
 
-  const onSuccess = () => {
-    // display successful message
-    /* history.push(`categories/${categoryId}/items/${itemId}`); */
-  }
-
   return (
     <BaseFormModal
       title="ADD ITEM"
@@ -65,13 +59,11 @@ export const AddItemModal = ({
 AddItemModal.propTypes = {
   addItem: PropTypes.func.isRequired,
   categories: PropTypes.arrayOf(PropTypes.object).isRequired,
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-  }).isRequired,
+  onSuccess: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state) => ({
   categories: selector.getCategories(state),
 })
 
-export default withRouter(connect(mapStateToProps, { addItem })(AddItemModal));
+export default connect(mapStateToProps, { addItem })(AddItemModal);

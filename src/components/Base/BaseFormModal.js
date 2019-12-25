@@ -50,12 +50,10 @@ export class BaseFormModal extends React.Component {
     } else {
       this.setState(initialState);
       hideModal();
-      /**
-       * navigate / actions when Form is successfully submitted
-       * */
+
+      // called onSuccess function with REQUEST and RESPONSE value
       if (onSuccess) {
-        /* onSuccess(res.payload); */
-        onSuccess(res.payload);
+        onSuccess(inputValue, res.result);
       }
     }
   }
