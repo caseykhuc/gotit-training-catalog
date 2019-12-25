@@ -28,6 +28,7 @@ describe('component/Category/CategoryContainer', () => {
         name: 'name',
         description: 'description',
       },
+      isLoadingItem: false,
       fetchItems: jest.fn(),
       itemList: [],
       page: 0,
@@ -37,27 +38,24 @@ describe('component/Category/CategoryContainer', () => {
   it('should render correctly', () => {
     setup();
     expect(wrapper).toMatchSnapshot();
-  });
-  it('should render CategoryDetails and fetchItems when category props is defined', () => {
+
+    props.isLoadingItem = true;
     setup();
-    expect(categoryDetails).toHaveLength(1);
-    expect(props.fetchItems).toHaveBeenCalledWith(props.categoryId);
+    expect(wrapper).toMatchSnapshot();
+
+    props.itemList = [{}, {}];
+    setup();
+    expect(wrapper).toMatchSnapshot();
   });
-  it('should render danger Alert / not fetchItems / navigate when category props is undefined', () => {
+  it('should render fetchItems when category props is defined', () => {
+    setup();
+    expect(props.fetchItems).toHaveBeenCalledWith(props.categoryId, props.page);
+  });
+  it('should render not fetchItems / navigate when category props is undefined', () => {
     props.category = undefined;
     setup();
-    expect(categoryDetails).toHaveLength(0);
-    expect(alertDanger).toHaveLength(1);
     expect(props.fetchItems).not.toHaveBeenCalled();
     expect(props.history.push).toHaveBeenCalledWith('/');
-  });
-  it('should render ItemList when itemList.length > 0', () => {
-    props.itemList = [{ name: 'item 1', description: 'desc' }];
-    setup();
-    expect(itemList).toHaveLength(1);
-  }); it('should render Alert when itemList is empty', () => {
-    setup();
-    expect(alertInfo).toHaveLength(1);
   });
   it('should not fetch items when updating without categoryId || page change', () => {
     setup();
@@ -70,7 +68,6 @@ describe('component/Category/CategoryContainer', () => {
     expect(props.fetchItems).toBeCalledTimes(2);
   });
 });
-
 
 describe('component/Category/CategoryContainer (mapStateToProps)', () => {
   let state; let match; let
