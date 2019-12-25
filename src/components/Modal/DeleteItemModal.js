@@ -24,7 +24,6 @@ export const DeleteItemModal = ({
       onAccept={onAccept}
     >
       <p>{confirmMessage.confirmDelete}</p>
-
     </BaseModal>
   )
 }

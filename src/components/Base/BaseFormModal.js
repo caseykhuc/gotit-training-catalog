@@ -27,7 +27,7 @@ class BaseFormModal extends React.Component {
 
   onFormSubmit = async () => {
     const {
-      onAction, initialState, validate, hideModal,
+      onAction, initialState, validate, hideModal, onSuccess,
     } = this.props;
     const { inputValue } = this.state;
 
@@ -50,6 +50,13 @@ class BaseFormModal extends React.Component {
     } else {
       this.setState(initialState);
       hideModal();
+      /**
+       * navigate / actions when Form is successfully submitted
+       * */
+      if (onSuccess) {
+        /* onSuccess(res.payload); */
+        onSuccess(res.payload);
+      }
     }
   }
 
@@ -94,6 +101,7 @@ BaseFormModal.propTypes = {
   }),
   onAction: PropTypes.func.isRequired,
   hideModal: PropTypes.func.isRequired,
+  onSuccess: PropTypes.func,
   title: PropTypes.string,
   validate: PropTypes.func,
 }
