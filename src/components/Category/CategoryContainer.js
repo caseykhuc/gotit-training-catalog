@@ -26,7 +26,9 @@ export class CategoryContainer extends React.Component {
       if (!isLoadingItem) {
         fetchItems(categoryId, page);
       }
-    } else history.push('/');
+    } else {
+      history.push('/')
+    }
 
     // direct app to first category page when 'page' number is invalid
     if (totalPages && page >= totalPages) {
@@ -161,11 +163,16 @@ CategoryContainer.propTypes = {
   totalPages: PropTypes.number.isRequired,
   history: PropTypes.object.isRequired,
   isLoadingItem: PropTypes.bool.isRequired,
+  userCurrent: PropTypes.number,
   category: PropTypes.shape({
     name: PropTypes.string,
     description: PropTypes.string,
   }),
-  itemList: PropTypes.arrayOf(PropTypes.object),
+  itemList: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    userId: PropTypes.number.isRequired,
+  })),
 }
 
 export default withRouter(connect(mapStateToProps, { fetchItems })(CategoryContainer));
