@@ -75,8 +75,17 @@ const totalItems = (state = 0, action) => {
   }
 };
 
+const page = (state = 0, action) => {
+  switch (action.type) {
+    case itemTypes.FETCH_ITEMS_SUCCESS:
+      return action.payload.page;
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
-  byId, totalItems, isLoading, error,
+  byId, totalItems, isLoading, error, page,
 });
 
 export const getItem = (state, id) => state.byId[id];

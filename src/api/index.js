@@ -48,7 +48,7 @@ export const fetchCategories = () => request('categories?offset=0&limit=100')
   .then((res) => res.categories);
 
 export const fetchItems = (categoryId, page) => request(`categories/${categoryId}/items?offset=${page * ITEM_PER_PAGE}&limit=${ITEM_PER_PAGE}`)
-  .then((res) => res)
+  .then((res) => ({ ...res, page }))
 
 export const fetchItem = (categoryId, itemId) => request(`categories/${categoryId}/items/${itemId}`)
   .then((res) => res)
