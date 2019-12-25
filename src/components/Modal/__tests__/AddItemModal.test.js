@@ -6,11 +6,9 @@ import BaseModal from '../../Base/BaseModal';
 describe('components/Modal/AddItemModal', () => {
   let props;
   let wrapper;
-  let baseModal;
 
   const update = () => {
     wrapper.update();
-    baseModal = wrapper.find(BaseModal);
   };
   const setup = () => {
     wrapper = shallow(<AddItemModal {...props} />);
@@ -19,7 +17,7 @@ describe('components/Modal/AddItemModal', () => {
   beforeEach(() => {
     props = {
       addItem: jest.fn().mockResolvedValue({}),
-      categories: [],
+      categories: [{ id: 2, name: 'Cat 1' }],
       onSuccess: jest.fn(),
     }
   });

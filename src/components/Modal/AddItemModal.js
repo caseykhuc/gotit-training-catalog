@@ -30,7 +30,7 @@ export const AddItemModal = ({
       name: '',
       description: '',
       price: '',
-      categoryId: categories[0],
+      categoryId: categories[0].id,
     },
     inputError: {
     },
