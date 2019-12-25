@@ -78,7 +78,6 @@ export class CategoryContainer extends React.Component {
             />
           )}
         </ListGroup.Item>
-
       ));
   }
 
@@ -99,7 +98,7 @@ export class CategoryContainer extends React.Component {
     } = this.props;
     if (itemList.length && !isLoadingItem) {
       return (
-        <div>
+        <div className="my-4">
           {this.renderItemList()}
           <ItemPagination
             totalPages={totalPages}

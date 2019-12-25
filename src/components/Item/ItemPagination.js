@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 // currentPage starts with 0
 const ItemPagination = ({ currentPage, totalPages, onPageClick }) => (
-  <Pagination>
+  <Pagination className="justify-content-center m-4">
     <Pagination.First
       onClick={(e) => onPageClick(e, 0)}
       disabled={currentPage <= 0}
