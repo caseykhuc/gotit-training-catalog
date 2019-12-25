@@ -20,16 +20,24 @@ describe('components/Modal/DeleteItemModal', () => {
     props = {
       categoryId: 2,
       itemId: 1,
-      deleteItem: jest.fn(),
+      deleteItem: jest.fn().mockResolvedValue({ success: true }),
+      hideModal: jest.fn(),
     }
   });
   it('should render correctly', () => {
     setup();
     expect(wrapper).toMatchSnapshot();
   });
-  it('should invoke action when BaseModal invoked onAccept ', () => {
+  it('should invoke action when BaseModal invoked onAccept ', async () => {
     setup();
-    baseModal.props().onAccept();
+    await baseModal.props().onAccept();
     expect(props.deleteItem).toHaveBeenCalledWith(props.categoryId, props.itemId);
+    expect(props.hideModal).toHaveBeenCalledTimes(1);
+
+    props.deleteItem = jest.fn().mockResolvedValue({ success: false });
+    setup();
+    await baseModal.props().onAccept();
+    expect(props.deleteItem).toHaveBeenCalledWith(props.categoryId, props.itemId);
+    expect(props.hideModal).toHaveBeenCalledTimes(1);
   });
 })
