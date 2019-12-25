@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import BaseModal from 'components/Base/BaseModal';
 import BaseForm from 'components/Base/BaseForm';
+import { hideModal } from 'actions/modal';
+import { connect } from 'react-redux';
 
 class BaseFormModal extends React.Component {
   state = this.props.initialState
@@ -24,7 +26,9 @@ class BaseFormModal extends React.Component {
   }
 
   onFormSubmit = async () => {
-    const { onAction, initialState, validate } = this.props;
+    const {
+      onAction, initialState, validate, hideModal,
+    } = this.props;
     const { inputValue } = this.state;
 
     // prevent empty submission
@@ -43,7 +47,10 @@ class BaseFormModal extends React.Component {
       this.setState((typeof res.message === 'object')
         ? { inputError: res.message }
         : { inputError: {}, requestError: res.message })
-    } else this.setState(initialState)
+    } else {
+      this.setState(initialState);
+      hideModal();
+    }
   }
 
   onKeyDown = (e) => {
@@ -86,8 +93,9 @@ BaseFormModal.propTypes = {
     requestError: PropTypes.string,
   }),
   onAction: PropTypes.func.isRequired,
+  hideModal: PropTypes.func.isRequired,
   title: PropTypes.string,
   validate: PropTypes.func,
 }
 
-export default BaseFormModal;
+export default connect(null, { hideModal })(BaseFormModal);
