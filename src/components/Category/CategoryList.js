@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import ScrollMenu from 'react-horizontal-scrolling-menu';
 import PropTypes from 'prop-types';
 
@@ -13,20 +13,22 @@ const ArrowRight = <div style={{ padding: '10px' }}>{'>'}</div>;
  * */
 
 class CategoryList extends React.Component {
-  state = { selected: NaN }
-
   onSelect = (key) => {
-    this.setState({ selected: Number(key) })
+    const { history } = this.props
+    history.push(`/categories/${key}`);
   }
 
   render() {
-    const { categories, defaultSelected } = this.props;
-    const selected = this.state.selected || defaultSelected;
+    const { categories, match } = this.props;
+    const selected = Number(match.params.categoryId);
 
     const menu = categories.map(({ id, name }) => (
-      <Link className={`menu-link ${id === selected && 'active-link'}`} to={`/categories/${id}`} key={id}>
+      <div
+        className={`menu-link ${id === selected ? 'active-link' : ''}`}
+        key={id}
+      >
         <span>{name.toUpperCase()}</span>
-      </Link>
+      </div>
     ));
 
     return (
@@ -47,7 +49,14 @@ CategoryList.propTypes = {
     name: PropTypes.string,
     id: PropTypes.number,
   })).isRequired,
-  defaultSelected: PropTypes.number,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      categoryId: PropTypes.string,
+    }),
+  }).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 }
 
-export default CategoryList;
+export default withRouter(CategoryList);

@@ -129,7 +129,7 @@ export class CategoryContainer extends React.Component {
       category,
     } = this.props;
     return category ? (
-      <div className="w-75 mx-auto">
+      <div>
         <CategoryDetails category={category} />
         {this.renderItem()}
       </div>

@@ -36,13 +36,21 @@ export class App extends React.Component {
       return (
         <div>
           <Header isSignedIn={!!userId} />
-          <CategoryList
-            categories={categories}
-            defaultSelected={categories[0].id}
-          />
           <Switch>
             <Route exact path="/categories/items/:categoryId/:itemId" component={ItemSingle} />
-            <Route exact path="/categories/:categoryId" component={CategoryContainer} />
+            <Route
+              exact
+              path="/categories/:categoryId"
+              render={() => (
+                <div className="w-75 mx-auto">
+                  <CategoryList
+                    categories={categories}
+                    defaultSelected={categories[0].id}
+                  />
+                  <CategoryContainer />
+                </div>
+              )}
+            />
             <Redirect to={`/categories/${categories[0].id}`} />
           </Switch>
         </div>
