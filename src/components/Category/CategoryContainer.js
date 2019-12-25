@@ -1,15 +1,15 @@
 /* eslint-disable no-shadow */
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Alert } from 'react-bootstrap';
+import { Alert, ListGroup } from 'react-bootstrap';
 import queryString from 'query-string';
 
 import PropTypes from 'prop-types';
 import CategoryDetails from 'components/Category/CategoryDetails';
-import ItemList from 'components/Item/ItemList';
 import ItemPagination from 'components/Item/ItemPagination';
 import LoadingPage from 'components/LoadingPage';
+import ModifyButton from 'components/Item/ModifyButton';
 
 import { fetchItems } from 'actions/item';
 import { getItems } from 'reducers';
@@ -36,7 +36,7 @@ export class CategoryContainer extends React.Component {
 
   componentDidUpdate(prevState) {
     const {
-      categoryId, page, fetchItems, totalPages, history, isLoadingItem, itemList,
+      categoryId, page, fetchItems, totalPages, history, isLoadingItem,
     } = this.props;
 
     if (categoryId !== prevState.categoryId
@@ -52,6 +52,35 @@ export class CategoryContainer extends React.Component {
     }
   }
 
+  // render list of items
+  renderItemList = () => {
+    const {
+      itemList, userCurrent, categoryId,
+    } = this.props;
+    return itemList.map(({
+      id, name, description, price, userId,
+    }) => (
+        <ListGroup.Item
+          className="d-flex justify-content-between align-items-center"
+          key={id}
+        >
+          <Link to={`/categories/items/${categoryId}/${id}`} key={id}>
+            {name}
+          </Link>
+          {userId === userCurrent && (
+            <ModifyButton
+              categoryId={categoryId}
+              itemId={id}
+              currentValue={{ name, description, price }}
+              onDeleteSuccess={this.onDeleteSuccess}
+            />
+          )}
+        </ListGroup.Item>
+
+      ));
+  }
+
+  // handle actions after successfully delete item
   onDeleteSuccess = () => {
     const {
       isLoadingItem, fetchItems, categoryId, page,
@@ -62,19 +91,14 @@ export class CategoryContainer extends React.Component {
   }
 
   // conditionally render based on loading items state
-  renderList = () => {
+  renderItem = () => {
     const {
-      itemList, categoryId, isLoadingItem, totalPages, page,
+      itemList, isLoadingItem, totalPages, page,
     } = this.props;
     if (itemList.length && !isLoadingItem) {
       return (
         <div>
-          <ItemList
-            items={itemList}
-            categoryId={categoryId}
-            page={page}
-            onDeleteSuccess={this.onDeleteSuccess}
-          />
+          {this.renderItemList()}
           <ItemPagination
             totalPages={totalPages}
             currentPage={page}
@@ -105,7 +129,7 @@ export class CategoryContainer extends React.Component {
     return category ? (
       <div className="w-75 mx-auto">
         <CategoryDetails category={category} />
-        {this.renderList()}
+        {this.renderItem()}
       </div>
     ) : (<Alert variant="danger">Can't find category</Alert>);
   }
@@ -126,6 +150,7 @@ export const mapStateToProps = (state, { match, location }) => {
     page,
     isLoadingItem: state.item.isLoading,
     totalPages,
+    userCurrent: state.user.userId,
   };
 };
 
