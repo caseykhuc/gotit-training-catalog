@@ -13,13 +13,13 @@ const ItemPagination = ({ currentPage, totalPages, onPageClick }) => (
       onClick={(e) => onPageClick(e, currentPage - 1)}
       disabled={currentPage <= 0}
     />
-    {[...Array(totalPages)].map((page, i) => (
+    {[...Array(totalPages).keys()].map((page) => (
       <Pagination.Item
-        onClick={(e) => onPageClick(e, i)}
-        active={i === currentPage}
-        key={i}
+        onClick={(e) => onPageClick(e, page)}
+        active={page === currentPage}
+        key={page}
       >
-        {i + 1}
+        {page + 1}
       </Pagination.Item>
     ))}
     <Pagination.Next
