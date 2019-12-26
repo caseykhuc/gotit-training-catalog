@@ -3,7 +3,7 @@ import * as fromLocal from './local';
 import * as fromProd from './prod';
 import * as fromStaging from './staging';
 
-const config = () => {
+export const config = () => {
   switch (process.env.REACT_APP_ENV) {
     case 'dev':
       return fromDev;

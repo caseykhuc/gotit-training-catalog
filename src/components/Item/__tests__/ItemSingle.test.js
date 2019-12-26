@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import ModifyButton from '../ModifyButton';
 import { ItemSingle, mapStateToProps } from '../ItemSingle';
 
 describe('component/Item/ItemSingle', () => {
@@ -26,6 +25,7 @@ describe('component/Item/ItemSingle', () => {
       item: {
         name: 'test',
         description: 'test',
+        price: 30,
         id: 1,
         userId: 0,
       },
@@ -58,7 +58,7 @@ describe('component/Item/ItemSingle', () => {
   it('should redirect to category page when fail fetching items', async () => {
     props.fetchItem = () => Promise.resolve({ success: false });
     setup();
-    await new Promise((resolve, reject) => {
+    await new Promise((resolve) => {
       setImmediate(resolve)
     });
     expect(props.history.push).toHaveBeenCalled();
