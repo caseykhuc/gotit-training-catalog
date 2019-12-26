@@ -14,43 +14,48 @@ import ModifyButton from 'components/common/ModifyButton';
 import { fetchItems } from 'actions/item';
 import { getItems } from 'reducers';
 import config from 'configuration';
+import NotFoundPage from 'components/common/NotFoundPage';
 
 export class CategoryContainer extends React.Component {
+  state = { notFound: false }
+
   componentDidMount() {
     const {
-      categoryId, category, fetchItems, history, page, totalPages, isLoadingItem,
+      categoryId, category, page, isLoadingItem,
     } = this.props;
 
     // direct app to home page when no category is equivalent to categoryId
     if (category) {
       if (!isLoadingItem) {
-        fetchItems(categoryId, page);
+        this.fetchItems(categoryId, page);
       }
     } else {
-      history.push('/')
-    }
-
-    // direct app to first category page when 'page' number is invalid
-    if (totalPages && page >= totalPages) {
-      history.push(`${categoryId}?page=${totalPages - 1}`);
+      this.setState({ notFound: true })
     }
   }
 
   componentDidUpdate(prevState) {
     const {
-      categoryId, page, fetchItems, totalPages, history, isLoadingItem,
+      categoryId, page, isLoadingItem,
     } = this.props;
 
     if (categoryId !== prevState.categoryId
       || page !== prevState.page) {
       if (!isLoadingItem) {
-        fetchItems(categoryId, page);
+        this.fetchItems(categoryId, page);
       }
     }
+  }
 
-    // direct app to first category page when 'page' number is invalid
-    if (totalPages && page >= totalPages) {
-      history.push(`${categoryId}?page=${totalPages - 1}`);
+  fetchItems = async (categoryId, page) => {
+    const { fetchItems } = this.props;
+    const res = await fetchItems(categoryId, page);
+
+    // render NotFoundPage when fetchItems fails
+    if (!res.success) {
+      this.setState({ notFound: true })
+    } else {
+      this.setState({ notFound: false })
     }
   }
 
@@ -96,6 +101,10 @@ export class CategoryContainer extends React.Component {
     const {
       itemList, isLoadingItem, totalPages, page,
     } = this.props;
+
+    if (isLoadingItem) {
+      return <LoadingPage />
+    }
     if (itemList.length && !isLoadingItem) {
       return (
         <div className="my-4">
@@ -108,13 +117,15 @@ export class CategoryContainer extends React.Component {
         </div>
       );
     }
-    if (isLoadingItem) {
-      return <LoadingPage />
-    }
-    return (
-      <Alert variant="info">
+
+    // itemList is empty on non-loading state
+    return (page > 0
+      ? <NotFoundPage />
+      : (
+        <Alert variant="info">
         Category currently has no items. Add one now!
-      </Alert>
+        </Alert>
+      )
     );
   }
 
@@ -124,9 +135,12 @@ export class CategoryContainer extends React.Component {
   }
 
   render() {
-    const {
-      category,
-    } = this.props;
+    const { category } = this.props;
+    const { notFound } = this.state;
+
+    if (notFound) {
+      return <NotFoundPage />
+    }
     return category ? (
       <div>
         <CategoryDetails category={category} />

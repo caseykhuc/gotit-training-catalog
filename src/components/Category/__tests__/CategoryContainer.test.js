@@ -1,16 +1,19 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import ModifyButton from 'components/common/ModifyButton';
+import NotFoundPage from 'components/common/NotFoundPage';
 import { CategoryContainer, mapStateToProps } from '../CategoryContainer';
 
 describe('component/Category/CategoryContainer', () => {
   let props;
   let wrapper;
   let modifyButton;
+  let notFoundPage;
 
   const update = () => {
     wrapper.update();
     modifyButton = wrapper.find(ModifyButton);
+    notFoundPage = wrapper.find(NotFoundPage);
   };
   const setup = () => {
     wrapper = shallow(<CategoryContainer {...props} />);
@@ -52,6 +55,11 @@ describe('component/Category/CategoryContainer', () => {
     setup();
     expect(wrapper).toMatchSnapshot();
   });
+  it('should render not found on invalid category', () => {
+    props.category = undefined;
+    setup();
+    expect(notFoundPage).toBeTruthy();
+  })
 
   it('should render ModifyButton correctly', () => {
     expect(modifyButton).toHaveLength(0);
@@ -65,16 +73,18 @@ describe('component/Category/CategoryContainer', () => {
     setup();
     expect(props.fetchItems).toHaveBeenCalledWith(props.categoryId, props.page);
   });
-  it('should direct to home when category is undefined', () => {
-    props.category = undefined;
+  it('should render NotFoundPage when fetchItems fails', () => {
+    props.fetchItems = jest.fn().mockRejectedValue();
     setup();
-    expect(props.fetchItems).not.toHaveBeenCalledWith(props.categoryId, props.page);
-    expect(props.history.push).toHaveBeenCalledWith('/');
-  });
-  it('should push to last page when page in query is too big', () => {
-    props.page = 10;
+    expect(notFoundPage.length).toBeTruthy();
+
+    props.fetchItems = jest.fn().mockResolvedValue({ success: false });
     setup();
-    expect(props.history.push).toHaveBeenCalledWith(`${props.categoryId}?page=${props.totalPages - 1}`)
+    expect(notFoundPage.length).toBeTruthy();
+
+    props.fetchItems = jest.fn().mockResolvedValue({ success: true });
+    setup();
+    expect(notFoundPage.length).toBeFalsy();
   });
   // componentDidUpdate
   it('should fetch items only when categoryId || page change', () => {
@@ -91,10 +101,13 @@ describe('component/Category/CategoryContainer', () => {
     wrapper.setProps({ categoryId: 2, isLoadingItem: true });
     expect(props.fetchItems).toBeCalledTimes(1);
   });
-  it('should direct to last page when page in query is too big', () => {
+  it('should render NotFoundPage when itemList is empty on page > 0', () => {
+    props.page = 10;
+    props.itemList = [];
     setup();
-    wrapper.setProps({ page: 100 });
-    expect(props.history.push).toHaveBeenCalledWith(`${props.categoryId}?page=${props.totalPages - 1}`)
+    props.category = undefined;
+    setup();
+    expect(notFoundPage).toBeTruthy();
   });
 
   // interactions
