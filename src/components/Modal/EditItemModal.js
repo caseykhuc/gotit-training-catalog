@@ -49,7 +49,6 @@ export const EditItemModal = ({
 
 EditItemModal.propTypes = {
   editItem: PropTypes.func.isRequired,
-  hideModal: PropTypes.func.isRequired,
   currentValue: PropTypes.shape({
     name: PropTypes.string,
     description: PropTypes.string,

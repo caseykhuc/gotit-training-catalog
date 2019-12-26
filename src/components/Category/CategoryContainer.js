@@ -62,23 +62,23 @@ export class CategoryContainer extends React.Component {
     return itemList.map(({
       id, name, description, price, userId,
     }) => (
-        <ListGroup.Item
-          className="d-flex justify-content-between align-items-center"
-          key={id}
-        >
-          <Link to={`/categories/items/${categoryId}/${id}`} key={id}>
-            {name}
-          </Link>
-          {userId === userCurrent && (
-            <ModifyButton
-              categoryId={categoryId}
-              itemId={id}
-              currentValue={{ name, description, price }}
-              onDeleteSuccess={this.onDeleteSuccess}
-            />
-          )}
-        </ListGroup.Item>
-      ));
+      <ListGroup.Item
+        className="d-flex justify-content-between align-items-center"
+        key={id}
+      >
+        <Link to={`/categories/items/${categoryId}/${id}`} key={id}>
+          {name}
+        </Link>
+        {userId === userCurrent && (
+        <ModifyButton
+          categoryId={categoryId}
+          itemId={id}
+          currentValue={{ name, description, price }}
+          onDeleteSuccess={this.onDeleteSuccess}
+        />
+        )}
+      </ListGroup.Item>
+    ));
   }
 
   // handle actions after successfully delete item

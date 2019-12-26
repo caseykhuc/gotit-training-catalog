@@ -7,21 +7,21 @@ import { hideModal } from 'actions/modal';
 export const BaseModal = ({
   title, hideModal, onAccept, children,
 }) => (
-    <Modal show onHide={hideModal} centered>
-      <Modal.Header closeButton>
-        <Modal.Title>{title}</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>{children}</Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={hideModal}>
+  <Modal show onHide={hideModal} centered>
+    <Modal.Header closeButton>
+      <Modal.Title>{title}</Modal.Title>
+    </Modal.Header>
+    <Modal.Body>{children}</Modal.Body>
+    <Modal.Footer>
+      <Button variant="secondary" onClick={hideModal}>
           Close
       </Button>
-        <Button variant="primary" onClick={onAccept}>
+      <Button variant="primary" onClick={onAccept}>
           Accept
       </Button>
-      </Modal.Footer>
-    </Modal>
-  )
+    </Modal.Footer>
+  </Modal>
+)
 
 BaseModal.propTypes = {
   title: PropTypes.string.isRequired,

@@ -21,8 +21,8 @@ export class BaseFormModal extends React.Component {
       inputValue: newValue,
       inputError: validate(newValue),
     } : {
-        inputValue: newValue,
-      });
+      inputValue: newValue,
+    });
   }
 
   onFormSubmit = async () => {
