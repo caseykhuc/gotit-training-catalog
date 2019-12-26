@@ -1,5 +1,5 @@
 import { userTypes } from 'constants/actionTypes';
-import * as api from 'api';
+import * as api from 'utils/api';
 
 export const fetchUser = () => ({
   type: userTypes.FETCH_USER,

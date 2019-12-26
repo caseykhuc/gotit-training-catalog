@@ -1,13 +1,10 @@
 import { itemTypes } from 'constants/actionTypes';
-import * as api from 'api';
+import * as api from 'utils/api';
 
-/* export const fetchItem = () => ({
-  type: actionTypes.FETCH_ITEM,
-  promise: request('/item', { method: 'GET' }),
-}); */
 export const fetchItems = (categoryId, page = 0) => ({
   type: itemTypes.FETCH_ITEMS,
-  promise: api.fetchItems(categoryId, page),
+  promise: api.fetchItems(categoryId, page)
+    .then((res) => ({ ...res, page })),
 })
 
 export const fetchItem = (categoryId, itemId) => ({
