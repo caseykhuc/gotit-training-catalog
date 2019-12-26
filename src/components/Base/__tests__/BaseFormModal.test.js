@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import BaseModal from 'components/Base/BaseModal';
+import { BaseFormModal } from 'components/Base/BaseFormModal';
 import BaseForm from '../BaseForm'
-import BaseModal from '../BaseModal';
-import { BaseFormModal } from '../BaseFormModal';
 
 describe('components/BaseFormModal', () => {
   let props;
@@ -56,12 +56,6 @@ describe('components/BaseFormModal', () => {
   })
 
   // onKeyDown
-  it('should invoke onAction when user press Enter', () => {
-    setup();
-    baseForm.props().onKeyDown({ key: 'Enter' });
-    expect(props.onAction).toHaveBeenCalled();
-  });
-
   it('should invoke onAction when user press Enter', () => {
     setup();
     baseForm.props().onKeyDown({ key: 'Enter' });

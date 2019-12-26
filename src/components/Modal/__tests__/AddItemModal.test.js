@@ -1,7 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { AddItemModal, validate } from '../AddItemModal';
-import BaseModal from '../../Base/BaseModal';
 
 describe('components/Modal/AddItemModal', () => {
   let props;

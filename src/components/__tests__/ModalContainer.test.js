@@ -1,12 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import modalKeys from 'constants/modelKeys';
 import { ModalContainer } from '../ModalContainer';
-import modalKeys from '../../constants/modelKeys';
 
 describe('component/ModalContainer', () => {
   let props;
   let wrapper;
-  let authBtn;
 
   const update = () => {
     wrapper.update();
@@ -29,7 +28,7 @@ describe('component/ModalContainer', () => {
     Object.keys(modalKeys).map((key) => {
       props.modal.current = modalKeys[key];
       setup();
-      expect(wrapper).toMatchSnapshot();
+      return expect(wrapper).toMatchSnapshot();
     });
   });
 })

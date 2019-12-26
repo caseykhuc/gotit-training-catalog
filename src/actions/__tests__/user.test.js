@@ -1,5 +1,5 @@
+import { userTypes } from 'constants/actionTypes';
 import * as userActions from '../user';
-import { userTypes } from '../../constants/actionTypes';
 
 describe('actions/user', () => {
   const store = global.mockStore;
@@ -27,7 +27,7 @@ describe('actions/user', () => {
   });
 
   // register user
-  it('should create success action', async () => {
+  it('should create register success action', async () => {
     fetch.mockResponse(JSON.stringify(response));
     creator = userActions.registerUser(body);
     await setup();
@@ -35,7 +35,7 @@ describe('actions/user', () => {
     expect(actions[1]).toEqual({ type: userTypes.REGISTER_USER_SUCCESS, payload: 'test' });
   });
 
-  it('should create failure action when caught error', async () => {
+  it('should create register failure action when caught error', async () => {
     fetch.mockReject(JSON.stringify(response));
     creator = userActions.registerUser(body);
     await setup();
@@ -43,8 +43,8 @@ describe('actions/user', () => {
     expect(actions[1]).toEqual({ type: userTypes.REGISTER_USER_FAILURE });
   });
 
-  // signin user
-  it('should create success action', async () => {
+  // sign in user
+  it('should create sign in success action', async () => {
     fetch.mockResponse(JSON.stringify(response));
     creator = userActions.signinUser();
     await setup();
@@ -52,7 +52,7 @@ describe('actions/user', () => {
     expect(actions[1]).toEqual({ type: userTypes.SIGNIN_USER_SUCCESS, payload: 'test' });
   });
 
-  it('should create failure action when caught error', async () => {
+  it('should create sign in failure action when caught error', async () => {
     fetch.mockReject(JSON.stringify(response));
     creator = userActions.signinUser();
     await setup();

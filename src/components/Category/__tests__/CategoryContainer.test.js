@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import ModifyButton from 'components/Item/ModifyButton';
 import { CategoryContainer, mapStateToProps } from '../CategoryContainer';
-import ModifyButton from '../../Item/ModifyButton';
 
 describe('component/Category/CategoryContainer', () => {
   let props;

@@ -1,5 +1,5 @@
+import { itemTypes } from 'constants/actionTypes';
 import * as itemActions from '../item';
-import { itemTypes } from '../../constants/actionTypes';
 
 describe('actions/item', () => {
   const store = global.mockStore;

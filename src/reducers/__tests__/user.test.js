@@ -1,5 +1,5 @@
-import reducer, * as selector from '../user';
-import { userTypes } from '../../constants/actionTypes';
+import { userTypes } from 'constants/actionTypes';
+import reducer from '../user';
 
 describe('reducers/user', () => {
   let state;

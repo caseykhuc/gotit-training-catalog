@@ -1,5 +1,5 @@
+import { categoryTypes } from 'constants/actionTypes';
 import reducer, * as selector from '../category';
-import { categoryTypes } from '../../constants/actionTypes';
 
 describe('reducers/category', () => {
   let state;

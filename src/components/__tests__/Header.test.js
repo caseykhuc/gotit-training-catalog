@@ -1,9 +1,7 @@
-
 import React from 'react';
 import { shallow } from 'enzyme';
-import { showModal } from 'actions/modal';
+import modalKeys from 'constants/modelKeys';
 import { Header } from '../Header';
-import modalKeys from '../../constants/modelKeys';
 
 describe('component/Header', () => {
   let props;

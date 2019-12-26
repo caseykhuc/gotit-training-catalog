@@ -1,4 +1,4 @@
-import { modalTypes } from '../constants/actionTypes';
+import { modalTypes } from 'constants/actionTypes';
 
 const initialState = {
   current: null,

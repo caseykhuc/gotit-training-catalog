@@ -1,5 +1,5 @@
-import { itemTypes } from '../constants/actionTypes';
-import * as api from '../api';
+import { itemTypes } from 'constants/actionTypes';
+import * as api from 'api';
 
 /* export const fetchItem = () => ({
   type: actionTypes.FETCH_ITEM,

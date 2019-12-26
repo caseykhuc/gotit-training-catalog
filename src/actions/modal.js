@@ -1,4 +1,4 @@
-import { modalTypes } from '../constants/actionTypes';
+import { modalTypes } from 'constants/actionTypes';
 
 export const showModal = (modalKey, props = {}) => ({
   type: modalTypes.SHOW_MODAL,

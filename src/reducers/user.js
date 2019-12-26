@@ -1,4 +1,4 @@
-import { userTypes } from '../constants/actionTypes';
+import { userTypes } from 'constants/actionTypes';
 
 const initialState = {
   userId: null,

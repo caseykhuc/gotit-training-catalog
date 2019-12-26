@@ -6,12 +6,10 @@ describe('component/Iutem/ModifyButton', () => {
   let props;
   let wrapper;
   let deleteBtn;
-  let editBtn;
 
   const update = () => {
     wrapper.update();
     deleteBtn = wrapper.find('[variant="danger"]');
-    editBtn = wrapper.findWhere((x) => x.text() === 'Edit')
   };
   const setup = () => {
     wrapper = shallow(<ModifyButton {...props} />);

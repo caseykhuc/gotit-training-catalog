@@ -1,8 +1,8 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { createLogger } from 'redux-logger';
-import handleFetch from './middlewares/handleFetch';
-import handleJwt from './middlewares/handleJwt';
-import rootReducer from './reducers';
+import handleFetch from 'middlewares/handleFetch';
+import handleJwt from 'middlewares/handleJwt';
+import rootReducer from 'reducers';
 
 const configureStore = () => {
   const middlewares = [handleFetch, handleJwt];
@@ -13,7 +13,11 @@ const configureStore = () => {
   }
 
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-  return createStore(rootReducer, /* preloadedState, */ composeEnhancers(applyMiddleware(...middlewares)));
+  return createStore(
+    rootReducer,
+    /* preloadedState, */
+    composeEnhancers(applyMiddleware(...middlewares)),
+  );
 };
 
 export default configureStore;

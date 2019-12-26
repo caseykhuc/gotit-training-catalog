@@ -1,5 +1,5 @@
+import { modalTypes } from 'constants/actionTypes';
 import * as modalActions from '../modal';
-import { modalTypes } from '../../constants/actionTypes';
 
 describe('actions/modal', () => {
   const store = global.mockStore;

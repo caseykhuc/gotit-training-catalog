@@ -1,5 +1,5 @@
+import { modalTypes } from 'constants/actionTypes';
 import reducer from '../modal';
-import { modalTypes } from '../../constants/actionTypes';
 
 describe('reducers/modal', () => {
   let state;

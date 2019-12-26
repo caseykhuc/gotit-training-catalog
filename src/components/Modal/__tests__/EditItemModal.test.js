@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { editItem } from 'actions/item';
 import { EditItemModal, validate, mapDispatchToProps } from '../EditItemModal';
-import { editItem } from '../../../actions/item';
 
 describe('components/Modal/EditItemModal', () => {
   let props;
