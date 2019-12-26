@@ -14,7 +14,8 @@ import CategoryContainer from 'components/Category/CategoryContainer';
 import CategoryList from 'components/Category/CategoryList';
 import ModalContainer from 'components/ModalContainer';
 import ItemSingle from 'components/Item/ItemSingle';
-import LoadingPage from 'components/LoadingPage';
+import LoadingPage from 'components/common/LoadingPage';
+import NotFoundPage from 'components/common/NotFoundPage';
 
 export class App extends React.Component {
   componentDidMount() {
@@ -51,7 +52,12 @@ export class App extends React.Component {
                 </div>
               )}
             />
-            <Redirect to={`/categories/${categories[0].id}`} />
+            <Route
+              exact
+              path="/"
+              render={() => <Redirect to={`/categories/${categories[0].id}`} />}
+            />
+            <Route component={NotFoundPage} />
           </Switch>
         </div>
       )

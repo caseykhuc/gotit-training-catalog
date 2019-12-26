@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { ItemSingle, mapStateToProps } from 'components/Item/ItemSingle';
+import { ItemSingle, mapStateToProps } from '../ItemSingle';
 
 describe('component/Item/ItemSingle', () => {
   let props;

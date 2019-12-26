@@ -6,8 +6,8 @@ import PropTypes from 'prop-types';
 import { getItem } from 'reducers';
 import { fetchItem } from 'actions/item';
 import { formatDateString } from 'utils';
-import LoadingPage from 'components/LoadingPage';
-import ModifyButton from 'components/Item/ModifyButton';
+import LoadingPage from 'components/common/LoadingPage';
+import ModifyButton from 'components/common/ModifyButton';
 
 export class ItemSingle extends Component {
   componentDidMount() {

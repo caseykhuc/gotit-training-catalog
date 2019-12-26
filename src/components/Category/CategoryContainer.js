@@ -8,8 +8,8 @@ import queryString from 'query-string';
 import PropTypes from 'prop-types';
 import CategoryDetails from 'components/Category/CategoryDetails';
 import ItemPagination from 'components/Item/ItemPagination';
-import LoadingPage from 'components/LoadingPage';
-import ModifyButton from 'components/Item/ModifyButton';
+import LoadingPage from 'components/common/LoadingPage';
+import ModifyButton from 'components/common/ModifyButton';
 
 import { fetchItems } from 'actions/item';
 import { getItems } from 'reducers';
