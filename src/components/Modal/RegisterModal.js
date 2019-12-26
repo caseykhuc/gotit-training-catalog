@@ -1,11 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import validator from 'validator';
 
 import { registerUser } from 'actions/user';
 import BaseFormModal from 'components/Base/BaseFormModal';
-
-import validator from 'validator';
 import * as errorMessage from 'utils/inputError';
 
 export const validate = ({

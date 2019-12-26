@@ -2,7 +2,7 @@ import { userTypes } from '../constants/actionTypes';
 import * as api from '../api';
 
 export const fetchUser = () => ({
-  type: 'FETCH_USER',
+  type: userTypes.FETCH_USER,
   promise: api.fetchUser(),
 });
 

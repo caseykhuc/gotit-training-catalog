@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import ScrollMenu from 'react-horizontal-scrolling-menu';
 import PropTypes from 'prop-types';
 
