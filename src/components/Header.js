@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { Button, ButtonGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -27,7 +27,9 @@ export const Header = ({
         justifyContent: 'space-between',
       }}
     >
-      <h1>Catalog Header</h1>
+      <Link to="/" style={{ color: 'black', textDecoration: 'none' }}>
+        <h1>Catalog Header</h1>
+      </Link>
       {isSignedIn
         ? (
           <ButtonGroup>
