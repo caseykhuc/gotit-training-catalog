@@ -37,10 +37,8 @@ export const fetchItem = (categoryId, itemId) => request.GET(
 )
 
 export const registerUser = (body) => request.POST('registrations', body)
-  .then((res) => res.accessToken)
 
 export const signinUser = (body) => request.POST('login', body)
-  .then((res) => res.accessToken)
 
 // authorized requests
 export const fetchUser = () => request.GET('me')
