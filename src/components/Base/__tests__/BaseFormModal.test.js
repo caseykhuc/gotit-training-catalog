@@ -41,12 +41,27 @@ describe('components/BaseFormModal', () => {
     setup();
     expect(wrapper).toMatchSnapshot();
   });
+
+  // onInputChange
   it('should controll inputs in BaseForm', () => {
     setup();
     baseForm.props().onInputChange({ target: { name: 'username', value: 'changed' } });
     expect(wrapper.state().inputValue.username).toEqual('changed');
   });
+  it('should set input errors as validation if available', () => {
+    props.validate = jest.fn().mockReturnValue({ username: 'Sample Validation' });
+    setup();
+    baseForm.props().onInputChange({ target: { name: 'username', value: 'changed' } });
+    expect(wrapper.state().inputError).toEqual({ username: 'Sample Validation' });
+  })
+
   // onKeyDown
+  it('should invoke onAction when user press Enter', () => {
+    setup();
+    baseForm.props().onKeyDown({ key: 'Enter' });
+    expect(props.onAction).toHaveBeenCalled();
+  });
+
   it('should invoke onAction when user press Enter', () => {
     setup();
     baseForm.props().onKeyDown({ key: 'Enter' });

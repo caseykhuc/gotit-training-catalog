@@ -19,30 +19,45 @@ describe('components/BaseForm', () => {
     update();
   };
   beforeEach(() => {
+    const options = [
+      { name: 'Opt 1', id: 1 },
+      { name: 'Opt 2', id: 2 }];
+
     props = {
+      onInputChange: jest.fn(),
+      onKeyDown: jest.fn(),
+      fields: [
+        { name: 'name', type: 'text' },
+        { name: 'description', type: 'textarea' },
+        { name: 'sameple', type: 'textarea' },
+        { name: 'categoryId', type: 'select', options }],
+      inputError: {},
       inputValue: {
-        username: '',
-        password: '',
-      },
-      inputError: {
+        name: '',
+        description: '',
       },
       requestError: '',
-      fields: [{ name: 'username', type: 'text' }, {
-        name: 'password', type: 'password',
-      }],
-      onAction: jest.fn(),
-      onKeyDown: jest.fn(),
-      onInputChange: jest.fn(),
     }
   });
+
   it('should render correctly', () => {
     setup();
     expect(wrapper).toMatchSnapshot();
   });
-  it('should invoke onAction when user press any key', () => {
+
+  it('should invoke onKeyDown when user press any key', () => {
     setup();
     container.props().onKeyDown({ key: 'b' });
     expect(props.onKeyDown).toHaveBeenCalled();
+  });
+  it('should render select input type', () => {
+    setup();
+    expect(wrapper.find('[as="select"]')).toHaveLength(1);
+    expect(wrapper.find('option')).toHaveLength(props.fields.pop().options.length);
+  });
+  it('should render textarea input type', () => {
+    setup();
+    expect(wrapper.find('[as="textarea"]')).toHaveLength(2);
   });
   it('should render Alert when requestError exist', () => {
     props.requestError = 'Error';
