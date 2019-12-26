@@ -1,13 +1,16 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import NotFoundPage from 'components/common/NotFoundPage';
 import { ItemSingle, mapStateToProps } from '../ItemSingle';
 
 describe('component/Item/ItemSingle', () => {
   let props;
   let wrapper;
+  let notFoundPage;
 
   const update = () => {
     wrapper.update();
+    notFoundPage = wrapper.find(NotFoundPage);
   };
   const setup = () => {
     wrapper = shallow(<ItemSingle {...props} />);
@@ -57,7 +60,7 @@ describe('component/Item/ItemSingle', () => {
     expect(props.fetchItem).toHaveBeenCalled();
   });
   // componentDidUpdate
-  it('should', () => {
+  it('should fetchItem when categoryId or itemId changes', () => {
     setup();
     expect(props.fetchItem).toHaveBeenCalledTimes(1);
     wrapper.setProps({ itemId: 10 });
@@ -70,13 +73,13 @@ describe('component/Item/ItemSingle', () => {
     expect(props.fetchItem).toHaveBeenCalledTimes(3);
   });
   // this.fetchItem
-  it('should redirect to category page when fail fetching items', async () => {
+  it('should display 404 page when fail fetching items', async () => {
     props.fetchItem = () => Promise.resolve({ success: false });
     setup();
     await new Promise((resolve) => {
       setImmediate(resolve)
     });
-    expect(props.history.push).toHaveBeenCalled();
+    expect(notFoundPage).toBeTruthy();
   })
 })
 

@@ -8,8 +8,11 @@ import { fetchItem } from 'actions/item';
 import { formatDateString } from 'utils';
 import LoadingPage from 'components/common/LoadingPage';
 import ModifyButton from 'components/common/ModifyButton';
+import NotFoundPage from 'components/common/NotFoundPage';
 
 export class ItemSingle extends Component {
+  state = { notFound: false }
+
   componentDidMount() {
     const {
       categoryId, itemId,
@@ -34,9 +37,11 @@ export class ItemSingle extends Component {
   fetchItem = async (categoryId, itemId) => {
     const { fetchItem } = this.props;
     const res = await fetchItem(categoryId, itemId);
-    const { history } = this.props;
+
     if (!res.success) {
-      history.push(`/categories/${categoryId}`)
+      this.setState({ notFound: true })
+    } else {
+      this.setState({ notFound: false })
     }
   }
 
@@ -44,6 +49,11 @@ export class ItemSingle extends Component {
     const {
       item, userCurrent, categoryId, itemId, isLoadingItem,
     } = this.props;
+    const { notFound } = this.state;
+
+    if (isLoadingItem) return <LoadingPage />;
+
+    if (notFound) return <NotFoundPage />;
 
     if (item) {
       const {
@@ -82,7 +92,6 @@ export class ItemSingle extends Component {
         </Card>
       )
     }
-    if (isLoadingItem) return <LoadingPage />;
     return '';
   }
 }
