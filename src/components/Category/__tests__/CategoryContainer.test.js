@@ -1,14 +1,16 @@
-
 import React from 'react';
 import { shallow } from 'enzyme';
 import { CategoryContainer, mapStateToProps } from '../CategoryContainer';
+import ModifyButton from '../../Item/ModifyButton';
 
 describe('component/Category/CategoryContainer', () => {
   let props;
   let wrapper;
+  let modifyButton;
 
   const update = () => {
     wrapper.update();
+    modifyButton = wrapper.find(ModifyButton);
   };
   const setup = () => {
     wrapper = shallow(<CategoryContainer {...props} />);
@@ -42,10 +44,6 @@ describe('component/Category/CategoryContainer', () => {
     setup();
     expect(wrapper).toMatchSnapshot();
 
-    props.userCurrent = 3;
-    setup();
-    expect(wrapper).toMatchSnapshot();
-
     props.itemList = [];
     setup();
     expect(wrapper).toMatchSnapshot();
@@ -54,6 +52,13 @@ describe('component/Category/CategoryContainer', () => {
     setup();
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('should render ModifyButton correctly', () => {
+    expect(modifyButton).toHaveLength(0);
+    props.userCurrent = 3;
+    setup();
+    expect(modifyButton).toHaveLength(1);
+  })
 
   // componentDidMount
   it('should render fetchItems when category props is defined', () => {
@@ -80,6 +85,12 @@ describe('component/Category/CategoryContainer', () => {
     wrapper.setProps({ categoryId: 2 });
     expect(props.fetchItems).toBeCalledTimes(2);
   });
+  it('should not fetch items when isLoadingItem is true', () => {
+    setup();
+    expect(props.fetchItems).toBeCalledTimes(1);
+    wrapper.setProps({ categoryId: 2, isLoadingItem: true });
+    expect(props.fetchItems).toBeCalledTimes(1);
+  });
   it('should direct to last page when page in query is too big', () => {
     setup();
     wrapper.setProps({ page: 100 });
@@ -88,6 +99,13 @@ describe('component/Category/CategoryContainer', () => {
 
   // interactions
   it('should refetchItem on delete successfully an item', () => {
+    props.isLoadingItem = false;
+    setup();
+    wrapper.instance().onDeleteSuccess();
+    expect(props.fetchItems).toHaveBeenCalledTimes(2);
+
+    // do not refetch if isLoadingItem is true
+    props.isLoadingItem = true;
     setup();
     wrapper.instance().onDeleteSuccess();
     expect(props.fetchItems).toHaveBeenCalledTimes(2);
@@ -100,8 +118,11 @@ describe('component/Category/CategoryContainer', () => {
 });
 
 describe('component/Category/CategoryContainer (mapStateToProps)', () => {
-  let state; let match; let
-    location;
+  let state; let match; let location;
+  let props;
+  const setup = () => {
+    props = mapStateToProps(state, { match, location });
+  }
   beforeEach(() => {
     state = { category: { byId: { 1: 'Category' } }, item: {}, user: { userId: 1 } };
     match = { params: { categoryId: '1' } };
@@ -109,7 +130,13 @@ describe('component/Category/CategoryContainer (mapStateToProps)', () => {
   });
 
   it('should return the right categoryId and page from path', () => {
-    expect(mapStateToProps(state, { match, location }).categoryId).toBe(1);
-    expect(mapStateToProps(state, { match, location }).page).toBe(2);
+    setup();
+    expect(props.categoryId).toBe(1);
+    expect(props.page).toBe(2);
+  });
+  it('should set default page to 0', () => {
+    location = {};
+    setup();
+    expect(props.page).toBe(0);
   })
 });

@@ -7,5 +7,3 @@ exports[`component/Category/CategoryContainer should render correctly 2`] = `Sha
 exports[`component/Category/CategoryContainer should render correctly 3`] = `ShallowWrapper {}`;
 
 exports[`component/Category/CategoryContainer should render correctly 4`] = `ShallowWrapper {}`;
-
-exports[`component/Category/CategoryContainer should render correctly 5`] = `ShallowWrapper {}`;

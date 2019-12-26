@@ -12,7 +12,7 @@ const ArrowRight = <div style={{ padding: '10px' }}>{'>'}</div>;
  *
  * */
 
-class CategoryList extends React.Component {
+export class CategoryList extends React.Component {
   onSelect = (key) => {
     const { history } = this.props
     history.push(`/categories/${key}`);
@@ -46,8 +46,8 @@ class CategoryList extends React.Component {
 
 CategoryList.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string,
-    id: PropTypes.number,
+    name: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
   })).isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
