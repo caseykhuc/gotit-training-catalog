@@ -10,10 +10,10 @@ export const DeleteItemModal = ({
   categoryId, itemId, deleteItem, onSuccess, hideModal,
 }) => {
   const onAccept = async () => {
-    const res = await deleteItem(categoryId, itemId);
+    const { success } = await deleteItem(categoryId, itemId);
     // hide modal when request is successful
     // re-fetch is handled elsewhere
-    if (res.success) {
+    if (success) {
       hideModal();
       onSuccess();
     }

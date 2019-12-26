@@ -22,7 +22,7 @@ export class ItemSingle extends Component {
       categoryId, itemId,
     } = this.props;
 
-    /* refetch item in case new item added
+    /* re-fetch item in case new item added
       when ItemSingle still mounted
     */
     if (categoryId !== prevState.categoryId
