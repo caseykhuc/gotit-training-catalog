@@ -3,7 +3,8 @@ import * as api from 'utils/api';
 
 export const fetchUser = () => ({
   type: userTypes.FETCH_USER,
-  promise: api.fetchUser(),
+  promise: api.fetchUser()
+    .then((res) => res.id),
 });
 
 export const registerUser = ({
@@ -21,7 +22,6 @@ export const registerUser = ({
   return res;
 };
 
-
 export const signinUser = (body) => async (dispatch) => {
   const res = await dispatch({
     type: userTypes.SIGNIN_USER,
@@ -32,7 +32,6 @@ export const signinUser = (body) => async (dispatch) => {
   }
   return res;
 };
-
 
 export const signoutUser = () => ({
   // sync

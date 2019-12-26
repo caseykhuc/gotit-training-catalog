@@ -1,5 +1,7 @@
 import camelcaseKeys from 'camelcase-keys';
 import config from 'configuration';
+import requestMethod from 'constants/requestMethods';
+import _ from 'lodash';
 
 const { BASE_URL, ITEM_PER_PAGE } = config;
 
@@ -12,56 +14,45 @@ const handleJson = (res) => {
   throw res.json();
 }
 
-const request = (url = '', method = 'GET', body) => {
-  const req = ((method !== 'GET' && body) ? fetch(`${BASE_URL}/${url}`, {
-    method,
-    body: JSON.stringify(body),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  }) : fetch(`${BASE_URL}/${url}`))
-  return req.then(handleJson);
-}
+const requestFromMethod = (method) => (url = '', body) => fetch(`${BASE_URL}/${url}`, {
+  method,
+  body: (body ? JSON.stringify(body) : undefined),
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+    'Content-Type': 'application/json',
+  },
+}).then(handleJson)
 
-const authorizedRequest = (url = '', method = 'GET', body) => {
-  const req = (body)
-    ? fetch(`${BASE_URL}/${url}`, {
-      method,
-      body: JSON.stringify(body),
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-        'Content-Type': 'application/json',
-      },
-    })
-    : fetch(`${BASE_URL}/${url}`, {
-      method,
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-        'Content-Type': 'application/json',
-      },
-    })
-  return req.then(handleJson);
-}
+const request = _.mapValues(requestMethod, (value) => requestFromMethod(value));
 
 // regular requests
-export const fetchCategories = () => request('categories?offset=0&limit=100')
+export const fetchCategories = () => request.GET('categories?offset=0&limit=100')
 
-export const fetchItems = (categoryId, page) => request(`categories/${categoryId}/items?offset=${page * ITEM_PER_PAGE}&limit=${ITEM_PER_PAGE}`)
+export const fetchItems = (categoryId, page) => request.GET(
+  `categories/${categoryId}/items?offset=${page * ITEM_PER_PAGE}&limit=${ITEM_PER_PAGE}`,
+)
 
-export const fetchItem = (categoryId, itemId) => request(`categories/${categoryId}/items/${itemId}`)
+export const fetchItem = (categoryId, itemId) => request.GET(
+  `categories/${categoryId}/items/${itemId}`,
+)
 
-export const registerUser = (body) => request('registrations', 'POST', body)
-  .then((res) => res.accessToken);
+export const registerUser = (body) => request.POST('registrations', body)
+  .then((res) => res.accessToken)
 
-export const signinUser = (body) => request('login', 'POST', body)
-  .then((res) => res.accessToken);
+export const signinUser = (body) => request.POST('login', body)
+  .then((res) => res.accessToken)
 
 // authorized requests
-export const fetchUser = () => authorizedRequest('me')
-  .then((res) => res.id);
+export const fetchUser = () => request.GET('me')
 
-export const addItem = (categoryId, body) => authorizedRequest(`categories/${categoryId}/items`, 'POST', body)
+export const addItem = (categoryId, body) => request.POST(
+  `categories/${categoryId}/items`, body,
+)
 
-export const editItem = (categoryId, itemId, body) => authorizedRequest(`categories/${categoryId}/items/${itemId}`, 'PUT', body)
+export const editItem = (categoryId, itemId, body) => request.PUT(
+  `categories/${categoryId}/items/${itemId}`, body,
+)
 
-export const deleteItem = (categoryId, itemId) => authorizedRequest(`categories/${categoryId}/items/${itemId}`, 'DELETE')
+export const deleteItem = (categoryId, itemId) => request.DELETE(
+  `categories/${categoryId}/items/${itemId}`,
+)
