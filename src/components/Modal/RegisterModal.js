@@ -8,6 +8,24 @@ import BaseFormModal from 'components/Base/BaseFormModal';
 import validator from 'validator';
 import * as errorMessage from 'utils/inputError';
 
+export const validate = ({
+  username, email, password, confirm,
+}) => {
+  const inputError = {};
+  if (username && username.length < 5) inputError.username = errorMessage.username.tooShort;
+  if (email && !validator.isEmail(email)) inputError.email = errorMessage.email.invalid;
+  if (password && (password.length < 8
+    || !validator.isAlphanumeric(password)
+    || validator.isAlpha(password)
+    || validator.isNumeric(password))) {
+    inputError.password = errorMessage.password.tooSimple;
+  }
+  if (confirm && confirm !== password) {
+    inputError.confirm = errorMessage.password.notMatch;
+  }
+  return inputError;
+};
+
 export const RegisterModal = ({ registerUser }) => {
   const initialState = {
     inputValue: {
@@ -29,24 +47,6 @@ export const RegisterModal = ({ registerUser }) => {
     { name: 'password', type: 'password' },
     { name: 'confirm', type: 'password' },
   ];
-
-  const validate = ({
-    username, email, password, confirm,
-  }) => {
-    const inputError = {};
-    if (username && username.length < 5) inputError.username = errorMessage.username.tooShort;
-    if (email && !validator.isEmail(email)) inputError.email = errorMessage.email.invalid;
-    if (password && (password.length < 8
-      || !validator.isAlphanumeric(password)
-      || validator.isAlpha(password)
-      || validator.isNumeric(password))) {
-      inputError.password = errorMessage.password.tooSimple;
-    }
-    if (confirm && confirm !== password) {
-      inputError.confirm = errorMessage.password.notMatch;
-    }
-    return inputError;
-  };
 
   return (
     <BaseFormModal

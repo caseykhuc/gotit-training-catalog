@@ -8,7 +8,7 @@ import BaseFormModal from 'components/Base/BaseFormModal';
 import validator from 'validator';
 import * as errorMessage from 'utils/inputError';
 
-const validate = ({
+export const validate = ({
   name, price,
 }) => {
   const priceString = String(price);
@@ -60,7 +60,7 @@ const mapStateToProps = (state) => ({
   categories: selector.getCategories(state),
 })
 
-const mapDispatchToProps = (dispatch, { categoryId, itemId }) => ({
+export const mapDispatchToProps = (dispatch, { categoryId, itemId }) => ({
   editItem: (body) => dispatch(editItem(categoryId, itemId)(body)),
 })
 

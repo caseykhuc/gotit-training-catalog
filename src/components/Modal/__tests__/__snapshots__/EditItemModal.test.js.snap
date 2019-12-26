@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/Modal/EditItemModal should render correctly 1`] = `ShallowWrapper {}`;
+
+exports[`components/Modal/EditItemModal should render correctly 2`] = `ShallowWrapper {}`;

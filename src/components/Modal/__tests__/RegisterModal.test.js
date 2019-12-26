@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { RegisterModal } from '../RegisterModal';
+import { RegisterModal, validate } from '../RegisterModal';
 import BaseFormModal from '../../Base/BaseFormModal';
 
 describe('components/Modal/RegisterModal', () => {
@@ -31,3 +31,35 @@ describe('components/Modal/RegisterModal', () => {
     expect(props.registerUser).toHaveBeenCalled();
   });
 })
+
+describe('components/Modal/RegisterModal (validate)', () => {
+  let input;
+  beforeEach(() => {
+    input = {
+      username: 'Name',
+      email: 'abc',
+      password: '1234',
+      confirm: '123',
+    }
+  });
+  it('should render error for username shorter then 5 characters', () => {
+    expect(validate(input).username).toBeTruthy();
+    input.username = 'Longer username';
+    expect(validate(input).username).toBeFalsy();
+  });
+  it('should render error for invalid email', () => {
+    expect(validate(input).email).toBeTruthy();
+    input.email = 'a@gmail.com';
+    expect(validate(input).email).toBeFalsy();
+  });
+  it('should render error for invalid password', () => {
+    expect(validate(input).password).toBeTruthy();
+    input.password = '1234abcd';
+    expect(validate(input).password).toBeFalsy();
+  });
+  it('should render error for not matching confirm', () => {
+    expect(validate(input).confirm).toBeTruthy();
+    input.confirm = '1234';
+    expect(validate(input).confirm).toBeFalsy();
+  });
+});
