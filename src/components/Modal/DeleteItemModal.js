@@ -12,7 +12,7 @@ export const DeleteItemModal = ({
   const onAccept = async () => {
     const res = await deleteItem(categoryId, itemId);
     // hide modal when request is successful
-    // refetch is handled elsewhere
+    // re-fetch is handled elsewhere
     if (res.success) {
       hideModal();
       onSuccess();

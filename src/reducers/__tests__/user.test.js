@@ -30,7 +30,7 @@ describe('reducers/user', () => {
   });
   it('should handle FAILURE', () => {
     const action = {
-      type: userTypes.SIGNIN_USER_FAILURE,
+      type: userTypes.SIGN_IN_USER_FAILURE,
       payload: 'Not found',
     }
     expect(reducer(state, action)).toEqual({
@@ -41,7 +41,7 @@ describe('reducers/user', () => {
   });
   it('should handle SIGN OUT', () => {
     const action = {
-      type: userTypes.SIGNOUT_USER,
+      type: userTypes.SIGN_OUT_USER,
       payload: '12345',
     };
     expect(reducer(state, action)).toEqual({

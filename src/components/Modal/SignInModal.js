@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { signinUser } from 'actions/user';
+import { signInUser } from 'actions/user';
 import BaseFormModal from 'components/Base/BaseFormModal';
 
-export const SignInModal = ({ signinUser }) => {
+export const SignInModal = ({ signInUser }) => {
   const initialState = {
     inputValue: {
       username: '',
@@ -20,12 +20,12 @@ export const SignInModal = ({ signinUser }) => {
     { name: 'password', type: 'password' }];
 
   return (
-    <BaseFormModal title="SIGN IN" fields={fields} initialState={initialState} onAction={signinUser} />
+    <BaseFormModal title="SIGN IN" fields={fields} initialState={initialState} onAction={signInUser} />
   )
 }
 
 SignInModal.propTypes = {
-  signinUser: PropTypes.func.isRequired,
+  signInUser: PropTypes.func.isRequired,
 }
 
-export default connect(null, { signinUser })(SignInModal);
+export default connect(null, { signInUser })(SignInModal);

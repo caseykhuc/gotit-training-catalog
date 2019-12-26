@@ -4,11 +4,11 @@ import { Button, ButtonGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { showModal } from 'actions/modal';
-import { signoutUser } from 'actions/user';
+import { signOutUser } from 'actions/user';
 import modalKeys from 'constants/modelKeys';
 
 export const Header = ({
-  isSignedIn, showModal, signoutUser, history,
+  isSignedIn, showModal, signOutUser, history,
 }) => {
   // handle actions after successfully add item
   const onAddSuccess = (requestValue, responseValue) => {
@@ -44,7 +44,7 @@ export const Header = ({
             <Button
               className="auth-btn"
               variant="secondary"
-              onClick={signoutUser}
+              onClick={signOutUser}
             >
               Sign Out
             </Button>
@@ -59,7 +59,7 @@ export const Header = ({
               Register
             </Button>
             <Button
-              onClick={() => showModal(modalKeys.SIGNIN_MODAL)}
+              onClick={() => showModal(modalKeys.SIGN_IN_MODAL)}
               className="auth-btn"
             >
               Sign In
@@ -73,9 +73,9 @@ export const Header = ({
 Header.propTypes = {
   isSignedIn: PropTypes.bool,
   showModal: PropTypes.func.isRequired,
-  signoutUser: PropTypes.func.isRequired,
+  signOutUser: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
 }
 
 
-export default withRouter(connect(null, { showModal, signoutUser })(Header));
+export default withRouter(connect(null, { showModal, signOutUser })(Header));

@@ -98,13 +98,13 @@ describe('component/Category/CategoryContainer', () => {
   });
 
   // interactions
-  it('should refetchItem on delete successfully an item', () => {
+  it('should re-fetch item on delete successfully an item', () => {
     props.isLoadingItem = false;
     setup();
     wrapper.instance().onDeleteSuccess();
     expect(props.fetchItems).toHaveBeenCalledTimes(2);
 
-    // do not refetch if isLoadingItem is true
+    // do not re-fetch if isLoadingItem is true
     props.isLoadingItem = true;
     setup();
     wrapper.instance().onDeleteSuccess();

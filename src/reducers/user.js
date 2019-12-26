@@ -12,16 +12,16 @@ export default (state = initialState, action) => {
       return { ...state, isLoading: false, userId: action.payload };
 
     case userTypes.REGISTER_USER_REQUEST:
-    case userTypes.SIGNIN_USER_REQUEST:
+    case userTypes.SIGN_IN_USER_REQUEST:
     case userTypes.FETCH_USER_REQUEST:
       return { ...state, isLoading: true }
 
     case userTypes.FETCH_USER_FAILURE:
     case userTypes.REGISTER_USER_FAILURE:
-    case userTypes.SIGNIN_USER_FAILURE:
+    case userTypes.SIGN_IN_USER_FAILURE:
       return { ...state, isLoading: false, error: action.payload }
 
-    case userTypes.SIGNOUT_USER:
+    case userTypes.SIGN_OUT_USER:
       return { ...initialState };
 
     default:

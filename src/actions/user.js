@@ -22,10 +22,10 @@ export const registerUser = ({
   return res;
 };
 
-export const signinUser = (body) => async (dispatch) => {
+export const signInUser = (body) => async (dispatch) => {
   const res = await dispatch({
-    type: userTypes.SIGNIN_USER,
-    promise: api.signinUser(body)
+    type: userTypes.SIGN_IN_USER,
+    promise: api.signInUser(body)
       .then((res) => res.accessToken),
   });
   if (res.success) {
@@ -34,7 +34,7 @@ export const signinUser = (body) => async (dispatch) => {
   return res;
 };
 
-export const signoutUser = () => ({
+export const signOutUser = () => ({
   // sync
-  type: userTypes.SIGNOUT_USER,
+  type: userTypes.SIGN_OUT_USER,
 });

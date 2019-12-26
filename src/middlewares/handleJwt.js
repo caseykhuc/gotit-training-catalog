@@ -4,12 +4,12 @@ import { userTypes } from '../constants/actionTypes';
 
 const persistJwt = () => (next) => (action) => {
   switch (action.type) {
-    case userTypes.SIGNIN_USER_SUCCESS:
+    case userTypes.SIGN_IN_USER_SUCCESS:
     case userTypes.REGISTER_USER_SUCCESS:
       localStorage.setItem('access_token', action.payload);
       break
 
-    case userTypes.SIGNOUT_USER:
+    case userTypes.SIGN_OUT_USER:
       localStorage.removeItem('access_token');
       break
 

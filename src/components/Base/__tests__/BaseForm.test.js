@@ -29,7 +29,7 @@ describe('components/BaseForm', () => {
       fields: [
         { name: 'name', type: 'text' },
         { name: 'description', type: 'textarea' },
-        { name: 'sameple', type: 'textarea' },
+        { name: 'sample', type: 'textarea' },
         { name: 'categoryId', type: 'select', options }],
       inputError: {},
       inputValue: {

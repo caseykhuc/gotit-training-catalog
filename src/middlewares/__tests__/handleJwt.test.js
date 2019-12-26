@@ -13,14 +13,14 @@ describe('middlewares/handleJwt', () => {
     return { store, next, invoke }
   }
 
-  const { store, next, invoke } = create();
+  const { next, invoke } = create();
 
   beforeEach(() => {
     localStorage.clear();
   })
 
   it('should store token on localStorage in signin/register success', () => {
-    let action = { type: userTypes.SIGNIN_USER_SUCCESS, payload: 'sample access_token' };
+    let action = { type: userTypes.SIGN_IN_USER_SUCCESS, payload: 'sample access_token' };
     invoke(action);
 
     expect(localStorage.getItem('access_token')).toBe('sample access_token');
@@ -31,7 +31,7 @@ describe('middlewares/handleJwt', () => {
     expect(localStorage.getItem('access_token')).toBe('test access_token');
   });
   it('should clear token on localStorage in signout action', () => {
-    const action = { type: userTypes.SIGNOUT_USER, payload: 'sample access_token' };
+    const action = { type: userTypes.SIGN_OUT_USER, payload: 'sample access_token' };
     invoke(action);
 
     expect(localStorage.getItem('access_token')).toBeFalsy();

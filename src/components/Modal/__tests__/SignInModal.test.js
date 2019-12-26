@@ -18,7 +18,7 @@ describe('components/Modal/SignInModal', () => {
   };
   beforeEach(() => {
     props = {
-      signinUser: jest.fn(),
+      signInUser: jest.fn(),
     }
   });
   it('should render correctly', () => {
@@ -28,6 +28,6 @@ describe('components/Modal/SignInModal', () => {
   it('should invoke register when BaseFormModal invoked onAccept ', () => {
     setup();
     baseFormModal.props().onAction();
-    expect(props.signinUser).toHaveBeenCalled();
+    expect(props.signInUser).toHaveBeenCalled();
   });
 })

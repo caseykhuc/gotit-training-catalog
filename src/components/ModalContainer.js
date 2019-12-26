@@ -13,7 +13,7 @@ export const ModalContainer = ({ modal }) => {
     switch (current) {
       case modalKeys.REGISTER_MODAL:
         return <RegisterModal />;
-      case modalKeys.SIGNIN_MODAL:
+      case modalKeys.SIGN_IN_MODAL:
         return <SignInModal />;
       case modalKeys.DELETE_ITEM_MODAL:
         return <DeleteItemModal {...props} />;

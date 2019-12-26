@@ -43,7 +43,7 @@ describe('components/BaseFormModal', () => {
   });
 
   // onInputChange
-  it('should controll inputs in BaseForm', () => {
+  it('should control inputs in BaseForm', () => {
     setup();
     baseForm.props().onInputChange({ target: { name: 'username', value: 'changed' } });
     expect(wrapper.state().inputValue.username).toEqual('changed');
@@ -86,7 +86,7 @@ describe('components/BaseFormModal', () => {
     baseModal.props().onAccept();
     expect(props.onAction).not.toHaveBeenCalled();
   });
-  it('should set request error coresponding to failure message', async () => {
+  it('should set request error corresponding to failure message', async () => {
     props.onAction = () => Promise.resolve({ success: false, message: 'error test changed' });
     setup();
     await baseModal.props().onAccept();

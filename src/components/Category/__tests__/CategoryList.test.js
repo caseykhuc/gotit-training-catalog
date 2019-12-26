@@ -27,7 +27,7 @@ describe('component/Category/CategoryList', () => {
     setup();
     expect(wrapper).toMatchSnapshot();
   });
-  it('should direct to other category when seleteced', () => {
+  it('should direct to other category when selected', () => {
     setup();
     wrapper.instance().onSelect(2);
     expect(props.history.push).toHaveBeenCalledWith('/categories/2');

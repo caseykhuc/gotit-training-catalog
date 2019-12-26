@@ -38,7 +38,7 @@ export const fetchItem = (categoryId, itemId) => request.GET(
 
 export const registerUser = (body) => request.POST('registrations', body)
 
-export const signinUser = (body) => request.POST('login', body)
+export const signInUser = (body) => request.POST('login', body)
 
 // authorized requests
 export const fetchUser = () => request.GET('me')

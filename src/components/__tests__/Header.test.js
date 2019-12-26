@@ -24,7 +24,7 @@ describe('component/Header', () => {
     props = {
       isSignedIn: false,
       showModal: jest.fn(),
-      signoutUser: jest.fn(),
+      signOutUser: jest.fn(),
       history: {
         push: jest.fn(),
       },
@@ -42,7 +42,7 @@ describe('component/Header', () => {
     expect(props.showModal).toHaveBeenCalledWith(modalKeys.REGISTER_MODAL);
 
     authBtn.simulate('click');
-    expect(props.showModal).toHaveBeenCalledWith(modalKeys.SIGNIN_MODAL);
+    expect(props.showModal).toHaveBeenCalledWith(modalKeys.SIGN_IN_MODAL);
   });
   it('should render SignOut button correctly', () => {
     props.isSignedIn = true;
@@ -53,7 +53,7 @@ describe('component/Header', () => {
     expect(props.showModal).toHaveBeenCalled();
 
     authBtn.simulate('click');
-    expect(props.signoutUser).toHaveBeenCalled();
+    expect(props.signOutUser).toHaveBeenCalled();
   });
   it('should invoke onAddSuccess as on addBtn', () => {
     props.isSignedIn = true;

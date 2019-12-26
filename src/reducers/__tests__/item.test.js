@@ -48,12 +48,12 @@ describe('reducers/item', () => {
     setup();
     expect(newState.byId['1']).toEqual(action.payload);
   });
-  it('shoul handle ADD_ITEM_SUCCESS', () => {
+  it('should handle ADD_ITEM_SUCCESS', () => {
     action = { type: itemTypes.ADD_ITEM_SUCCESS }
     setup();
     expect(newState.totalItems).toBe(state.totalItems + 1);
   });
-  it('shoul handle DELETE_ITEM_SUCCESS', () => {
+  it('should handle DELETE_ITEM_SUCCESS', () => {
     action = { type: itemTypes.DELETE_ITEM_SUCCESS }
     setup();
     expect(newState.totalItems).toBe(state.totalItems - 1);
