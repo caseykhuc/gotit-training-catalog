@@ -1,5 +1,5 @@
 import { itemTypes } from 'constants/actionTypes';
-import { arrayToObject } from 'utils/utils';
+import { arrayToObject } from 'utils';
 import reducer, * as selector from '../item';
 
 describe('reducers/item', () => {

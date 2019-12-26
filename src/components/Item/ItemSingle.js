@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getItem } from 'reducers';
 import { fetchItem } from 'actions/item';
-import { formatDateString } from 'utils/utils';
+import { formatDateString } from 'utils';
 import LoadingPage from 'components/LoadingPage';
 import ModifyButton from 'components/Item/ModifyButton';
 

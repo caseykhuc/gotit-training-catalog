@@ -5,7 +5,7 @@ import validator from 'validator';
 
 import { registerUser } from 'actions/user';
 import BaseFormModal from 'components/Base/BaseFormModal';
-import * as errorMessage from 'utils/inputError';
+import * as errorMessage from 'constants/inputError';
 
 export const validate = ({
   username, email, password, confirm,

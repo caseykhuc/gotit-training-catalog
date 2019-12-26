@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import BaseModal from 'components/Base/BaseModal';
-import confirmMessage from 'utils/confirmMessage';
+import confirmMessage from 'constants/confirmMessage';
 import { deleteItem, fetchItems } from 'actions/item';
 import { hideModal } from 'actions/modal';
 

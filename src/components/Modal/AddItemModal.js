@@ -6,7 +6,7 @@ import { addItem } from 'actions/item';
 import BaseFormModal from 'components/Base/BaseFormModal';
 
 import validator from 'validator';
-import * as errorMessage from 'utils/inputError';
+import * as errorMessage from 'constants/inputError';
 
 export const validate = ({
   name, price, categoryId,

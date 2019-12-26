@@ -1,5 +1,5 @@
 import { categoryTypes } from 'constants/actionTypes';
-import { arrayToObject } from 'utils/utils';
+import { arrayToObject } from 'utils';
 
 const initialState = {
   byId: {},

@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { itemTypes } from 'constants/actionTypes';
-import { arrayToObject } from 'utils/utils';
+import { arrayToObject } from 'utils';
 
 /** store items in the current page
  * or about a single item itself
