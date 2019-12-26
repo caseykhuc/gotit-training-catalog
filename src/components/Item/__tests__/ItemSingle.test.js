@@ -51,10 +51,25 @@ describe('component/Item/ItemSingle', () => {
     setup();
     expect(wrapper).toMatchSnapshot();
   });
-  it('should fetchItem when item is not defined in props', () => {
+  // componentDidMount
+  it('should fetchItem when mounted', () => {
     setup();
     expect(props.fetchItem).toHaveBeenCalled();
   });
+  // componentDidUpdate
+  it('should', () => {
+    setup();
+    expect(props.fetchItem).toHaveBeenCalledTimes(1);
+    wrapper.setProps({ itemId: 10 });
+    expect(props.fetchItem).toHaveBeenCalledTimes(2);
+
+    wrapper.setProps({ categoryId: 10 });
+    expect(props.fetchItem).toHaveBeenCalledTimes(3);
+
+    wrapper.setProps({ userCurrent: 5 });
+    expect(props.fetchItem).toHaveBeenCalledTimes(3);
+  });
+  // this.fetchItem
   it('should redirect to category page when fail fetching items', async () => {
     props.fetchItem = () => Promise.resolve({ success: false });
     setup();

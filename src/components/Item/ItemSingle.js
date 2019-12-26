@@ -17,6 +17,20 @@ export class ItemSingle extends Component {
     this.fetchItem(categoryId, itemId);
   }
 
+  componentDidUpdate(prevState) {
+    const {
+      categoryId, itemId,
+    } = this.props;
+
+    /* refetch item in case new item added
+      when ItemSingle still mounted
+    */
+    if (categoryId !== prevState.categoryId
+      || itemId !== prevState.itemId) {
+      this.fetchItem(categoryId, itemId);
+    }
+  }
+
   fetchItem = async (categoryId, itemId) => {
     const { fetchItem } = this.props;
     const res = await fetchItem(categoryId, itemId);
