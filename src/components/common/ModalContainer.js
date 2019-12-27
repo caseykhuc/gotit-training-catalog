@@ -23,7 +23,7 @@ export const ModalContainer = ({ modal }) => {
       case modalKeys.ADD_ITEM_MODAL:
         return <AddItemModal {...props} />
       default:
-        return '';
+        return null;
     }
   };
 
