@@ -1,7 +1,7 @@
 import camelcaseKeys from 'camelcase-keys';
 import config from 'configuration';
 import requestMethod from 'constants/requestMethods';
-import _ from 'lodash';
+import * as utils from 'utils';
 
 const { BASE_URL, ITEM_PER_PAGE } = config;
 
@@ -23,7 +23,7 @@ const requestFromMethod = (method) => (url = '', body) => fetch(`${BASE_URL}/${u
   },
 }).then(handleJson)
 
-const request = _.mapValues(requestMethod, (value) => requestFromMethod(value));
+const request = utils.mapValues(requestMethod, (value) => requestFromMethod(value));
 
 // regular requests
 export const fetchCategories = () => request.GET('categories?offset=0&limit=100')

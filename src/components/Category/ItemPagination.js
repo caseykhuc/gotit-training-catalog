@@ -1,25 +1,25 @@
 import React from 'react';
 import { Pagination } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
+import * as utils from 'utils';
 
 // return which pages should be shown currently
 export const pages = (totalPages, currentPage, neighbors = 1) => {
   const pagesShown = neighbors * 2 + 1;
 
   if (totalPages <= pagesShown) {
-    return _.range(totalPages);
+    return utils.range(totalPages);
   }
 
   if (currentPage <= neighbors) {
-    return _.range(pagesShown);
+    return utils.range(pagesShown);
   }
 
   if (currentPage >= totalPages - neighbors) {
-    return _.range(totalPages - pagesShown, totalPages);
+    return utils.range(totalPages - pagesShown, totalPages);
   }
 
-  return _.range(currentPage - neighbors, currentPage + neighbors + 1);
+  return utils.range(currentPage - neighbors, currentPage + neighbors + 1);
 }
 
 // currentPage starts with 0

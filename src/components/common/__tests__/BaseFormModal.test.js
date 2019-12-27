@@ -74,7 +74,7 @@ describe('components/Common/BaseFormModal', () => {
     expect(props.onAction).toHaveBeenCalled();
   });
   it('should not invoke onAction when all inputs are empty', () => {
-    props.initialState.inputValue = {};
+    props.initialState.inputValue = { username: '', password: '' };
     setup();
     baseModal.props().onAccept();
     expect(props.onAction).not.toHaveBeenCalled();

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import _ from 'lodash';
+import * as utils from 'utils';
 
 import BaseModal from 'components/Common/BaseModal';
 import BaseForm from 'components/Common/BaseForm';
@@ -30,16 +30,17 @@ export class BaseFormModal extends React.Component {
     const {
       onAction, initialState, validate, hideModal, onSuccess,
     } = this.props;
-    const { inputValue } = this.state;
+    const { inputValue, inputError } = this.state;
 
     // prevent empty submission
-    if (!_.values(inputValue).some((x) => !_.isEmpty(x))) {
+    if (!utils.values(inputValue).some((x) => !utils.isEmpty(x))) {
       this.setState({ requestError: 'Empty input' });
       return;
     }
 
     // prevent invalid request body
-    if (validate && !_.isEmpty(validate(inputValue))) {
+    if ((validate && !utils.isEmpty(validate(inputValue)))
+    || !utils.isEmpty(inputError)) {
       return;
     }
 
