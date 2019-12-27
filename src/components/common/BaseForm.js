@@ -50,7 +50,7 @@ const BaseForm = ({
   };
 
   return (
-    <div onKeyDown={onKeyDown}>
+    <Form onKeyDown={onKeyDown}>
       {fields.map(({ name, type, options }) => (
         <Form.Group controlId={name} key={name}>
           {renderInput({ name, type, options })}
@@ -58,7 +58,7 @@ const BaseForm = ({
         </Form.Group>
       ))}
       {requestError && <Alert variant="danger">{requestError}</Alert>}
-    </div>
+    </Form>
   )
 }
 

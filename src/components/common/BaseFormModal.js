@@ -74,14 +74,17 @@ export class BaseFormModal extends React.Component {
 
     const { fields, title } = this.props;
     return (
-      <BaseModal title={title} onAccept={() => this.onFormSubmit()}>
+      <BaseModal
+        title={title}
+        onAccept={() => this.onFormSubmit()}
+      >
         <BaseForm
           onInputChange={(e) => this.onInputChange(e)}
           inputValue={inputValue}
           inputError={inputError}
           requestError={requestError}
           fields={fields}
-          onKeyDown={(e) => this.onKeyDown(e)}
+          onKeyDown={this.onKeyDown}
         />
       </BaseModal>
     )

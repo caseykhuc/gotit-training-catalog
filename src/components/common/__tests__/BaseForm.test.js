@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Alert } from 'react-bootstrap'
+import { Alert, Form } from 'react-bootstrap'
 import BaseForm from '../BaseForm'
 
 describe('components/Common/BaseForm', () => {
@@ -11,7 +11,7 @@ describe('components/Common/BaseForm', () => {
   let alert;
   const update = () => {
     wrapper.update();
-    container = wrapper.find('div');
+    container = wrapper.find(Form);
     alert = wrapper.find(Alert);
   };
   const setup = () => {
