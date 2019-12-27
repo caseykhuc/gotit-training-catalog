@@ -29,7 +29,7 @@ export const Header = ({
       }}
     >
       <Link to="/" style={{ color: 'black', textDecoration: 'none' }}>
-        <h1>Catalog Header</h1>
+        <h1>Catalog Logo</h1>
       </Link>
       {isSignedIn
         ? (
