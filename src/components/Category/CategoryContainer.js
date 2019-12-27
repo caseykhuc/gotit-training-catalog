@@ -7,7 +7,7 @@ import queryString from 'query-string';
 
 import PropTypes from 'prop-types';
 import CategoryDetails from 'components/Category/CategoryDetails';
-import ItemPagination from 'components/Item/ItemPagination';
+import ItemPagination from 'components/Category/ItemPagination';
 import LoadingPage from 'components/common/LoadingPage';
 import ModifyButton from 'components/common/ModifyButton';
 
@@ -153,7 +153,7 @@ export class CategoryContainer extends React.Component {
         <CategoryDetails category={category} />
         {this.renderItem()}
       </div>
-    ) : (<Alert variant="danger">Can't find category</Alert>);
+    ) : (<Alert variant="danger">Can&apos;t find category</Alert>);
   }
 }
 
@@ -167,7 +167,6 @@ export const mapStateToProps = (state, { match, location }) => {
 
   const isLastPage = (state.item.totalItems % config.ITEM_PER_PAGE === 0)
     && page === totalPages;
-  console.log(isLastPage);
 
   return {
     category: state.category.byId[categoryId],

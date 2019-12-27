@@ -33,7 +33,19 @@ export class App extends React.Component {
         <div>
           <Header isSignedIn={!!userId} />
           <Switch>
-            <Route exact path="/categories/items/:categoryId/:itemId" component={ItemSingle} />
+            <Route
+              exact
+              path="/categories/items/:categoryId/:itemId"
+              render={() => (
+                <div className="w-75 mx-auto">
+                  <CategoryList
+                    categories={categories}
+                    defaultSelected={categories[0].id}
+                  />
+                  <ItemSingle />
+                </div>
+              )}
+            />
             <Route
               exact
               path="/categories/:categoryId"
