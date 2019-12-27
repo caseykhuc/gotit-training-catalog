@@ -36,7 +36,8 @@
     "react/jsx-props-no-spreading": 0,
 
     "no-shadow": 0,
-    "import/no-named-as-default": "warn"
+    "import/no-named-as-default": "warn",
+    "import/prefer-default-export": "warn"
   },
   "settings": {
     "import/resolver": {

@@ -2,6 +2,7 @@ import * as fromDev from './dev';
 import * as fromLocal from './local';
 import * as fromProd from './prod';
 import * as fromStaging from './staging';
+import * as fromBase from './base';
 
 export const config = () => {
   switch (process.env.REACT_APP_ENV) {
@@ -18,4 +19,4 @@ export const config = () => {
   }
 }
 
-export default config();
+export default { ...config(), ...fromBase };
