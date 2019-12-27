@@ -26,7 +26,7 @@ describe('component/Item/ItemPagination', () => {
   };
   beforeEach(() => {
     props = {
-      totalPages: 5,
+      totalPages: 10,
       currentPage: 0,
       onPageClick: jest.fn(),
     }
@@ -39,10 +39,16 @@ describe('component/Item/ItemPagination', () => {
     setup();
     expect(wrapper).toMatchSnapshot();
   });
+  it('should not render too much pages', () => {
+    for (let i = 0; i < props.totalPages; i += 1) {
+      props.currentPage = i;
+      setup();
+      expect(props.totalPages - pagiItem.length + 1).toBeTruthy();
+    }
+  });
   it('should invoke onPageClick properly', () => {
     props.currentPage = 3;
     setup();
-    expect(pagiItem).toHaveLength(props.totalPages);
 
     pagiFirst.simulate('click', {});
     expect(props.onPageClick).toBeCalledWith({}, 0);

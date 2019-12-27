@@ -1,6 +1,26 @@
 import React from 'react';
 import { Pagination } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
+
+// return which pages should be shown currently
+export const pages = (totalPages, currentPage, neighbors = 1) => {
+  const pagesShown = neighbors * 2 + 1;
+
+  if (totalPages <= pagesShown) {
+    return _.range(totalPages);
+  }
+
+  if (currentPage <= neighbors) {
+    return _.range(pagesShown);
+  }
+
+  if (currentPage >= totalPages - neighbors) {
+    return _.range(totalPages - pagesShown, totalPages);
+  }
+
+  return _.range(currentPage - neighbors, currentPage + neighbors + 1);
+}
 
 // currentPage starts with 0
 const ItemPagination = ({ currentPage, totalPages, onPageClick }) => (
@@ -13,7 +33,7 @@ const ItemPagination = ({ currentPage, totalPages, onPageClick }) => (
       onClick={(e) => onPageClick(e, currentPage - 1)}
       disabled={currentPage <= 0}
     />
-    {[...Array(totalPages).keys()].map((page) => (
+    {pages(totalPages, currentPage).map((page) => (
       <Pagination.Item
         onClick={(e) => onPageClick(e, page)}
         active={page === currentPage}
