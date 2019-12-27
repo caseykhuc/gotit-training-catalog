@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import _ from 'lodash';
+
 import BaseModal from 'components/Base/BaseModal';
 import BaseForm from 'components/Base/BaseForm';
 import { hideModal } from 'actions/modal';
-import { connect } from 'react-redux';
 
 export class BaseFormModal extends React.Component {
   state = this.props.initialState

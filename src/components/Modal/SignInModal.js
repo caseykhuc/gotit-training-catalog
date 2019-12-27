@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { signInUser } from 'actions/user';
+
 import BaseFormModal from 'components/Base/BaseFormModal';
 
 export const SignInModal = ({ signInUser }) => {

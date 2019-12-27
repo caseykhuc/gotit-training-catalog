@@ -14,7 +14,7 @@ const byId = (state = {}, action) => {
     case itemTypes.EDIT_ITEM_SUCCESS:
       return { ...state, [action.payload.id]: action.payload };
     /** do not modify state here because
-     * deleted/added item required refetch items
+     * deleted/added item required re-fetch items
     case itemTypes.DELETE_ITEM_SUCCESS:
     case itemTypes.ADD_ITEM_SUCCESS:
       return state;

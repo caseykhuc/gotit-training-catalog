@@ -74,7 +74,13 @@
     "webpack": "4.41.2",
     "webpack-dev-server": "3.9.0",
     "webpack-manifest-plugin": "2.2.0",
-    "workbox-webpack-plugin": "4.3.1"
+    "workbox-webpack-plugin": "4.3.1",
+    "babel-eslint": "^10.0.3",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
+    "eslint-plugin-jest": "^23.1.1",
+    "jest-fetch-mock": "^3.0.0",
+    "redux-mock-store": "^1.5.4"
   },
   "scripts": {
     "start": "node scripts/start.js",
@@ -97,14 +103,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "babel-eslint": "^10.0.3",
-    "enzyme": "^3.10.0",
-    "enzyme-adapter-react-16": "^1.15.1",
-    "eslint-plugin-jest": "^23.1.1",
-    "jest-fetch-mock": "^3.0.0",
-    "redux-mock-store": "^1.5.4"
   },
   "jest": {
     "roots": [

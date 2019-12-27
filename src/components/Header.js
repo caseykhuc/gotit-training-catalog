@@ -3,6 +3,7 @@ import { withRouter, Link } from 'react-router-dom';
 import { Button, ButtonGroup } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
 import { showModal } from 'actions/modal';
 import { signOutUser } from 'actions/user';
 import modalKeys from 'constants/modelKeys';

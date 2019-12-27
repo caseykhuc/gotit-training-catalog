@@ -1,20 +1,19 @@
-/* eslint-disable no-shadow */
 import React from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Alert, ListGroup } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 import queryString from 'query-string';
 
-import PropTypes from 'prop-types';
 import CategoryDetails from 'components/Category/CategoryDetails';
 import ItemPagination from 'components/Category/ItemPagination';
 import LoadingPage from 'components/common/LoadingPage';
 import ModifyButton from 'components/common/ModifyButton';
+import NotFoundPage from 'components/common/NotFoundPage';
 
 import { fetchItems } from 'actions/item';
 import { getItems } from 'reducers';
 import config from 'configuration';
-import NotFoundPage from 'components/common/NotFoundPage';
 
 export class CategoryContainer extends React.Component {
   state = { notFound: false }

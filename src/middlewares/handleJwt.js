@@ -1,6 +1,6 @@
 import { userTypes } from '../constants/actionTypes';
-// store accessToken to localStorage when LOGIN_USER_SUCCESS
-// clear when LOGOUT_USER
+// store accessToken to localStorage when LOG_IN_USER_SUCCESS
+// clear when LOG_OUT_USER
 
 const persistJwt = () => (next) => (action) => {
   switch (action.type) {

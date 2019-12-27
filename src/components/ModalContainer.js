@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import modalKeys from 'constants/modelKeys';
+
 import RegisterModal from 'components/Modal/RegisterModal';
 import SignInModal from 'components/Modal/SignInModal';
 import DeleteItemModal from 'components/Modal/DeleteItemModal';
 import EditItemModal from 'components/Modal/EditItemModal'
 import AddItemModal from 'components/Modal/AddItemModal';
+import modalKeys from 'constants/modelKeys';
 
 export const ModalContainer = ({ modal }) => {
   const renderModal = ({ current, props }) => {

@@ -1,11 +1,4 @@
-// get() is one of our utilities for creating GET API calls
-/*
-
-*/
-
-// thunk
-
-const thunk = (store) => (next) => async (action) => {
+const handleFetch = (store) => (next) => async (action) => {
   if (typeof action === 'function') {
     return action(store.dispatch, store.getState);
   }
@@ -40,4 +33,4 @@ const thunk = (store) => (next) => async (action) => {
   }
 };
 
-export default thunk;
+export default handleFetch;

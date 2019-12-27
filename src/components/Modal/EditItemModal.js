@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import * as selector from 'reducers';
-import { editItem } from 'actions/item';
-import BaseFormModal from 'components/Base/BaseFormModal';
-
 import validator from 'validator';
+
+import BaseFormModal from 'components/Base/BaseFormModal';
+import { editItem } from 'actions/item';
+import * as selector from 'reducers';
 import * as errorMessage from 'constants/inputError';
 
 export const validate = ({

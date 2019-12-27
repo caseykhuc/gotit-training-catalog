@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Alert } from 'react-bootstrap';
+
 import BaseModal from 'components/Base/BaseModal';
-import confirmMessage from 'constants/confirmMessage';
 import { deleteItem, fetchItems } from 'actions/item';
 import { hideModal } from 'actions/modal';
-import { Alert } from 'react-bootstrap';
+import confirmMessage from 'constants/confirmMessage';
 
 export const DeleteItemModal = ({
   categoryId, itemId, deleteItem, onSuccess, hideModal, error,

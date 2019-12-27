@@ -55,6 +55,7 @@ export const categoryTypes = {
 };
 
 export const modalTypes = {
+  // modal
   SHOW_MODAL: 'SHOW_MODAL',
   HIDE_MODAL: 'HIDE_MODAL',
 };

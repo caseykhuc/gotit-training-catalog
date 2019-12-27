@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import validator from 'validator';
 
-import { registerUser } from 'actions/user';
 import BaseFormModal from 'components/Base/BaseFormModal';
+import { registerUser } from 'actions/user';
 import * as errorMessage from 'constants/inputError';
 
 export const validate = ({
