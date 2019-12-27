@@ -71,9 +71,12 @@ export class ItemSingle extends Component {
           margin: '0 auto',
         }}
         >
-          <Card.Header>
-            <h4>{`Item ${id}`}</h4>
-            <small><i>{created && formatDateString(created)}</i></small>
+          <Card.Header className="d-flex justify-content-between align-items-center">
+            <div>
+              <h4>{`Item ${id}`}</h4>
+              <small><i>{created && formatDateString(created)}</i></small>
+            </div>
+            <h3>{`$${price}`}</h3>
           </Card.Header>
           <Card.Body className="text-center" style={{ paddingRight: '10%', paddingLeft: '10%' }}>
 

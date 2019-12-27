@@ -69,6 +69,7 @@ export class CategoryContainer extends React.Component {
     }) => (
       <ListGroup.Item
         className="d-flex justify-content-between align-items-center"
+        style={{ height: '50px' }}
         key={id}
       >
         <Link to={`/categories/items/${categoryId}/${id}`} key={id}>
