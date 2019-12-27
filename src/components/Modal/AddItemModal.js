@@ -12,12 +12,12 @@ export const validate = ({
   name, price, categoryId,
 }) => {
   const inputError = {};
-  if (name && name.length < 5) inputError.name = errorMessage.name.tooShort;
+  if (name && name.length < 5) inputError.name = errorMessage.name.TOO_SHORT;
   if (price && !validator.isNumeric(price)) {
-    inputError.price = errorMessage.price.isNotNumeric;
+    inputError.price = errorMessage.price.IS_NOT_NUMERIC;
   }
   if (!categoryId) {
-    inputError.categoryId = errorMessage.category.isNotDefined;
+    inputError.categoryId = errorMessage.category.IS_NOT_DEFINED;
   }
   return inputError;
 };

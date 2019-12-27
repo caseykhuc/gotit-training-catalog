@@ -13,9 +13,9 @@ export const validate = ({
 }) => {
   const priceString = String(price);
   const inputError = {};
-  if (name && name.length < 5) inputError.name = errorMessage.name.tooShort;
+  if (name && name.length < 5) inputError.name = errorMessage.name.TOO_SHORT;
   if (priceString && !validator.isNumeric(priceString)) {
-    inputError.price = errorMessage.price.isNotNumeric;
+    inputError.price = errorMessage.price.IS_NOT_NUMERIC;
   }
   return inputError;
 };

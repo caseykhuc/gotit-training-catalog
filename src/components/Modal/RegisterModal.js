@@ -11,16 +11,16 @@ export const validate = ({
   username, email, password, confirm,
 }) => {
   const inputError = {};
-  if (username && username.length < 5) inputError.username = errorMessage.username.tooShort;
-  if (email && !validator.isEmail(email)) inputError.email = errorMessage.email.invalid;
+  if (username && username.length < 5) inputError.username = errorMessage.username.TOO_SHORT;
+  if (email && !validator.isEmail(email)) inputError.email = errorMessage.email.INVALID;
   if (password && (password.length < 8
     || !validator.isAlphanumeric(password)
     || validator.isAlpha(password)
     || validator.isNumeric(password))) {
-    inputError.password = errorMessage.password.tooSimple;
+    inputError.password = errorMessage.password.TOO_SIMPLE;
   }
   if (confirm && confirm !== password) {
-    inputError.confirm = errorMessage.password.notMatch;
+    inputError.confirm = errorMessage.password.NOT_MATCH;
   }
   return inputError;
 };

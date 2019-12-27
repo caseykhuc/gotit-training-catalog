@@ -26,7 +26,7 @@ export const DeleteItemModal = ({
       title="DELETE CONFIRM"
       onAccept={onAccept}
     >
-      <p>{confirmMessage.confirmDelete}</p>
+      <p>{confirmMessage.DELETE}</p>
       {error && <Alert variant="danger" class="error">{error}</Alert>}
     </BaseModal>
   )
