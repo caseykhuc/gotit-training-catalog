@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { CategoryList } from '../CategoryList';
 
-describe('component/Category/CategoryList', () => {
+describe('component/Common/CategoryList', () => {
   let props;
   let wrapper;
 

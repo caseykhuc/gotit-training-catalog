@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import modalKeys from 'constants/modelKeys';
 import { ModalContainer } from '../ModalContainer';
 
-describe('component/ModalContainer', () => {
+describe('component/Common/ModalContainer', () => {
   let props;
   let wrapper;
 

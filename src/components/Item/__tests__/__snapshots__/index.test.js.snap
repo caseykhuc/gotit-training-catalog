@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`component/Item should render correctly 1`] = `ShallowWrapper {}`;
+
+exports[`component/Item should render modifyButton 1`] = `ShallowWrapper {}`;
+
+exports[`component/Item should render modifyButton 2`] = `ShallowWrapper {}`;
+
+exports[`component/Item should render modifyButton 3`] = `ShallowWrapper {}`;

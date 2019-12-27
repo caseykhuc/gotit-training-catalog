@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Alert } from 'react-bootstrap';
 
-import BaseModal from 'components/Base/BaseModal';
+import BaseModal from 'components/Common/BaseModal';
 import { deleteItem, fetchItems } from 'actions/item';
 import { hideModal } from 'actions/modal';
 import confirmMessage from 'constants/confirmMessage';

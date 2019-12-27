@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
-import BaseModal from 'components/Base/BaseModal';
-import BaseForm from 'components/Base/BaseForm';
+import BaseModal from 'components/Common/BaseModal';
+import BaseForm from 'components/Common/BaseForm';
 import { hideModal } from 'actions/modal';
 
 export class BaseFormModal extends React.Component {

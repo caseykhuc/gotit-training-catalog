@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import BaseModal from 'components/Base/BaseModal';
+import BaseModal from 'components/Common/BaseModal';
 import { DeleteItemModal } from '../DeleteItemModal';
 
-describe('components/Modal/DeleteItemModal', () => {
+describe('components/Common/DeleteItemModal', () => {
   let props;
   let wrapper;
   let baseModal;

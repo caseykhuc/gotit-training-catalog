@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { AddItemModal, validate } from '../AddItemModal';
 
-describe('components/Modal/AddItemModal', () => {
+describe('components/Common/AddItemModal', () => {
   let props;
   let wrapper;
 

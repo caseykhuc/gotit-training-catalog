@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import { editItem } from 'actions/item';
 import { EditItemModal, validate, mapDispatchToProps } from '../EditItemModal';
 
-describe('components/Modal/EditItemModal', () => {
+describe('components/Common/EditItemModal', () => {
   let props;
   let wrapper;
 

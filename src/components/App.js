@@ -5,13 +5,13 @@ import { connect } from 'react-redux';
 import { Container, Alert } from 'react-bootstrap'
 import PropTypes from 'prop-types';
 
-import Header from 'components/Header';
-import CategoryContainer from 'components/Category/CategoryContainer';
-import ItemSingle from 'components/Item/ItemSingle';
-import ModalContainer from 'components/ModalContainer';
-import CategoryList from 'components/common/CategoryList';
-import LoadingPage from 'components/common/LoadingPage';
-import NotFoundPage from 'components/common/NotFoundPage';
+import Header from 'components/Common/Header';
+import Category from 'components/Category';
+import Item from 'components/Item';
+import ModalContainer from 'components/Common/ModalContainer';
+import CategoryList from 'components/Common/CategoryList';
+import LoadingPage from 'components/Common/LoadingPage';
+import NotFoundPage from 'components/Common/NotFoundPage';
 
 import { fetchCategory } from 'actions/category';
 import { fetchUser } from 'actions/user';
@@ -42,7 +42,7 @@ export class App extends React.Component {
                     categories={categories}
                     defaultSelected={categories[0].id}
                   />
-                  <ItemSingle />
+                  <Item />
                 </div>
               )}
             />
@@ -55,7 +55,7 @@ export class App extends React.Component {
                     categories={categories}
                     defaultSelected={categories[0].id}
                   />
-                  <CategoryContainer />
+                  <Category />
                 </div>
               )}
             />

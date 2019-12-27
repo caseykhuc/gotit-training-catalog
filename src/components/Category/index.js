@@ -7,15 +7,15 @@ import queryString from 'query-string';
 
 import CategoryDetails from 'components/Category/CategoryDetails';
 import ItemPagination from 'components/Category/ItemPagination';
-import LoadingPage from 'components/common/LoadingPage';
-import ModifyButton from 'components/common/ModifyButton';
-import NotFoundPage from 'components/common/NotFoundPage';
+import LoadingPage from 'components/Common/LoadingPage';
+import ModifyButton from 'components/Common/ModifyButton';
+import NotFoundPage from 'components/Common/NotFoundPage';
 
 import { fetchItems } from 'actions/item';
 import { getItems } from 'reducers';
 import config from 'configuration';
 
-export class CategoryContainer extends React.Component {
+export class Category extends React.Component {
   state = { notFound: false }
 
   componentDidMount() {
@@ -180,7 +180,7 @@ export const mapStateToProps = (state, { match, location }) => {
   };
 };
 
-CategoryContainer.propTypes = {
+Category.propTypes = {
   categoryId: PropTypes.number.isRequired,
   fetchItems: PropTypes.func.isRequired,
   page: PropTypes.number.isRequired,
@@ -200,4 +200,4 @@ CategoryContainer.propTypes = {
   isLastPage: PropTypes.bool,
 }
 
-export default withRouter(connect(mapStateToProps, { fetchItems })(CategoryContainer));
+export default withRouter(connect(mapStateToProps, { fetchItems })(Category));

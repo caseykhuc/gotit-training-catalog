@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import LoadingPage from '../LoadingPage';
 
-describe('component/LoadingPage', () => {
+describe('component/Common/LoadingPage', () => {
   let props;
   let wrapper;
 

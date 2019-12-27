@@ -1,10 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import ModifyButton from 'components/common/ModifyButton';
-import NotFoundPage from 'components/common/NotFoundPage';
-import { CategoryContainer, mapStateToProps } from '../CategoryContainer';
+import ModifyButton from 'components/Common/ModifyButton';
+import NotFoundPage from 'components/Common/NotFoundPage';
+import { Category, mapStateToProps } from 'components/Category';
 
-describe('component/Category/CategoryContainer', () => {
+describe('component/Category', () => {
   let props;
   let wrapper;
   let modifyButton;
@@ -16,7 +16,7 @@ describe('component/Category/CategoryContainer', () => {
     notFoundPage = wrapper.find(NotFoundPage);
   };
   const setup = () => {
-    wrapper = shallow(<CategoryContainer {...props} />);
+    wrapper = shallow(<Category {...props} />);
     update();
   };
   beforeEach(() => {
@@ -134,7 +134,7 @@ describe('component/Category/CategoryContainer', () => {
   })
 });
 
-describe('component/Category/CategoryContainer (mapStateToProps)', () => {
+describe('component/Category (mapStateToProps)', () => {
   let state; let match; let location;
   let props;
   const setup = () => {

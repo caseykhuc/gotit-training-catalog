@@ -4,14 +4,14 @@ import { Card } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import LoadingPage from 'components/common/LoadingPage';
-import ModifyButton from 'components/common/ModifyButton';
-import NotFoundPage from 'components/common/NotFoundPage';
+import LoadingPage from 'components/Common/LoadingPage';
+import ModifyButton from 'components/Common/ModifyButton';
+import NotFoundPage from 'components/Common/NotFoundPage';
 import { getItem } from 'reducers';
 import { fetchItem } from 'actions/item';
 import { formatDateString } from 'utils';
 
-export class ItemSingle extends Component {
+export class Item extends Component {
   state = { notFound: false }
 
   componentDidMount() {
@@ -27,7 +27,7 @@ export class ItemSingle extends Component {
     } = this.props;
 
     /* re-fetch item in case new item added
-      when ItemSingle still mounted
+      when Item still mounted
     */
     if (categoryId !== prevState.categoryId
       || itemId !== prevState.itemId) {
@@ -118,7 +118,7 @@ export const mapStateToProps = (state, { match }) => {
   }
 }
 
-ItemSingle.propTypes = {
+Item.propTypes = {
   itemId: PropTypes.number.isRequired,
   categoryId: PropTypes.number.isRequired,
   history: PropTypes.shape({
@@ -138,4 +138,4 @@ ItemSingle.propTypes = {
   userCurrent: PropTypes.number,
 }
 
-export default withRouter(connect(mapStateToProps, { fetchItem })(ItemSingle));
+export default withRouter(connect(mapStateToProps, { fetchItem })(Item));

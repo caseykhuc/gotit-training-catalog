@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import { Alert } from 'react-bootstrap'
 import BaseForm from '../BaseForm'
 
-describe('components/BaseForm', () => {
+describe('components/Common/BaseForm', () => {
   let props;
   let wrapper;
   let container;

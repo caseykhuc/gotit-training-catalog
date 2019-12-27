@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import NotFoundPage from 'components/common/NotFoundPage';
-import { ItemSingle, mapStateToProps } from '../ItemSingle';
+import NotFoundPage from 'components/Common/NotFoundPage';
+import { Item, mapStateToProps } from 'components/Item';
 
-describe('component/Item/ItemSingle', () => {
+describe('component/Item', () => {
   let props;
   let wrapper;
   let notFoundPage;
@@ -13,7 +13,7 @@ describe('component/Item/ItemSingle', () => {
     notFoundPage = wrapper.find(NotFoundPage);
   };
   const setup = () => {
-    wrapper = shallow(<ItemSingle {...props} />);
+    wrapper = shallow(<Item {...props} />);
     update();
   };
 
@@ -41,7 +41,8 @@ describe('component/Item/ItemSingle', () => {
   it('should render correctly', () => {
     setup();
     expect(wrapper).toMatchSnapshot();
-
+  });
+  it('should render modifyButton', () => {
     props.item.userId = 10;
     setup();
     expect(wrapper).toMatchSnapshot();
@@ -83,7 +84,7 @@ describe('component/Item/ItemSingle', () => {
   })
 })
 
-describe('component/Item/ItemSingle (mapStateToProps)', () => {
+describe('component/Item (mapStateToProps)', () => {
   let state;
   let match;
   beforeEach(() => {

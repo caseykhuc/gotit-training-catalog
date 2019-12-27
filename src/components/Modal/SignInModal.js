@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { signInUser } from 'actions/user';
 
-import BaseFormModal from 'components/Base/BaseFormModal';
+import BaseFormModal from 'components/Common/BaseFormModal';
 
 export const SignInModal = ({ signInUser }) => {
   const initialState = {

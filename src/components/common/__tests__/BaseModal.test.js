@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { BaseModal } from '../BaseModal';
 
-describe('components/BaseModal', () => {
+describe('components/Common/BaseModal', () => {
   let props;
   let wrapper;
   const update = () => {

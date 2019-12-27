@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import NotFoundPage from '../NotFoundPage';
 
-describe('component/NotFoundPage', () => {
+describe('component/Common/NotFoundPage', () => {
   let props;
   let wrapper;
 

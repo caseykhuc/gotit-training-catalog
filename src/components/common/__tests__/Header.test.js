@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import modalKeys from 'constants/modelKeys';
 import { Header } from '../Header';
 
-describe('component/Header', () => {
+describe('component/Common/Header', () => {
   let props;
   let wrapper;
   let authBtn;

@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { ModifyButton } from '../ModifyButton';
 
-describe('component/Item/ModifyButton', () => {
+describe('component/Common/ModifyButton', () => {
   let props;
   let wrapper;
   let deleteBtn;

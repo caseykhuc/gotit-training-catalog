@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import { Pagination } from 'react-bootstrap';
 import ItemPagination from '../ItemPagination';
 
-describe('component/Item/ItemPagination', () => {
+describe('component/Category/ItemPagination', () => {
   let props;
   let wrapper;
   let pagiFirst;

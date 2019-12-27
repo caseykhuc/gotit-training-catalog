@@ -1,10 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import BaseModal from 'components/Base/BaseModal';
-import { BaseFormModal } from 'components/Base/BaseFormModal';
+import BaseModal from 'components/Common/BaseModal';
+import { BaseFormModal } from 'components/Common/BaseFormModal';
 import BaseForm from '../BaseForm'
 
-describe('components/BaseFormModal', () => {
+describe('components/Common/BaseFormModal', () => {
   let props;
   let wrapper;
   let baseModal;

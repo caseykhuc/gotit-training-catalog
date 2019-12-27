@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import validator from 'validator';
 
-import BaseFormModal from 'components/Base/BaseFormModal';
+import BaseFormModal from 'components/Common/BaseFormModal';
 import { addItem } from 'actions/item';
 import * as selector from 'reducers';
 import * as errorMessage from 'constants/inputError';

@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import BaseFormModal from 'components/Base/BaseFormModal';
+import BaseFormModal from 'components/Common/BaseFormModal';
 import { RegisterModal, validate } from '../RegisterModal';
 
-describe('components/Modal/RegisterModal', () => {
+describe('components/Common/RegisterModal', () => {
   let props;
   let wrapper;
   let baseFormModal;
