@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import ScrollMenu from 'react-horizontal-scrolling-menu';
 import PropTypes from 'prop-types';
 
-import './CategoryList.css';
+import './CategoryList.scss';
 
 const ArrowLeft = <div style={{ padding: '10px' }}>{'<'}</div>;
 const ArrowRight = <div style={{ padding: '10px' }}>{'>'}</div>;
@@ -32,7 +32,7 @@ export class CategoryList extends React.Component {
     ));
 
     return (
-      <div className="my-4">
+      <div className="category-list my-4">
         <ScrollMenu
           data={menu}
           arrowLeft={ArrowLeft}
