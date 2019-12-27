@@ -5,15 +5,19 @@ import validator from 'validator';
 
 import BaseFormModal from 'components/Common/BaseFormModal';
 import { registerUser } from 'actions/user';
-import * as errorMessage from 'constants/inputError';
+import { errorMessage, MIN_NAME_LENGTH, MIN_PASSWORD_LENGTH } from 'constants/formValidation';
 
 export const validate = ({
   username, email, password, confirm,
 }) => {
   const inputError = {};
-  if (username && username.length < 5) inputError.username = errorMessage.username.TOO_SHORT;
-  if (email && !validator.isEmail(email)) inputError.email = errorMessage.email.INVALID;
-  if (password && (password.length < 8
+  if (username && username.length < MIN_NAME_LENGTH) {
+    inputError.username = errorMessage.username.TOO_SHORT
+  }
+  if (email && !validator.isEmail(email)) {
+    inputError.email = errorMessage.email.INVALID
+  }
+  if (password && (password.length < MIN_PASSWORD_LENGTH
     || !validator.isAlphanumeric(password)
     || validator.isAlpha(password)
     || validator.isNumeric(password))) {

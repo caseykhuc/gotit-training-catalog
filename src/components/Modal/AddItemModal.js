@@ -6,13 +6,15 @@ import validator from 'validator';
 import BaseFormModal from 'components/Common/BaseFormModal';
 import { addItem } from 'actions/item';
 import * as selector from 'reducers';
-import * as errorMessage from 'constants/inputError';
+import { errorMessage, MIN_NAME_LENGTH } from 'constants/formValidation';
 
 export const validate = ({
   name, price, categoryId,
 }) => {
   const inputError = {};
-  if (name && name.length < 5) inputError.name = errorMessage.name.TOO_SHORT;
+  if (name && name.length < MIN_NAME_LENGTH) {
+    inputError.name = errorMessage.name.TOO_SHORT
+  }
   if (price && !validator.isNumeric(price)) {
     inputError.price = errorMessage.price.IS_NOT_NUMERIC;
   }
