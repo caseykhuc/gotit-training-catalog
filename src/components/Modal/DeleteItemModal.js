@@ -5,9 +5,10 @@ import BaseModal from 'components/Base/BaseModal';
 import confirmMessage from 'constants/confirmMessage';
 import { deleteItem, fetchItems } from 'actions/item';
 import { hideModal } from 'actions/modal';
+import { Alert } from 'react-bootstrap';
 
 export const DeleteItemModal = ({
-  categoryId, itemId, deleteItem, onSuccess, hideModal,
+  categoryId, itemId, deleteItem, onSuccess, hideModal, error,
 }) => {
   const onAccept = async () => {
     const { success } = await deleteItem(categoryId, itemId);
@@ -25,9 +26,14 @@ export const DeleteItemModal = ({
       onAccept={onAccept}
     >
       <p>{confirmMessage.confirmDelete}</p>
+      {error && <Alert variant="danger" class="error">{error}</Alert>}
     </BaseModal>
   )
 }
+
+const mapStateToProps = ({ item }) => ({
+  error: item.error,
+})
 
 DeleteItemModal.propTypes = {
   categoryId: PropTypes.number.isRequired,
@@ -35,6 +41,7 @@ DeleteItemModal.propTypes = {
   deleteItem: PropTypes.func.isRequired,
   onSuccess: PropTypes.func.isRequired,
   hideModal: PropTypes.func.isRequired,
+  error: PropTypes.string.isRequired,
 }
 
-export default connect(null, { deleteItem, hideModal, fetchItems })(DeleteItemModal)
+export default connect(mapStateToProps, { deleteItem, hideModal, fetchItems })(DeleteItemModal)

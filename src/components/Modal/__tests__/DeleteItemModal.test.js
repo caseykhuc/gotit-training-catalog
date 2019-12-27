@@ -23,6 +23,7 @@ describe('components/Modal/DeleteItemModal', () => {
       deleteItem: jest.fn().mockResolvedValue({ success: true }),
       onSuccess: jest.fn(),
       hideModal: jest.fn(),
+      error: '',
     }
   });
   it('should render correctly', () => {
@@ -41,4 +42,9 @@ describe('components/Modal/DeleteItemModal', () => {
     expect(props.deleteItem).toHaveBeenCalledWith(props.categoryId, props.itemId);
     expect(props.hideModal).toHaveBeenCalledTimes(1);
   });
+  it('should display item error when available', () => {
+    props.error = 'Error';
+    setup();
+    expect(wrapper.find('.error')).toBeTruthy();
+  })
 })
