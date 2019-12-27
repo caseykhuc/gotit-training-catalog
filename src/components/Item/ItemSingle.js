@@ -45,6 +45,11 @@ export class ItemSingle extends Component {
     }
   }
 
+  onDeleteSuccess = () => {
+    const { history, categoryId } = this.props;
+    history.push(`/categories/${categoryId}`);
+  }
+
   render() {
     const {
       item, userCurrent, categoryId, itemId, isLoadingItem,
@@ -86,6 +91,7 @@ export class ItemSingle extends Component {
                 categoryId={categoryId}
                 itemId={itemId}
                 currentValue={{ name, description, price }}
+                onDeleteSuccess={this.onDeleteSuccess}
               />
             )}
           </Card.Body>

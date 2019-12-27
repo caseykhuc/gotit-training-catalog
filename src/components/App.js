@@ -19,13 +19,8 @@ import NotFoundPage from 'components/common/NotFoundPage';
 
 export class App extends React.Component {
   componentDidMount() {
-    this.fetchInit();
-  }
-
-  // prevent any actions before both user state and category are ready
-  fetchInit = async () => {
     const { fetchCategory, fetchUser } = this.props;
-    await fetchUser();
+    fetchUser();
     fetchCategory();
   }
 
@@ -62,7 +57,7 @@ export class App extends React.Component {
         </div>
       )
     }
-    // show only loading page before fetchInit finishes
+    // prevent any actions before both user and category state are ready
     if (isLoading) {
       return <LoadingPage />
     }

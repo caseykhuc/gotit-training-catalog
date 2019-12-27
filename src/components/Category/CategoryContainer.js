@@ -86,12 +86,19 @@ export class CategoryContainer extends React.Component {
     ));
   }
 
-  // handle actions after successfully delete item
+  // handle actions after successfully delete item on item list
   onDeleteSuccess = () => {
     const {
-      isLoadingItem, fetchItems, categoryId, page,
+      isLoadingItem, fetchItems, categoryId, page, isLastPage, history,
     } = this.props;
-    if (!isLoadingItem) {
+
+    /** special case: deleted item is the last item on last page
+     * => push to the last available page
+    */
+    if (isLastPage && page > 0) {
+      history.push(`/categories/${categoryId}?page=${page - 1}`);
+    } else if (!isLoadingItem) {
+      // else just need to re-fetch that page
       fetchItems(categoryId, page);
     }
   }
@@ -158,12 +165,17 @@ export const mapStateToProps = (state, { match, location }) => {
   const page = Number(queryString.parse(location.search).page)
     || 0;
 
+  const isLastPage = (state.item.totalItems % config.ITEM_PER_PAGE === 0)
+    && page === totalPages;
+  console.log(isLastPage);
+
   return {
     category: state.category.byId[categoryId],
     itemList: getItems(state),
     categoryId,
     page,
     isLoadingItem: state.item.isLoading,
+    isLastPage,
     totalPages,
     userCurrent: state.user.userId,
   };
@@ -186,6 +198,7 @@ CategoryContainer.propTypes = {
     name: PropTypes.string.isRequired,
     userId: PropTypes.number.isRequired,
   })),
+  isLastPage: PropTypes.bool,
 }
 
 export default withRouter(connect(mapStateToProps, { fetchItems })(CategoryContainer));

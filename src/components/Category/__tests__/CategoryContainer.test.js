@@ -22,7 +22,7 @@ describe('component/Category/CategoryContainer', () => {
   beforeEach(() => {
     props = {
       categoryId: 1,
-      fetchItems: jest.fn(),
+      fetchItems: jest.fn().mockResolvedValue({ success: true }),
       page: 0,
       totalPages: 5,
       history: { push: jest.fn() },
@@ -73,19 +73,23 @@ describe('component/Category/CategoryContainer', () => {
     setup();
     expect(props.fetchItems).toHaveBeenCalledWith(props.categoryId, props.page);
   });
-  it('should render NotFoundPage when fetchItems fails', () => {
-    props.fetchItems = jest.fn().mockRejectedValue();
-    setup();
-    expect(notFoundPage.length).toBeTruthy();
-
+  it('should render NotFoundPage when fetchItems fails', async () => {
     props.fetchItems = jest.fn().mockResolvedValue({ success: false });
     setup();
-    expect(notFoundPage.length).toBeTruthy();
+    await new Promise((resolve) => {
+      setImmediate(resolve)
+    });
+    wrapper.update();
+    expect(notFoundPage).toBeTruthy();
 
-    props.fetchItems = jest.fn().mockResolvedValue({ success: true });
+    /* props.fetchItems = jest.fn().mockResolvedValue({ success: true });
     setup();
-    expect(notFoundPage.length).toBeFalsy();
+    await new Promise((resolve) => {
+      setImmediate(resolve)
+    });
+    expect(notFoundPage.length).toBeFalsy(); */
   });
+
   // componentDidUpdate
   it('should fetch items only when categoryId || page change', () => {
     setup();
