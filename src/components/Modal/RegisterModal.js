@@ -12,19 +12,19 @@ export const validate = ({
 }) => {
   const inputError = {};
   if (username && username.length < MIN_NAME_LENGTH) {
-    inputError.username = errorMessage.username.TOO_SHORT
+    inputError.username = errorMessage.Username.TOO_SHORT
   }
   if (email && !validator.isEmail(email)) {
-    inputError.email = errorMessage.email.INVALID
+    inputError.email = errorMessage.Email.INVALID
   }
   if (password && (password.length < MIN_PASSWORD_LENGTH
     || !validator.isAlphanumeric(password)
     || validator.isAlpha(password)
     || validator.isNumeric(password))) {
-    inputError.password = errorMessage.password.TOO_SIMPLE;
+    inputError.password = errorMessage.Password.TOO_SIMPLE;
   }
   if (confirm && confirm !== password) {
-    inputError.confirm = errorMessage.password.NOT_MATCH;
+    inputError.confirm = errorMessage.Password.NOT_MATCH;
   }
   return inputError;
 };

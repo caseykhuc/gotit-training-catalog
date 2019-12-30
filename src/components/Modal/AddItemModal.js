@@ -13,13 +13,13 @@ export const validate = ({
 }) => {
   const inputError = {};
   if (name && name.length < MIN_NAME_LENGTH) {
-    inputError.name = errorMessage.name.TOO_SHORT
+    inputError.name = errorMessage.Name.TOO_SHORT
   }
   if (price && !validator.isNumeric(price)) {
-    inputError.price = errorMessage.price.IS_NOT_NUMERIC;
+    inputError.price = errorMessage.Price.IS_NOT_NUMERIC;
   }
   if (!categoryId) {
-    inputError.categoryId = errorMessage.category.IS_NOT_DEFINED;
+    inputError.categoryId = errorMessage.Category.IS_NOT_DEFINED;
   }
   return inputError;
 };

@@ -14,10 +14,10 @@ export const validate = ({
   const priceString = String(price);
   const inputError = {};
   if (name && name.length < MIN_NAME_LENGTH) {
-    inputError.name = errorMessage.name.TOO_SHORT
+    inputError.name = errorMessage.Name.TOO_SHORT
   }
   if (priceString && !validator.isNumeric(priceString)) {
-    inputError.price = errorMessage.price.IS_NOT_NUMERIC;
+    inputError.price = errorMessage.Price.IS_NOT_NUMERIC
   }
   return inputError;
 };
